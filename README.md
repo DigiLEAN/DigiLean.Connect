@@ -2,7 +2,8 @@
 
 Example code for consuming our API.
 
-[DigiLEAN Connect OpenAPI documentation](https://connect.digilean.tools/swagger/index.html) to get a complete overview of endpoints and methods
+[DigiLEAN Connect OpenAPI documentation](https://connect.digilean.tools/swagger/index.html) to get a complete overview of endpoints and methods  
+[DigiLEAN Authentication Discovery Document](https://auth.digilean.tools/.well-known/openid-configuration)
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
