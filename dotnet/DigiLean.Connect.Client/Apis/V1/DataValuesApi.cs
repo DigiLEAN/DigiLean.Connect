@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DigiLean.Connect.Client.Apis.V1
 {
-    public class DataValuesApiV1 : ApiEndpointBase
+    public class DataValuesApi : ApiEndpointBase
     {
-        public DataValuesApiV1(HttpClient client, ILogger logger) : base(client, logger, "/v1/datasources")
+        public DataValuesApi(HttpClient client, ILogger logger) : base(client, logger, "/v1/datasources")
         {
         }
 

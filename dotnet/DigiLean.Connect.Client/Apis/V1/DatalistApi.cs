@@ -13,9 +13,7 @@ namespace DigiLean.Connect.Client.Apis.V1
         {
         }
 
-        /// <summary>
-        /// Get all datasources
-        /// </summary>
+        
         public async Task<List<DataList>> GetAll()
         {
             var response = await Client.GetAsync(BasePath);

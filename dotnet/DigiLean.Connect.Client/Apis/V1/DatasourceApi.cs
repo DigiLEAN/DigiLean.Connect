@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace DigiLean.Connect.Client.Apis.V1
 {
-    public class DatasourceApiV1 : ApiEndpointBase
+    public class DatasourceApi : ApiEndpointBase
     {
-        public DatasourceApiV1(HttpClient client, ILogger logger) : base(client, logger, "/v1/datasources")
+        public DatasourceApi(HttpClient client, ILogger logger) : base(client, logger, "/v1/datasources")
         {
         }
 
-        /// <summary>
-        /// Get all datasources
-        /// </summary>
+        
         public async Task<IEnumerable<DataSourceInfo>> Get()
         {
             var response = await Client.GetAsync(BasePath);
