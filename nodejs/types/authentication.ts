@@ -24,3 +24,9 @@ export interface DiscoveryDocument {
     code_challenge_methods_supported: string[]
     request_parameter_supported: boolean
 }
+export interface TokenResponse {
+    access_token: string
+    expires_in: number
+    token_type: string
+    scope: string
+}

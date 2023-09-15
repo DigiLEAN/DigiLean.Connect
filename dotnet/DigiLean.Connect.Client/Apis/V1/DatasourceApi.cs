@@ -11,7 +11,6 @@ namespace DigiLean.Connect.Client.Apis.V1
         public DatasourceApi(HttpClient client, ILogger logger) : base(client, logger, "/v1/datasources")
         {
         }
-
         
         public async Task<IEnumerable<DataSourceInfo>> Get()
         {
@@ -21,7 +20,6 @@ namespace DigiLean.Connect.Client.Apis.V1
 
             await HandleError(response);
             return null;
-
         }
 
         public async Task<DataSource> GetDataSource(int dataSourceId)

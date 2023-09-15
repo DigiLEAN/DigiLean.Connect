@@ -3,10 +3,9 @@ import * as fs from "fs"
 import * as path from "path"
 import * as http from "./httpService"
 
-
-let swaggerUrl = "https://connect.digilean.tools/swagger/v1/swagger.json"
-let localFolder = "api"
-let localFile = "swagger.json"
+const swaggerUrl = "https://connect.digilean.tools/swagger/v1/swagger.json"
+const localFolder = "types"
+const localFile = "swagger.json"
 
 const saveFile = (content: string, directory: string, name: string) => {
     return new Promise((resolve, reject) => {

@@ -4,7 +4,7 @@
   "description": "DigiLEAN Connect",
   "main": "index.js",
   "scripts": {
-    "test": "ts-node ./services/test.ts",
+    "test": "cross-env NODE_ENV=test ts-node ./services/test.ts",
     "import-api": "ts-node ./services/generateApiModels.ts"
   },
   "repository": {
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/DigiLEAN/DigiLean.Connect#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "openapi-typescript-codegen": "^0.25.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
