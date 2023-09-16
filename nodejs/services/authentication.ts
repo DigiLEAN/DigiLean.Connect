@@ -9,7 +9,7 @@ export async function getDiscoveryDocument(authServerUrl: string): Promise<Disco
     return docJson
 }
 
-export async function authenticateClient(authServerUrl: string, clientId: string, clientSecret: string): Promise<TokenResponse> {
+export async function getClientToken(authServerUrl: string, clientId: string, clientSecret: string): Promise<TokenResponse> {
     const doc = await getDiscoveryDocument(authServerUrl)
     const xFormBody = `client_id=${encodeURI(clientId)}&client_secret=${encodeURI(clientSecret)}&grant_type=client_credentials`
     console.log("xFormBody", xFormBody)

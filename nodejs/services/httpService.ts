@@ -36,7 +36,7 @@ export function post(url: string, data?: any, contentType?: string): Promise<str
     })
 }
 
-function handleResponse(res: IncomingMessage, resolve: (data:any)=>void, reject:(msg:string)=>void) {
+export function handleResponse(res: IncomingMessage, resolve: (data:any)=>void, reject:(msg:string)=>void) {
     let {statusCode} = res
     let error: Error | null = null
 
