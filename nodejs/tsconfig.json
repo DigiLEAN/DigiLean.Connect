@@ -2,11 +2,11 @@
     // This is an alias to @tsconfig/node16: https://github.com/tsconfig/bases
     "extends": "ts-node/node16/tsconfig.json",
     "ts-node": {
+        "require": ["tsconfig-paths/register"],
         "transpileOnly": false,
         "files": true,
-        "clean": true,
         "compilerOptions": {
-            "noImplicitAny": true
+            "noImplicitAny": true,
         }
     },
     "compilerOptions": {
@@ -20,6 +20,6 @@
             "@lib/*": ["src/*"]
         }
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*.ts"],
     "exclude": ["node_modules", "lib"]
 }
