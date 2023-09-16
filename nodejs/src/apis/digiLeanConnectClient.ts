@@ -1,7 +1,7 @@
 import { HttpClient } from "../services/httpClient";
 import { Version1 } from "./version1";
 
-export default class DigiLeanConnectClient {
+export class DigiLeanConnectClient {
 
     constructor(clientId: string, clientSecret: string, testmode?: boolean) {
         const urls = getUrls(testmode)

@@ -4,15 +4,19 @@
     "ts-node": {
         "transpileOnly": false,
         "files": true,
+        "clean": true,
         "compilerOptions": {
             "noImplicitAny": true
         }
     },
     "compilerOptions": {
-        "outDir": "dist",
+        "outDir": "lib",
+        "moduleResolution": "Node16",
         "baseUrl": ".",
         "paths": {
-            "@common/*": ["../common/*"]
+            "@lib/*": ["src/*"]
         }
-    }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "lib"]
 }

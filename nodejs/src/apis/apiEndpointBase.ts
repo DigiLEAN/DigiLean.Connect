@@ -1,4 +1,4 @@
-import { HttpClient } from "services/httpClient"
+import { HttpClient } from "src/services/httpClient"
 
 export class ApiEndpointBase {
     protected basePath = ""

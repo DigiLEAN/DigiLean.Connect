@@ -1,4 +1,4 @@
-import { HttpClient } from "../services/httpClient"
+import { HttpClient } from "@lib/services/httpClient"
 import { DataSourceApiV1 } from "./v1/dataSourceApi"
 import { DataValuesApiV1 } from "./v1/dataValuesApi"
 

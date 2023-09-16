@@ -1,6 +1,6 @@
-import { ApiEndpointBase } from "../apiEndpointBase"
-import { HttpClient } from "../../services/httpClient"
-import { DataSource, DataSourceInfo } from "../../types"
+import { ApiEndpointBase } from "@lib/apis/apiEndpointBase"
+import { HttpClient } from "@lib/services/httpClient"
+import { DataSource, DataSourceInfo } from "@lib/types"
 
 export class DataSourceApiV1 extends ApiEndpointBase {
     constructor(client: HttpClient) {

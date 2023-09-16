@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test ts-node ./test.ts",
+    "build": "tsc",
     "import-api": "ts-node ./services/generateApiModels.ts"
   },
   "repository": {
