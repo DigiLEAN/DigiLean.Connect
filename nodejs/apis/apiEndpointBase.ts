@@ -1,7 +1,10 @@
-export class ApiEndpointBase {
-    private baseUrl = ""
+import { HttpClient } from "services/httpClient"
 
-    constructor(baseUrl: string) {
+export class ApiEndpointBase {
+    protected baseUrl = ""
+    protected client: HttpClient
+    constructor(client: HttpClient, baseUrl: string) {
+        this.client = client
         this.baseUrl = baseUrl
     }
 }

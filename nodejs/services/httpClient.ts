@@ -1,4 +1,4 @@
-import http from "http"
+import https from "https"
 import { handleResponse } from "./httpService"
 import { getClientToken } from "./authentication"
 
@@ -19,11 +19,9 @@ export class HttpClient  {
     }
     async get(path: string) {
         const token = await this.getToken()
-        const options: http.RequestOptions = {
+        const options: https.RequestOptions = {
             method: "GET",
             host: this.host,
-            protocol: "https:",
-            port: 443,
             path,
             headers: {
                 "Content-Type": "application/json",
@@ -33,9 +31,10 @@ export class HttpClient  {
         return this.request(options)
     }
 
-    request(options: http.RequestOptions, data?: any): Promise<string> {
+    request(options: https.RequestOptions, data?: any): Promise<string> {
+        console.log(`host: ${options.host}, path: ${options.path}`)
         return new Promise((resolve, reject) => {
-            const request = http.request(options, (res) => {
+            const request = https.request(options, (res) => {
                 handleResponse(res, resolve, reject)
             })
                 .on("error", (e) => reject(e))
@@ -47,6 +46,8 @@ export class HttpClient  {
         if (this.token)
             return this.token
         const auth = await getClientToken(this.authUrl, this.clientId, this.clientSecret)
+        console.log("got token", auth.scope)
+        this.token = auth.access_token
         return auth.access_token
     }
 }
