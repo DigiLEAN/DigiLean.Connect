@@ -1,8 +1,9 @@
 {
-  "name": "digilean-connect",
-  "version": "1.0.0",
+  "name": "@digilean/connect",
+  "version": "0.1.0",
   "description": "DigiLEAN Connect",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "cross-env NODE_ENV=test ts-node ./test.ts",
     "build": "tsc",
