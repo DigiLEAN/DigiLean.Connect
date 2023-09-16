@@ -7,7 +7,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test ts-node ./test.ts",
     "build": "tsc",
-    "import-api": "ts-node ./services/generateApiModels.ts"
+    "import-api": "ts-node ./generateApiModels.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/DigiLEAN/DigiLean.Connect#readme",
   "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "openapi-typescript-codegen": "^0.25.0",

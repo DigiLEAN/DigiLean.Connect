@@ -1,1 +1,1 @@
-export { DigiLeanConnectClient } from "./apis/digiLeanConnectClient"
+export { DigiLeanConnectClient } from "@lib/apis/digiLeanConnectClient"

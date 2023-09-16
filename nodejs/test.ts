@@ -1,10 +1,9 @@
-import { DigiLeanConnectClient } from "@digilean/connect"
+import { DigiLeanConnectClient } from "./src"
 import config from "./config"
 async function test() {
     const client = new DigiLeanConnectClient(config.clientId, config.clientSecret, true)
-    // const sources = await client.v1.dataSources.getAll()
-    // console.log(sources)
-    // console.log("many sources, not one source")
+    const sources = await client.v1.dataSources.getAll()
+    console.log(sources)
     const source = await client.v1.dataSources.get(432)
     console.log(source)
     const values = await client.v1.dataValues.getAllByDatasourceId(432)
