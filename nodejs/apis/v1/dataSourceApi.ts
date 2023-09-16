@@ -1,6 +1,6 @@
 import { ApiEndpointBase } from "../apiEndpointBase"
 import { HttpClient } from "../../services/httpClient"
-import { DataSourceInfo } from "../../types"
+import { DataSource, DataSourceInfo } from "../../types"
 
 export class DataSourceApiV1 extends ApiEndpointBase {
     constructor(client: HttpClient) {
@@ -15,7 +15,7 @@ export class DataSourceApiV1 extends ApiEndpointBase {
     async get(id: number) {
         const url = `${this.baseUrl}/${id}`
         const resRaw = await this.client.get(url)
-        const res = JSON.parse(resRaw) as DataSourceInfo
+        const res = JSON.parse(resRaw) as DataSource
         return res
     }
 }

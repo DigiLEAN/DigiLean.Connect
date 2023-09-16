@@ -6,7 +6,7 @@
 import type { DataSourceElement } from './DataSourceElement';
 
 export type DataSource = {
-    id?: number;
+    id: number;
     title?: string | null;
     description?: string | null;
     objectSource?: string | null;

@@ -8,7 +8,7 @@ export type UserInfoModel = {
     readonly fullName?: string | null;
     readonly isSupport?: boolean;
     userName: string;
-    email: string;
+    email?: string | null;
     useAD?: boolean;
     azureAdObjectId?: string | null;
     firstName: string;

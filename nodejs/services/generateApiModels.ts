@@ -3,7 +3,7 @@ import * as fs from "fs"
 import * as path from "path"
 import * as http from "./httpService"
 
-const swaggerUrl = "https://connect.digilean.tools/swagger/v1/swagger.json"
+const swaggerUrl = "https://apidev.digilean.tools/swagger/v1/swagger.json"
 const localFolder = "types"
 const localFile = "swagger.json"
 

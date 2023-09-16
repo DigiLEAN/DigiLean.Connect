@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 export type DataListItem = {
-    id?: number;
+    id: number;
     identifier?: string | null;
     name?: string | null;
     sortOrder?: number;
