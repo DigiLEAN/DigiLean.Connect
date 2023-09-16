@@ -1,4 +1,4 @@
-import { DigiLeanConnectClient } from "@lib/index"
+import { DigiLeanConnectClient } from "@digilean/connect"
 import config from "./config"
 async function test() {
     const client = new DigiLeanConnectClient(config.clientId, config.clientSecret, true)
