@@ -16,3 +16,7 @@ Therefore we allow copying and modyfing codebase according to the [LICENSE](LICE
 ## dotnet
 
 Open `DigiLEAN.Connect.sln` in Visual Studio. Open `DigiLean.Connect.ConsoleApp` project and edit the appsettings.json with your client credentials and try run the program to test.
+
+## nodejs
+
+Run `test.ts` file by typing `npm test` in the command line

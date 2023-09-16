@@ -46,7 +46,6 @@ export class HttpClient  {
         if (this.token)
             return this.token
         const auth = await getClientToken(this.authUrl, this.clientId, this.clientSecret)
-        console.log("got token", auth.scope)
         this.token = auth.access_token
         return auth.access_token
     }

@@ -1,12 +1,12 @@
 {
   "name": "@digilean/connect",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "DigiLEAN Connect",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "cross-env NODE_ENV=test ts-node ./test.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "import-api": "ts-node ./generateApiModels.ts"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "dotenv": "^16.3.1",
     "openapi-typescript-codegen": "^0.25.0",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.7",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
   }
