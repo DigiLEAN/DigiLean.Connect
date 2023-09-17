@@ -1,5 +1,5 @@
-import { DigiLeanConnectClient } from "./src"
-import config from "./config"
+import { DigiLeanConnectClient } from "./lib/index.js"
+import config from "./config.js"
 async function test() {
     const client = new DigiLeanConnectClient(config.clientId, config.clientSecret, true)
     const sources = await client.v1.dataSources.getAll()

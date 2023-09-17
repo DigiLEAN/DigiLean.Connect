@@ -3,11 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { CustomFieldValue } from './CustomFieldValue';
-import type { IncidentCategory } from './IncidentCategory';
-import type { IncidentCause } from './IncidentCause';
-import type { IncidentConsequence } from './IncidentConsequence';
-import type { IncidentSeverity } from './IncidentSeverity';
+import type { CustomFieldValue } from './CustomFieldValue.js';
+import type { IncidentCategory } from './IncidentCategory.js';
+import type { IncidentCause } from './IncidentCause.js';
+import type { IncidentConsequence } from './IncidentConsequence.js';
+import type { IncidentSeverity } from './IncidentSeverity.js';
 
 export type IncidentCreate = {
     id?: number;

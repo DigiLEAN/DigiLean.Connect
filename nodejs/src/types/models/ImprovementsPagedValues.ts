@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Improvement } from './Improvement';
+import type { Improvement } from './Improvement.js';
 
 export type ImprovementsPagedValues = {
     total?: number;

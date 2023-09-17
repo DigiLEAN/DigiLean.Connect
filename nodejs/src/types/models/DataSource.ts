@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { DataSourceElement } from './DataSourceElement';
+import type { DataSourceElement } from './DataSourceElement.js';
 
 export type DataSource = {
     id: number;

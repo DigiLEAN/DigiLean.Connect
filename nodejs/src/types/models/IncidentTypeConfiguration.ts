@@ -3,10 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Category } from './Category';
-import type { Cause } from './Cause';
-import type { CustomField } from './CustomField';
-import type { IncidentTypeConsequence } from './IncidentTypeConsequence';
+import type { Category } from './Category.js';
+import type { Cause } from './Cause.js';
+import type { CustomField } from './CustomField.js';
+import type { IncidentTypeConsequence } from './IncidentTypeConsequence.js';
 
 export type IncidentTypeConfiguration = {
     id?: number;

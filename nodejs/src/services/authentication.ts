@@ -1,5 +1,5 @@
-import { DiscoveryDocument, TokenResponse } from "@lib/types/authentication"
-import * as httpService from "./httpService"
+import { DiscoveryDocument, TokenResponse } from "@lib/types/authentication.js"
+import * as httpService from "./httpService.js"
 
 const disco = "/.well-known/openid-configuration"
 

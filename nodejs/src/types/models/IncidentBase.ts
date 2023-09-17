@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IncidentSeverity } from './IncidentSeverity';
-import type { IncidentStatus } from './IncidentStatus';
+import type { IncidentSeverity } from './IncidentSeverity.js';
+import type { IncidentStatus } from './IncidentStatus.js';
 
 export type IncidentBase = {
     id?: number;

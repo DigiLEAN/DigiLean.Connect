@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IncidentInfo } from './IncidentInfo';
+import type { IncidentInfo } from './IncidentInfo.js';
 
 export type IncidentPagedValues = {
     total?: number;

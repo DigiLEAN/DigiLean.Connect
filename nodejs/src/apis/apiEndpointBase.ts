@@ -1,4 +1,4 @@
-import { HttpClient } from "@lib/services/httpClient"
+import { HttpClient } from "@lib/services/httpClient.js"
 
 export class ApiEndpointBase {
     protected basePath = ""

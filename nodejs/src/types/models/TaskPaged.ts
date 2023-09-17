@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { TaskInfo } from './TaskInfo';
+import type { TaskInfo } from './TaskInfo.js';
 
 export type TaskPaged = {
     total?: number;

@@ -3,12 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IncidentCategory } from './IncidentCategory';
-import type { IncidentCause } from './IncidentCause';
-import type { IncidentConsequence } from './IncidentConsequence';
-import type { IncidentCustomField } from './IncidentCustomField';
-import type { IncidentSeverity } from './IncidentSeverity';
-import type { IncidentStatus } from './IncidentStatus';
+import type { IncidentCategory } from './IncidentCategory.js';
+import type { IncidentCause } from './IncidentCause.js';
+import type { IncidentConsequence } from './IncidentConsequence.js';
+import type { IncidentCustomField } from './IncidentCustomField.js';
+import type { IncidentSeverity } from './IncidentSeverity.js';
+import type { IncidentStatus } from './IncidentStatus.js';
 
 export type Incident = {
     project?: string | null;

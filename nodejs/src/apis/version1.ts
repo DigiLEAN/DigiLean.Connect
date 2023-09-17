@@ -1,6 +1,6 @@
-import { HttpClient } from "@lib/services/httpClient"
-import { DataSourceApiV1 } from "./v1/dataSourceApi"
-import { DataValuesApiV1 } from "./v1/dataValuesApi"
+import { HttpClient } from "@lib/services/httpClient.js"
+import { DataSourceApiV1 } from "./v1/dataSourceApi.js"
+import { DataValuesApiV1 } from "./v1/dataValuesApi.js"
 
 export class Version1 {
     

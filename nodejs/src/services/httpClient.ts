@@ -1,6 +1,6 @@
 import https from "https"
-import { handleResponse } from "./httpService"
-import { getClientToken } from "./authentication"
+import { handleResponse } from "./httpService.js"
+import { getClientToken } from "./authentication.js"
 
 export class HttpClient  {
     private authUrl = ""

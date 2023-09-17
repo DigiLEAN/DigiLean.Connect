@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { TaskStatus } from './TaskStatus';
+import type { TaskStatus } from './TaskStatus.js';
 
 export type TaskInfo = {
     id?: number;

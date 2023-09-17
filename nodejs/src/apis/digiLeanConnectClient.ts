@@ -1,5 +1,5 @@
-import { HttpClient } from "@lib/services/httpClient"
-import { Version1 } from "./version1"
+import { HttpClient } from "@lib/services/httpClient.js"
+import { Version1 } from "./version1.js"
 
 export class DigiLeanConnectClient {
 

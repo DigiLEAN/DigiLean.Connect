@@ -19,4 +19,7 @@ Open `DigiLEAN.Connect.sln` in Visual Studio. Open `DigiLean.Connect.ConsoleApp`
 
 ## nodejs
 
-Run `test.ts` file by typing `npm test` in the command line
+Build first with `npm run build`  
+Then run `test.ts` file with `npm test`
+
+This client is also packages as a [NPM package](https://www.npmjs.com/package/@digilean/connect)

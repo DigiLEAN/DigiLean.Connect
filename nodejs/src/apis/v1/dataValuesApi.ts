@@ -1,6 +1,6 @@
-import { ApiEndpointBase } from "@lib/apis/apiEndpointBase"
-import { HttpClient } from "@lib/services/httpClient"
-import { DataValuesPaged } from "@lib/types"
+import { ApiEndpointBase } from "@lib/apis/apiEndpointBase.js"
+import { HttpClient } from "@lib/services/httpClient.js"
+import { DataValuesPaged } from "@lib/types/index.js"
 
 export class DataValuesApiV1 extends ApiEndpointBase {
     constructor(client: HttpClient) {

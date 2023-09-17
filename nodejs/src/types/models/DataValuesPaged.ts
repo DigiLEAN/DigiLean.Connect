@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { DataValue } from './DataValue';
+import type { DataValue } from './DataValue.js';
 
 export type DataValuesPaged = {
     total?: number;

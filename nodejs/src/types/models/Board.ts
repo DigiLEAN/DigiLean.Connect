@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { BoardCategory } from './BoardCategory';
+import type { BoardCategory } from './BoardCategory.js';
 
 export type Board = {
     rows?: Array<BoardCategory> | null;
