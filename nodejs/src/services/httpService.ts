@@ -1,5 +1,6 @@
 import * as https from "https"
 import { IncomingMessage } from "http"
+import { ProblemDetails } from "@lib/types/errors.js"
 
 export function get(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -36,7 +37,7 @@ export function post(url: string, data?: any, contentType?: string): Promise<str
     })
 }
 
-export function handleResponse(res: IncomingMessage, resolve: (data:any)=>void, reject:(msg:string)=>void) {
+export function handleResponse(res: IncomingMessage, resolve: (data:any)=>void, reject:(msg:string | ProblemDetails)=>void) {
     let {statusCode} = res
     let error: Error | null = null
 
@@ -54,13 +55,20 @@ export function handleResponse(res: IncomingMessage, resolve: (data:any)=>void, 
     res.on("end", () => {
         const errmsg = `Status: ${statusCode} - msg: ${rawData}`
         if (error) {
-            if (reject) {
-                reject(errmsg)
-            } else {
-                throw new Error(errmsg)
-            }
+            const pd = tryParseProblemDetails(rawData)
+            if (pd)
+                reject(pd)
+            reject(errmsg)
         } else {
             resolve(rawData)
         }
     })
+}
+
+function tryParseProblemDetails(rawData: string): any {
+    try {
+        return JSON.parse(rawData) as ProblemDetails
+    } catch (e) {
+        return ""
+    }
 }

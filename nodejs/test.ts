@@ -1,6 +1,6 @@
 import { DigiLeanConnectClient } from "./lib/index.js"
 import config from "./config.js"
-import { DataValue } from "./lib/types/index.js"
+//import { DataValue } from "./lib/types/index.js"
 async function test() {
     const client = new DigiLeanConnectClient(config.clientId, config.clientSecret, true)
 
@@ -12,7 +12,7 @@ async function test() {
     // const res = await client.v1.dataValues.writeValue(432, newValue)
     // console.log("newvalue", res)
 
-    await client.v1.dataValues.deleteValue(432, 4694270)
+    //await client.v1.dataValues.deleteValue(432, 4694270)
     const values = await client.v1.dataValues.getAllByDatasourceId(432)
     console.log(values)
 }
