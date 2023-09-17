@@ -29,8 +29,6 @@ namespace DigiLean.Connect.Client.Apis.V1
                 return await SerializePayload<DataSource>(response);
             await HandleError(response);
             return null;
-
         }
-
     }
 }
