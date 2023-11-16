@@ -6,4 +6,3 @@
 export type IncidentSeverityCode = {
     severity?: number;
 };
-

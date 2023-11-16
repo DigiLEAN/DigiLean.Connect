@@ -10,4 +10,3 @@ export type ImprovementsPagedValues = {
     page?: number;
     values?: Array<Improvement> | null;
 };
-

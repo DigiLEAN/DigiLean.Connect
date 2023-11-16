@@ -10,4 +10,3 @@ export type DataValuesPaged = {
     page?: number;
     values?: Array<DataValue> | null;
 };
-

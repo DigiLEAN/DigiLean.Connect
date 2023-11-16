@@ -7,4 +7,3 @@ export type IncidentCategory = {
     id?: number;
     title?: string | null;
 };
-

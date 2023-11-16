@@ -12,4 +12,3 @@ export type Group = {
     projectId?: number | null;
     externalId?: string | null;
 };
-

@@ -39,4 +39,3 @@ export type IncidentInfo = {
     reasons?: Array<IncidentCause> | null;
     customFields?: Array<IncidentCustomField> | null;
 };
-

@@ -8,4 +8,3 @@ export type IncidentType = {
     title?: string | null;
     description?: string | null;
 };
-

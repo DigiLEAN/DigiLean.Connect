@@ -8,4 +8,3 @@ export type IncidentTypeConsequence = {
     title?: string | null;
     unit?: string | null;
 };
-

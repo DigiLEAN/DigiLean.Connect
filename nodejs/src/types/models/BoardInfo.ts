@@ -12,4 +12,3 @@ export type BoardInfo = {
     groupId?: number | null;
     groupName?: string | null;
 };
-

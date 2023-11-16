@@ -12,4 +12,3 @@ export type DataSourceElement = {
     dataSourceId?: number;
     dataListId?: number | null;
 };
-

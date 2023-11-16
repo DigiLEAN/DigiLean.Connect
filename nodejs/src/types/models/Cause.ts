@@ -9,4 +9,3 @@ export type Cause = {
     description?: string | null;
     sortOrder?: number | null;
 };
-

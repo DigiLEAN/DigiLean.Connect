@@ -46,4 +46,3 @@ export type Incident = {
     projectId?: number | null;
     externalId?: string | null;
 };
-

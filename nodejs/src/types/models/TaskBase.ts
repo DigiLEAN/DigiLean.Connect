@@ -18,4 +18,3 @@ export type TaskBase = {
     columnCategoryId?: number | null;
     tags?: Array<string> | null;
 };
-

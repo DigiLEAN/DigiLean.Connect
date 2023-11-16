@@ -7,4 +7,3 @@ export type IncidentCause = {
     id?: number;
     title?: string | null;
 };
-

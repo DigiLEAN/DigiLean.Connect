@@ -14,4 +14,3 @@ export type DataSource = {
     primaryInputSource?: string | null;
     elements?: Array<DataSourceElement> | null;
 };
-

@@ -13,4 +13,3 @@ export type BoardCategory = {
     responsibleUserId?: string | null;
     responsibleUser?: string | null;
 };
-

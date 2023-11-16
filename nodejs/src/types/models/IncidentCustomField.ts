@@ -13,4 +13,3 @@ export type IncidentCustomField = {
     label?: string | null;
     type?: string | null;
 };
-

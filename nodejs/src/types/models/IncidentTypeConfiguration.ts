@@ -17,4 +17,3 @@ export type IncidentTypeConfiguration = {
     consequences?: Array<IncidentTypeConsequence> | null;
     causes?: Array<Cause> | null;
 };
-

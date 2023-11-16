@@ -10,4 +10,3 @@ export type DataList = {
     lastModified?: string;
     lastModifiedByUser?: string | null;
 };
-

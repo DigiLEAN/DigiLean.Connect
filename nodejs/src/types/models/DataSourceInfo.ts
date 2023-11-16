@@ -8,4 +8,3 @@ export type DataSourceInfo = {
     title?: string | null;
     description?: string | null;
 };
-

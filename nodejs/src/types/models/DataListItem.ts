@@ -9,4 +9,3 @@ export type DataListItem = {
     name?: string | null;
     sortOrder?: number;
 };
-

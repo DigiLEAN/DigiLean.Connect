@@ -10,4 +10,3 @@ export type IncidentPagedValues = {
     page?: number;
     values?: Array<IncidentInfo> | null;
 };
-

@@ -1,7 +1,7 @@
 import * as OpenAPI from "openapi-typescript-codegen"
 import * as fs from "fs"
 import * as path from "path"
-import * as http from "./src/services/httpService"
+import * as http from "./src/services/httpService.js"
 
 const swaggerUrl = "https://apidev.digilean.tools/swagger/v1/swagger.json"
 const localFolder = "src/types"

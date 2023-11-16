@@ -12,4 +12,3 @@ export type Project = {
     description?: string | null;
     customerNumber?: string | null;
 };
-

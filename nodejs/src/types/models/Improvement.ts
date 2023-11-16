@@ -19,8 +19,12 @@ export type Improvement = {
     suggestedByUserId?: string | null;
     suggestedBy?: string | null;
     suggestionDate?: string | null;
-    implementedDate?: string | null;
     dueDate?: string | null;
+    plannedDate?: string | null;
+    inProgressDate?: string | null;
+    implementedDate?: string | null;
+    evaluatedDate?: string | null;
+    archivedDate?: string | null;
     responsibleUserId?: string | null;
     responsibleUser?: string | null;
     responsibleDisplayName?: string | null;
@@ -38,4 +42,3 @@ export type Improvement = {
     estimatedCostOfInvestmentHours?: number | null;
     estimatedGainOfInvestmentHours?: number | null;
 };
-

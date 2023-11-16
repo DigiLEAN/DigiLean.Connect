@@ -40,4 +40,3 @@ export type IncidentCreate = {
     causes?: Array<IncidentCause> | null;
     customFields?: Array<CustomFieldValue> | null;
 };
-

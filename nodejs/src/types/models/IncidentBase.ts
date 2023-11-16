@@ -36,4 +36,3 @@ export type IncidentBase = {
     projectId?: number | null;
     externalId?: string | null;
 };
-

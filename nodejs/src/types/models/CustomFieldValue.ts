@@ -7,4 +7,3 @@ export type CustomFieldValue = {
     id?: number;
     value?: string | null;
 };
-

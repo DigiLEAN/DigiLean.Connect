@@ -11,4 +11,3 @@ export type Category = {
     parentId?: number | null;
     children?: Array<Category> | null;
 };
-

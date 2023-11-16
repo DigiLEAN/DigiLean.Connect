@@ -29,4 +29,3 @@ export type UserInfoModel = {
     preferredLanguage?: string | null;
     businessUnitId?: number | null;
 };
-

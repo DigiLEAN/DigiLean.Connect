@@ -22,4 +22,3 @@ export type TaskInfo = {
     columnCategoryId?: number | null;
     tags?: Array<string> | null;
 };
-

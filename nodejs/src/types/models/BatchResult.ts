@@ -6,4 +6,3 @@
 export type BatchResult = {
     total?: number;
 };
-

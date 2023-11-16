@@ -19,4 +19,3 @@ export type DataValue = {
     registrationDate?: string;
     externalId?: string | null;
 };
-

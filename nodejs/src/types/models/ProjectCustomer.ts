@@ -7,4 +7,3 @@ export type ProjectCustomer = {
     customerNumber: string;
     name: string;
 };
-

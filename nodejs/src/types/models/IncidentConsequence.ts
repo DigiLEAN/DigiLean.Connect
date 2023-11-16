@@ -9,4 +9,3 @@ export type IncidentConsequence = {
     id?: number;
     title?: string | null;
 };
-

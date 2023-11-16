@@ -18,4 +18,3 @@ export type TaskCreate = {
     columnCategoryId?: number | null;
     tags?: Array<string> | null;
 };
-

@@ -11,4 +11,3 @@ export type UserGroupMember = {
     groupId?: number;
     groupRole?: AssetRoleType;
 };
-

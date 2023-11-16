@@ -10,4 +10,3 @@ export type CustomField = {
     sortOrder?: number;
     dataListId?: number | null;
 };
-

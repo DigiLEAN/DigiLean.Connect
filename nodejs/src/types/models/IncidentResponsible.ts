@@ -7,4 +7,3 @@ export type IncidentResponsible = {
     followUpGroupId: number;
     responsibleUserId: string;
 };
-
