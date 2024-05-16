@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DigiLean.Api.Model.V1.Tasks
 {
     public class TaskBase
     {
-        public string ExternalId { get; set; }
+        public string? ExternalId { get; set; }
         public int? BoardId { get; set; }
         
         [Required]
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
 
 
         public TaskStatus Status { get; set; } = TaskStatus.NotStarted; // NotStarted, Completed, Blocked
 
-        public string ResponsibleUserId { get; set; }
+        public string? ResponsibleUserId { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime? StartDate { get; set; }
 

@@ -2,6 +2,6 @@
 {
     public class Column
     {
-        public string Field { get; set; }
+        public string? Field { get; set; }
     }
 }

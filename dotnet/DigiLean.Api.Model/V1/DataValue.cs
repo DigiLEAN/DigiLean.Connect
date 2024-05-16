@@ -1,5 +1,4 @@
 ﻿using DigiLean.Api.Model.Common;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DigiLean.Api.Model.V1
@@ -18,16 +17,16 @@ namespace DigiLean.Api.Model.V1
         public int? ProjectId { get; set; }
         [Required]
         public double Value { get; set; }
-        public string Description { get; set; }
-        public string Dimension { get; set; }
-        public string Dimension2 { get; set; }
-        public string Dimension3 { get; set; }
-        public string Dimension4 { get; set; }
+        public string? Description { get; set; }
+        public string? Dimension { get; set; }
+        public string? Dimension2 { get; set; }
+        public string? Dimension3 { get; set; }
+        public string? Dimension4 { get; set; }
         [Required]
         public DateTime ValueDate { get; set; }
         public DateTime RegistrationDate { get; set; }
 
-        public string ExternalId { get; set; }
+        public string? ExternalId { get; set; }
 
         public override string ToString()
         {

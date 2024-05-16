@@ -44,6 +44,7 @@ namespace DigiLean.Api.Model.V1.Incident
         public string CreatedByUserDisplayName { get; set; }
         public DateTime? StatusNewDate { get; set; }
 
+        public string ExternalId { get; set; }
         public bool IsAnonymous { get; set; }
         public List<IncidentConsequence> Consequences { get; set; } = new List<IncidentConsequence>();
         public List<IncidentCategory> Categories { get; set; } = new List<IncidentCategory>();

@@ -10,7 +10,8 @@
   "type": "module",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "cross-env NODE_ENV=test ts-node --esm ./test.ts",
+    "test2": "cross-env NODE_ENV=test ts-node --esm ./test.ts",
+    "test": "node test.cjs",
     "build": "tsc && tsc-alias",
     "fix-esm-imports": "fix-esm-import-path ./src/types/index.ts",
     "import-api": "ts-node ./generateApiModels.ts && npm run fix-esm-imports",

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace DigiLean.Api.Model.Common
 {
@@ -14,9 +12,11 @@ namespace DigiLean.Api.Model.Common
 
         public Dictionary<string, string> GetQueryDictionary()
         {
-            var activeItems = new Dictionary<string, string>();
-            activeItems.Add("Count", Count.ToString());
-            activeItems.Add("Page", Page.ToString());
+            var activeItems = new Dictionary<string, string>
+            {
+                { "Count", Count.ToString() },
+                { "Page", Page.ToString() }
+            };
 
             if (BoardId.HasValue) activeItems.Add("BoardId", BoardId.ToString());
             if (From.HasValue) activeItems.Add("From", GetFormattedDate(From));

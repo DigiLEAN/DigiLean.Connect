@@ -7,6 +7,7 @@
         }
 
         public string UserId { get; set; }
+        public string UserName { get; set; } = string.Empty;
         public string AzureObjectId { get; set; }
         public int GroupId { get; set; }
         public AssetRoleType GroupRole { get; set; }

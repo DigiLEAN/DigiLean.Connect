@@ -47,6 +47,9 @@ namespace DigiLean.Api.Model.V1.Incident
         public bool IsAnonymous { get; set; }
         public int? AreaId { get; set; }
         public int? ProjectId { get; set; }
+        public int NumberOfComments { get; set; }
+        public int NumberOfActions { get; set; }
+        public int NumberOfAttachments { get; set; }
         public string ExternalId { get; set; }
     }
 }

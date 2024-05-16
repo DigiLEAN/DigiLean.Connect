@@ -26,12 +26,18 @@ namespace DigiLean.Api.Model.V1.Incident
         public DateTime? DueDate { get; set; }
         public string ResponsibleUserId { get; set; }
         public string Responsible { get; set; }
-
         public int? ProjectId { get; set; }
         public string Project { get; set; }
+        public int NumberOfComments { get; set; }
+        public int NumberOfActions { get; set; }
+        public int NumberOfAttachments { get; set; }
+        public string ExternalId {  get; set; }
         public IEnumerable<IncidentConsequence> Consequences { get; set; } = new List<IncidentConsequence>();
         public IEnumerable<IncidentCategory> Categories { get; set; } = new List<IncidentCategory>();
-        public IEnumerable<IncidentCause> Reasons { get; set; } = new List<IncidentCause>();
+        public IEnumerable<IncidentCause> Causes { get; set; } = new List<IncidentCause>();
+
+        [Obsolete("Replaced by Causes")]
+        public IEnumerable<IncidentCause> Reasons { get { return Causes; } }
         public IEnumerable<IncidentCustomField> CustomFields { get; set; } = new List<IncidentCustomField>();
     }
 }

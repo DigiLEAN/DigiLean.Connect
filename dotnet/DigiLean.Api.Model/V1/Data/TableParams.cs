@@ -1,5 +1,4 @@
 using DigiLean.Api.Model.Common;
-using System.Collections.Generic;
 
 namespace DigiLean.Api.Model.V1.Data
 {
@@ -16,7 +15,7 @@ namespace DigiLean.Api.Model.V1.Data
 
         public List<SortExpression> Sorting { get; set; } = new List<SortExpression>();
         public List<FilterElement> Filters { get; set; } = new List<FilterElement>();
-        public TimePeriod TimePeriod { get; set; }
+        public TimePeriod? TimePeriod { get; set; }
         public List<Column> Columns { get; set; } = new List<Column>();
         public string GetOrderByExpression()
         {

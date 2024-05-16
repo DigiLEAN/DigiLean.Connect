@@ -1,4 +1,4 @@
-﻿namespace KaizenSolutions.DigiLean.Model.KPI.Filter
+﻿namespace DigiLean.Model.KPI.Filter
 {
     public static class FilterOperators
     {
@@ -23,6 +23,6 @@
             Name = name;
         }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

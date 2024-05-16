@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace DigiLean.Api.Model.V1.Boards
+﻿namespace DigiLean.Api.Model.V1.Boards
 {
     public static class BoardType
     {

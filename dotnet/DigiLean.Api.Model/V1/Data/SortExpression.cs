@@ -19,7 +19,7 @@ namespace DigiLean.Api.Model.V1.Data
         }
 
 
-        private string direction;
+        private string? direction;
         public string Direction
         {
             get

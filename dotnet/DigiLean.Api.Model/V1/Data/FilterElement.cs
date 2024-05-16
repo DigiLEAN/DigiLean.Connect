@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DigiLean.Api.Model.V1.Data
+﻿namespace DigiLean.Api.Model.V1.Data
 {
     public class FilterElement
     {
@@ -8,9 +6,9 @@ namespace DigiLean.Api.Model.V1.Data
         {
             Items = new List<string>();
         }
-        public string SourceColumn { get; set; }
-        public string CustomFieldId { get; set; }
-        public string Operator { get; set; }
+        public string? SourceColumn { get; set; }
+        public string? CustomFieldId { get; set; }
+        public string? Operator { get; set; }
         public List<string> Items { get; set; }
 
         public bool IsCustomField()

@@ -1,5 +1,3 @@
-using System;
-
 namespace DigiLean.Api.Model.Common
 {
     public class TimePeriod

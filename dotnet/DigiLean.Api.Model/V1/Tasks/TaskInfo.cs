@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DigiLean.Api.Model.V1.Tasks
+﻿namespace DigiLean.Api.Model.V1.Tasks
 {
 
     public class TaskInfo : TaskBase

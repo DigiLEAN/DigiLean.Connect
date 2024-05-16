@@ -10,6 +10,7 @@ namespace DigiLean.Api.Model.Common
         public static ValidationResult DueDateRequired { get; set; } = new ValidationResult("Duedate is missing. Duedate must be set on task for this board type", new string[] { "DueDate" });
         public static ValidationResult ResponsibleUserNotValid { get; set; } = new ValidationResult("The responsible userId is not a valid member of this board. ", new string[] { "ResponsibleUserId" });
         public static ValidationResult TaskHasClone { get; set; } = new ValidationResult("The task provided is cloned, and cannot be updated by the API ", new string[] { "Task.Id" });
+        public static ValidationResult ParentIdNotValid { get; set; } = new ValidationResult("The task id provided as parent for subtask is not valid", new string[] { "id" });
 
     }
 }

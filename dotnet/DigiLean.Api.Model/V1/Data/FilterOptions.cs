@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DigiLean.Api.Model.V1.Data
+﻿namespace DigiLean.Api.Model.V1.Data
 {
     public class FilterOptions
     {
