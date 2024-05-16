@@ -27,7 +27,7 @@ Console.WriteLine($" ############################ Using ClientID: {clientId}####
 // Create our API client, the API mode will determine which endpoint to use.
 // ClientId / SecretKey is unique pr mode so Test(sandbox) and prod has different pairs.
 // Localhost can only be used when running the API on developer Machine
-var apiClient = DigiLeanApi.Create(clientId, secretKey, ApiMode.Test, null);
+var apiClient = DigiLeanApi.Create(clientId, secretKey, ApiMode.Production);
 
 
 try
