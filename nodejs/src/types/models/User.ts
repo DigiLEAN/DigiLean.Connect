@@ -3,16 +3,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserInfoModel = {
+export type User = {
     id?: string | null;
-    readonly fullName?: string | null;
-    readonly isSupport?: boolean;
     userName: string;
-    email?: string | null;
+    email: string;
     useAD?: boolean;
     azureAdObjectId?: string | null;
     firstName: string;
     lastName: string;
+    readonly fullName?: string | null;
     screenName?: string | null;
     isAdmin?: boolean;
     isBoardDesigner?: boolean;

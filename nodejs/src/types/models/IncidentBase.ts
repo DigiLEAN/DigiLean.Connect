@@ -34,5 +34,8 @@ export type IncidentBase = {
     isAnonymous?: boolean;
     areaId?: number | null;
     projectId?: number | null;
+    numberOfComments?: number;
+    numberOfActions?: number;
+    numberOfAttachments?: number;
     externalId?: string | null;
 };

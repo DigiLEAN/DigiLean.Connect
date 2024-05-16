@@ -34,6 +34,7 @@ export type IncidentCreate = {
     createdByUser?: string | null;
     createdByUserDisplayName?: string | null;
     statusNewDate?: string | null;
+    externalId?: string | null;
     isAnonymous?: boolean;
     consequences?: Array<IncidentConsequence> | null;
     categories?: Array<IncidentCategory> | null;

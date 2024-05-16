@@ -34,8 +34,16 @@ export type IncidentInfo = {
     responsible?: string | null;
     projectId?: number | null;
     project?: string | null;
+    numberOfComments?: number;
+    numberOfActions?: number;
+    numberOfAttachments?: number;
+    externalId?: string | null;
     consequences?: Array<IncidentConsequence> | null;
     categories?: Array<IncidentCategory> | null;
-    reasons?: Array<IncidentCause> | null;
+    causes?: Array<IncidentCause> | null;
+    /**
+     * @deprecated
+     */
+    readonly reasons?: Array<IncidentCause> | null;
     customFields?: Array<IncidentCustomField> | null;
 };

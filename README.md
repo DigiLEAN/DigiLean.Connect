@@ -19,12 +19,13 @@ Copying and modyfing this code is allowed according to the [LICENSE](LICENSE)
 ## dotnet
 
 Open `DigiLEAN.Connect.sln` in Visual Studio.  
-
-Then see `DigiLean.Api.Client.TestConsoleApp` project and edit the appsettings.json with your client credentials and try run the program to test.
+Then open `DigiLean.Api.Client.TestConsoleApp` and edit appsettings.json, or create appsettings.Development.json with your client credentials.  
+Then try run.
 
 ## nodejs
 
 Build first with `npm run build`  
+Then create `.env.test` file bases on `.env`with your client credentials.  
 Then run `test.ts` file with `npm test`
 
 This client is also packages as a [NPM package](https://www.npmjs.com/package/@digilean/connect)
