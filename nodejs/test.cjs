@@ -1,11 +1,9 @@
 const https = require("https")
 
 const tokenEndpoint = "https://authdev.digilean.tools/connect/token"
-console.log("tokenEndpoint", tokenEndpoint)
 const clientId = "5dbcb85b-ce4f-42d4-825d-28ffc5c136d7"
-console.log("clientId", clientId)
 
-const clientSecret = "J18gb1w3MGp5UT1PSzo3VWJDWnAhaGVXSTt7MUBnYjVYQiMta0E_XU4vJiYmOmpeMzI0c1p6Mz13RkVBOXxJMQ"
+const clientSecret = "xxx"
 //console.log("clientSecret", clientSecret)
 
 function post(url, data, contentType) {
@@ -66,7 +64,6 @@ async function perform() {
     const tokenRes = JSON.parse(tokenRaw)
 
     return tokenRes.access_token
-    //bru.setVar('ACCESS_TOKEN', tokenRes.access_token);
 }
 
 perform().then((token) => {
