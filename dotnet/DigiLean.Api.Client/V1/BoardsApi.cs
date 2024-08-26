@@ -14,35 +14,23 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<List<BoardInfo>> GetAll()
+        public Task<List<BoardInfo>> GetAll()
         {
-            var response = await Client.GetAsync(BasePath);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<BoardInfo>>(response);
-
-            await HandleError(response);
-            return null;
+            return GetResponseAndHandleError<List<BoardInfo>>(BasePath);
         }
 
-        public async Task <Board> GetBoard(int boardId)
+        public Task <Board> GetBoard(int boardId)
         {
-            var response = await Client.GetAsync($"{BasePath}/{boardId}");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Board>(response);
-            
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{boardId}";
+            return GetResponseAndHandleError<Board>(url);
         }
 
-        public async Task<List<TaskInfo>> GetTasks(int boardId, TaskQueryParams query)
+        public Task<List<TaskInfo>> GetTasks(int boardId, TaskQueryParams query)
         {
             var url = $"{BasePath}/{boardId}/tasks";
             var urlWithParams = QueryHelpers.AddQueryString(url, query.GetQueryDictionary());
-            var response = await Client.GetAsync(urlWithParams);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<TaskInfo>>(response);
-            await HandleError(response);
-            return null;
+
+            return GetResponseAndHandleError<List<TaskInfo>>(urlWithParams);
         }
 
         public async Task<TaskInfo> CreateTask(int boardId, TaskBase task)
@@ -54,14 +42,10 @@ namespace DigiLean.Api.Client.V1
             return null;
         }
 
-        public async Task<TaskPaged> GetTasksFromBoard(int id, TaskQueryParams queryParams = null)
+        public Task<TaskPaged> GetTasksFromBoard(int id, TaskQueryParams queryParams = null)
         {
-            var response = await Client.GetAsync(BasePath + $"/{id}/tasks");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<TaskPaged>(response);
-
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{id}/tasks";
+            return GetResponseAndHandleError<TaskPaged>(url);
         }
 
         public async Task<TaskInfo> CreateTaskForBoard(int boardId, TaskBase task)

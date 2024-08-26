@@ -1,12 +1,30 @@
 ﻿namespace DigiLean.Api.Model.Auth
 {
-    public class InMemoryTokenStore : ITokenStore
+    public sealed class InMemoryToken : ITokenStore
     {
-        protected Dictionary<string, DigiLeanToken> Tokens = new Dictionary<string, DigiLeanToken>();
+        private static readonly Dictionary<string, DigiLeanToken> Tokens = [];
+        private static InMemoryToken? singleton;
+        private static readonly object singletonLock = new();
 
-        public DigiLeanToken GetToken(string clientKey)
+        /// <summary>
+        /// Use singleton object to share token between public and internal API
+        /// </summary>
+        private InMemoryToken() {}
+        public static InMemoryToken Store
         {
-            DigiLeanToken token;
+            get
+            {
+                lock (singletonLock)
+                {
+                    singleton ??= new InMemoryToken();
+                    return singleton;
+                }
+            }
+        }
+
+        public DigiLeanToken? GetToken(string clientKey)
+        {
+            DigiLeanToken? token;
             lock (Tokens)
                 Tokens.TryGetValue(clientKey, out token);
 
@@ -25,7 +43,7 @@
 
     public interface ITokenStore
     {
-        DigiLeanToken GetToken(string clientKey);
+        DigiLeanToken? GetToken(string clientKey);
         void SaveToken(string clientKey, DigiLeanToken token);
     }
 }

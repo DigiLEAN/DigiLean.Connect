@@ -10,15 +10,9 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<ImprovementsPagedValues> GetList()
+        public Task<ImprovementsPagedValues> GetList()
         {
-            var url = BasePath;
-
-            var response = await Client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<ImprovementsPagedValues>(response);
-            await HandleError(response);
-            return null;
+            return GetResponseAndHandleError<ImprovementsPagedValues>(BasePath);
         }
     }
 }

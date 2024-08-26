@@ -7,7 +7,6 @@ namespace DigiLean.Api.Model.Auth
     {
         private readonly string AuthUrl;
         private readonly ApiSettings _settings;
-        private ITokenStore TokenStore;
 
         public DigiLeanHttpApiHandler(ApiSettings settings, string authUrl)
         {
@@ -35,21 +34,17 @@ namespace DigiLean.Api.Model.Auth
 
         public async Task<DigiLeanToken> GetToken()
         {
-            if (TokenStore != null)
-            {
-                var currentToken = TokenStore.GetToken(_settings.ClientId);
-                if (currentToken != null && !currentToken.IsExpired)
-                    return currentToken;
-            }
+            var currentToken = InMemoryToken.Store.GetToken(_settings.ClientId);
+            if (currentToken != null && !currentToken.IsExpired)
+                return currentToken;
+            
             return await GetSetNewToken();
         }
+
         private async Task<DigiLeanToken> GetSetNewToken()
         {
-            if (TokenStore == null)
-                TokenStore = new InMemoryTokenStore();
-
             var newToken = await DigiLeanToken.GetNew(AuthUrl, _settings);
-            TokenStore.SaveToken(_settings.ClientId, newToken);
+            InMemoryToken.Store.SaveToken(_settings.ClientId, newToken);
             return newToken;
         }
     }

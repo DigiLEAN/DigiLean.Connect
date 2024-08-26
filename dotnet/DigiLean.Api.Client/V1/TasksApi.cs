@@ -11,13 +11,10 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<TaskInfo> Get(int taskId)
+        public Task<TaskInfo> Get(int taskId)
         {
-            var response = await Client.GetAsync($"{BasePath}/{taskId}");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<TaskInfo>(response);
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{taskId}";
+            return GetResponseAndHandleError<TaskInfo>(url);
         }
 
         public async Task<TaskInfo> Create(TaskBase task)

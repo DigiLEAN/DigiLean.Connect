@@ -5,7 +5,7 @@ namespace DigiLean.Api.Client
 {
     public static class DigiLeanApi
     {
-        public static DigiLeanApiClient Create(string clientId, string secret, ApiMode mode = ApiMode.Production, ILoggerFactory? factory = null)
+        public static DigiLeanApiClient Create(string clientId, string secret, ApiMode mode, ILoggerFactory? factory = null)
         {
             var settings = new ApiSettings
             {

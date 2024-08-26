@@ -13,23 +13,15 @@ namespace DigiLean.Api.Client.V1
         /// <summary>
         /// Get all datasources
         /// </summary>
-        public async Task<IEnumerable<DataSourceInfo>> Get()
+        public Task<List<DataSourceInfo>> Get()
         {
-            var response = await Client.GetAsync(BasePath);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<DataSourceInfo>>(response);
-
-            await HandleError(response);
-            return null;
+            return GetResponseAndHandleError<List<DataSourceInfo>>(BasePath);
         }
 
-        public async Task<DataSource> GetDataSource(int dataSourceId)
+        public Task<DataSource> GetDataSource(int dataSourceId)
         {
-            var response = await Client.GetAsync($"{BasePath}/{dataSourceId}");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<DataSource>(response);
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{dataSourceId}";
+            return GetResponseAndHandleError<DataSource>(url);
         }
     }
 }

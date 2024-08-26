@@ -1,10 +1,21 @@
-﻿using DigiLean.Api.Model.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DigiLean.Api.Model.V1
 {
-    public class DataValuesPaged : PagedValues<DataValue>
+    public class DataValuesPaged
     {
+        public int PageSize { get; init; }
+        public int PageNo { get; init; }
+        public int Count { get; init; }
+        public List<DataValue> Values { get; init; } = new List<DataValue>();
+
+        public DataValuesPaged(List<DataValue> values, int pageSize, int page = 1)
+        {
+            PageSize = pageSize;
+            PageNo = page;
+            Values = values;
+            Count = values.Count;
+        }
     }
 
     public class DataValue
@@ -18,6 +29,7 @@ namespace DigiLean.Api.Model.V1
         [Required]
         public double Value { get; set; }
         public string? Description { get; set; }
+
         public string? Dimension { get; set; }
         public string? Dimension2 { get; set; }
         public string? Dimension3 { get; set; }

@@ -8,6 +8,6 @@
         public int Id { get; set; }
         public int? ParentId { get; set; }
         public DateTime? LastModified { get; set; }
-        public string ResponsibleUser { get; set; }
+        public string? ResponsibleUser { get; set; }
     }
 }

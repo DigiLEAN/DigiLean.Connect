@@ -14,24 +14,16 @@ namespace DigiLean.Api.Client.V1
         /// <summary>
         /// Get all datalists
         /// </summary>
-        public async Task<List<DataList>> GetAll()
+        public Task<List<DataList>> GetAll()
         {
-            var response = await Client.GetAsync(BasePath);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<DataList>>(response);
-
-            await HandleError(response);
-            return null;
+            return GetResponseAndHandleError<List<DataList>>(BasePath);
         }
 
 
-        public async Task <List<DataListItem>> GetItemsForList(int listId)
+        public Task <List<DataListItem>> GetItemsForList(int listId)
         {
-            var response = await Client.GetAsync($"{BasePath}/{listId}/items");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<DataListItem>>(response);
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{listId}/items";
+            return GetResponseAndHandleError<List<DataListItem>>(url);
         }
 
 

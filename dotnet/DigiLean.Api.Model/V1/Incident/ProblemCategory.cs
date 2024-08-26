@@ -8,9 +8,9 @@ namespace DigiLean.Api.Model.V1.Incident
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int? SortOrder { get; set; }
         public int? ParentId { get; set; }
-        public List<Category> Children { get; set; }
+        public List<Category> Children { get; set; } = new List<Category>();
     }
 }

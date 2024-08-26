@@ -1,31 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DigiLean.Api.Model.V1
+namespace DigiLean.Api.Model.V1.Users
 {
     public class User
     {
-        public string? Id { get; set; }
+        // not present when creating new user
+        public string? Id { get; init; }
 
         [Required]
         [Display(Name = "User name")]
         [EmailAddress(ErrorMessage = "Invalid User name")]
-        public string? UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         public bool UseAD { get; set; }
         public string? AzureAdObjectId { get; set; }
 
         [Required]
         [Display(Name = "First name")]
-        public string? FirstName { get; set; }
+        public string? FirstName { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Last name")]
-        public string? LastName { get; set; }
+        public string? LastName { get; set; } = string.Empty;
 
         public string FullName => FirstName + " " + LastName;
 

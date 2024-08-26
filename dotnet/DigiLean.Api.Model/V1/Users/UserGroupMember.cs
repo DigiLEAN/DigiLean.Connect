@@ -1,15 +1,19 @@
-﻿namespace DigiLean.Api.Model.V1.Users
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DigiLean.Api.Model.V1.Users
 {
     public class UserGroupMember
     {
         public UserGroupMember()
         {
         }
-
-        public string UserId { get; set; }
+        [Required]
+        public string UserId { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
-        public string AzureObjectId { get; set; }
+        public string? AzureObjectId { get; set; }
         public int GroupId { get; set; }
+
+        [Required]
         public AssetRoleType GroupRole { get; set; }
     }
 }

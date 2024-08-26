@@ -1,8 +1,4 @@
-﻿using DigiLean.Api.Model.V1.Incident;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DigiLean.Api.Model.V1.Incident
 {
@@ -12,11 +8,11 @@ namespace DigiLean.Api.Model.V1.Incident
         [Required]
         public int IncidentTypeId { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         [Required]
         public DateTime IncidentDate { get; set; }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
         public int? ReportedByGroupId { get; set; }
         public int? FollowUpGroupId { get; set; }
         public int? ProjectId { get; set; }
@@ -32,19 +28,19 @@ namespace DigiLean.Api.Model.V1.Incident
 
 
         public int? EvaluationStatus { get; set; }
-        public string EvaluationText { get; set; }
+        public string? EvaluationText { get; set; }
 
-        public string ResponsibleUserId { get; set; }
-        public string Responsible { get; set; }
-        public string ResponsibleDisplayName { get; set; }
+        public string? ResponsibleUserId { get; set; }
+        public string? Responsible { get; set; }
+        public string? ResponsibleDisplayName { get; set; }
 
         public DateTime CreatedDate { get; set; }
-        public string CreatedByUserId { get; set; }
-        public string CreatedByUser { get; set; }
-        public string CreatedByUserDisplayName { get; set; }
+        public string? CreatedByUserId { get; set; }
+        public string? CreatedByUser { get; set; }
+        public string? CreatedByUserDisplayName { get; set; }
         public DateTime? StatusNewDate { get; set; }
 
-        public string ExternalId { get; set; }
+        public string? ExternalId { get; set; }
         public bool IsAnonymous { get; set; }
         public List<IncidentConsequence> Consequences { get; set; } = new List<IncidentConsequence>();
         public List<IncidentCategory> Categories { get; set; } = new List<IncidentCategory>();

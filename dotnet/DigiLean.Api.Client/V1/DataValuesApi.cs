@@ -1,10 +1,7 @@
-﻿using DigiLean.Api.Model.Common;
-using DigiLean.Api.Model.V1;
-using DigiLean.Api.Model.V1.Data;
+﻿using DigiLean.Api.Model.V1;
 using DigiLean.Api.Model.Extensions;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using DigiLean.Api.Model.Clients;
 
 namespace DigiLean.Api.Client.V1
@@ -15,96 +12,51 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<PeriodFilteredDataValues> GetByPeriod(int dataSourceId, DateTime from, DateTime to)
+        /// <summary>Get values from Datasource scoped by time period</summary>
+        /// <remarks>If you don't filter on time period, use <see cref="GetValues(int, string?, int, int)"/> instead</remarks>
+        /// <param name="filter">OData filter example: projectId eq 1</param>
+        /// <param name="page">page number default 1</param>
+        /// <param name="pageSize">page size default 1000, max 10000</param>
+        public Task<DataValuesPaged> GetValues(int dataSourceId, DateTime from, DateTime to, string? filter = null, int page = 1, int pageSize = 1000)
         {
-            var url = $"{BasePath}/{dataSourceId}/values/period";
-            url = $"{url}?from={from:s}&to={to:s}";
-            var response = await Client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<PeriodFilteredDataValues>(response);
+            // does not matter if dates are already UTC
+            string fromUtc = from.ToUniversalTime().ToString("u");
+            string toUtc = to.ToUniversalTime().ToString("u");
 
-            await HandleError(response);
-            return null;
+            string url = $"{BasePath}/{dataSourceId}/values?from={fromUtc}&to={toUtc}&page={page}&pageSize={pageSize}";
+
+            if (!string.IsNullOrEmpty(filter))
+                url = QueryHelpers.AddQueryString(url, "$filter", filter);
+
+            return GetResponseAndHandleError<DataValuesPaged>(url);
         }
 
-        /// <summary>
-        /// Get values for data source and page, page 1 will be 1000 latest values
-        /// </summary>
-        public async Task<DataValuesPaged> QueryValues(int dataSourceId, TableParams tableParams)
+        /// <summary> Get values from Datasource</summary>
+        /// <remarks>If you filter on time period, use <see cref="GetValues(int, DateTime, DateTime, string?, int, int)"/> instead</remarks>
+        /// <param name="filter">OData filter example: projectId eq 1</param>
+        /// <param name="page">page number default 1</param>
+        /// <param name="pageSize">page size default 1000, max 10000</param>
+        /// <example>
+        /// <code>Filter example: projectId eq 1</code>
+        /// </example>
+        public Task<DataValuesPaged> GetValues(int dataSourceId, string? filter = null, int page = 1, int pageSize = 1000)
         {
-            var queryParams = JsonConvert.SerializeObject(tableParams);
-            var url = $"{BasePath}/{dataSourceId}/values/query?queryparams={queryParams}";
-            var response = await Client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<DataValuesPaged>(response);
+            string url = $"{BasePath}/{dataSourceId}/values?page={page}&pageSize={pageSize}";
 
-            await HandleError(response);
-            return null;
+            if (!string.IsNullOrEmpty(filter))
+                url = QueryHelpers.AddQueryString(url, "$filter", filter);
+
+            return GetResponseAndHandleError<DataValuesPaged>(url);
         }
 
-        /// <summary>
-        /// Get values for data source and page, page 1 will be 1000 latest values
-        /// </summary>
-        public async Task<IEnumerable<DataValue>> GetByDataSourceAndPage(int dataSourceId, int page = 1)
-        {
-            var url = $"{BasePath}/{dataSourceId}/values";
-            var result = await GetPaged(url, page);
-            return result.Values;
-        }
-
-        /// <summary>
-        /// Get all values for data source, paging is handled and returning values async
-        /// </summary>
-        public async IAsyncEnumerable<DataValue> GetAllByDataSource(int dataSourceId)
-        {
-            var url = $"{BasePath}/{dataSourceId}/values";
-            var totalReceived = 0;
-            bool pagesLeft = true;
-            int page = 1;
-            while (pagesLeft)
-            {
-                var result = await GetPaged(url, page);
-                totalReceived += result.Values.Count;
-                foreach (var value in result.Values)
-                    yield return value;
-
-                if (result.Total > totalReceived)
-                    page += 1;
-                else
-                    pagesLeft = false;
-            }
-        }
 
         /// <summary>
         /// Get all values for data source and filtered by project id, paging is handled and returning values async
         /// </summary>
-        public async IAsyncEnumerable<DataValue> GetAllByDataSourceAndProject(int dataSourceId, int projectId = 0)
-        {
-            var url = $"{BasePath}/{dataSourceId}/values";
-
-            var pUrl = QueryHelpers.AddQueryString(url, "projectId", projectId.ToString());
-
-            var totalReceived = 0;
-            bool pagesLeft = true;
-            int page = 1;
-            while (pagesLeft)
-            {
-                var result = await GetPaged(pUrl, page);
-                totalReceived += result.Values.Count;
-                foreach (var value in result.Values)
-                    yield return value;
-
-                if (result.Total > totalReceived)
-                    page += 1;
-                else
-                    pagesLeft = false;
-            }
-        }
-
         public async Task<bool> DeleteValues(int dataSourceId, List<int> listOfIdentifiers)
         {
             var url = $"{BasePath}/{dataSourceId}/values/batch";
-            HttpRequestMessage request = new HttpRequestMessage
+            HttpRequestMessage request = new()
             {
                 Content = listOfIdentifiers.AsJson(),
                 Method = HttpMethod.Delete,
@@ -114,17 +66,6 @@ namespace DigiLean.Api.Client.V1
             if (!response.IsSuccessStatusCode)
                 await HandleError(response, false);
             return response.IsSuccessStatusCode;
-        }
-
-        private async Task<DataValuesPaged> GetPaged(string url, int page = 1)
-        {
-            var qUrl = QueryHelpers.AddQueryString(url, "page", page.ToString());
-            var response = await Client.GetAsync(qUrl);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<DataValuesPaged>(response);
-
-            await HandleError(response);
-            return null;
         }
 
         public async Task<bool> DeleteValue(DataValue dataValue, int dataSourceId)

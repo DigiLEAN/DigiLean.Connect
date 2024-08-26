@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DigiLean.Api.Model.V1
+namespace DigiLean.Api.Model.V1.Projects
 {
     public class ProjectCustomer
     {

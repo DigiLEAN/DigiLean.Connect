@@ -1,5 +1,6 @@
 ﻿using DigiLean.Api.Model.Clients;
-using DigiLean.Api.Model.V1;
+using DigiLean.Api.Model.V1.Groups;
+using DigiLean.Api.Model.V1.Users;
 using Microsoft.Extensions.Logging;
 
 namespace DigiLean.Api.Client.V1
@@ -10,24 +11,21 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<List<User>> GetAll()
+        public Task<List<User>> GetAll()
         {
-            var response = await Client.GetAsync(BasePath);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<User>>(response);
-
-            await HandleError(response);
-            return null;
+            return GetResponseAndHandleError<List<User>>(BasePath);
         }
 
-        public async Task<User> GetOne(string userId)
+        public Task<User> GetOne(string userId)
         {
-            var response = await Client.GetAsync($"{BasePath}/{userId}");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<User>(response);
+            var url = $"{BasePath}/{userId}";
+            return GetResponseAndHandleError<User>(url);
+        }
 
-            await HandleError(response);
-            return null;
+        public Task<List<Group>> GetUserGroups(string userId)
+        {
+            var url = $"{BasePath}/{userId}/groups";
+            return GetResponseAndHandleError<List<Group>>(url);
         }
 
         // convenience methods

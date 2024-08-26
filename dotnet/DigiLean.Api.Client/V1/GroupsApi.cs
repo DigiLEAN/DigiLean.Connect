@@ -2,6 +2,7 @@
 using DigiLean.Api.Model.Extensions;
 using DigiLean.Api.Model.V1.Groups;
 using DigiLean.Api.Model.V1.Users;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
 namespace DigiLean.Api.Client.V1
@@ -21,17 +22,13 @@ namespace DigiLean.Api.Client.V1
             return null;
         }
 
-        public async Task<List<Group>> GetAll(GroupType? groupType = null)
+        public Task<List<Group>> GetGroups(string? filter = null)
         {
             var url = BasePath;
-            if (groupType.HasValue)
-                url += $"/?groupType={groupType}";
+            if (!string.IsNullOrEmpty(filter))
+                url = QueryHelpers.AddQueryString(url, "$filter", filter);
 
-            var response = await Client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<Group>>(response);
-            await HandleError(response);
-            return null;
+            return GetResponseAndHandleError<List<Group>>(url);
         }
 
         public async Task Delete(int id)
@@ -43,13 +40,10 @@ namespace DigiLean.Api.Client.V1
             await HandleError(response);
         }
 
-        public async Task<List<UserGroupMember>> GetGroupMembers(int groupId)
+        public Task<List<UserGroupMember>> GetGroupMembers(int groupId)
         {
-            var response = await Client.GetAsync($"{BasePath}/{groupId}/members");
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<List<UserGroupMember>>(response);
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{groupId}/members";
+            return GetResponseAndHandleError<List<UserGroupMember>>(url);
         }
 
         public async Task<bool> AddMember(int groupId, UserGroupMember member)
@@ -71,11 +65,9 @@ namespace DigiLean.Api.Client.V1
         }
 
 
-        public async Task<List<Group>> GetOnlyAdGroups()
+        public Task<List<Group>> GetOnlyAdGroups()
         {
-            var groups = await GetAll();
-            var groupsWithAzId = groups.Where(g => !string.IsNullOrWhiteSpace(g.ExternalId)).ToList();
-            return groupsWithAzId;
+            return GetGroups("externalId ne null and externalId ne ''"); // OData filter to get only those with externalId
         }
     }
 }
