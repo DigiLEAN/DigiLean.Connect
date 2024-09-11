@@ -1,0 +1,34 @@
+{
+    "properties": {
+        "capabilities": [],
+        "connectionParameters": {
+            "token": {
+                "type": "oAuthSetting",
+                "oAuthSettings": {
+                    "identityProvider": "oauth2",
+                    "scopes": [
+                        "public.api.read",
+                        "public.api.write"
+                    ],
+                    "redirectMode": "GlobalPerConnector",
+                    "customParameters": {
+                        "AuthorizationUrl": {
+                            "value": "https://auth.digilean.tools/connect/authorize"
+                        },
+                        "TokenUrl": {
+                            "value": "https://auth.digilean.tools/connect/token"
+                        },
+                        "RefreshUrl": {
+                            "value": "https://auth.digilean.tools/connect/token"
+                        }
+                    },
+                    "clientId": "<Enter your client ID>",
+                    "clientSecret": "<Enter your client secret>"
+                }
+            }
+        }
+    },
+    "iconBrandColor": "#2f4050",
+    "publisher": "Digilean AS",
+    "stackOwner": "Digilean AS"
+}
