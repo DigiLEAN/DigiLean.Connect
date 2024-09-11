@@ -1,934 +1,785 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "DigiLEAN Connect",
-      "description": "Visual management tool supporting improvement processes for teams and enterprise",
-      "version": "1.0.0"
-    },
-    "host": "connect.digilean.tools",
-    "schemes": [
-      "https"
-    ],
-    "paths": {
-      "/v1/Datalists": {
-        "get": {
-          "tags": [
-            "Datalists"
-          ],
-          "summary": "Datalist List",
-          "description": "List Datalists with optional filter",
-          "operationId": "Datalists_List",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "$filter",
-              "description": "Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)",
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/DataList"
-                }
-              }
-            }
+  "swagger": "2.0",
+  "info": {
+    "title": "DigiLEAN Connect",
+    "description": "Visual management tool supporting improvement processes for teams and enterprise",
+    "version": "1.0.0"
+  },
+  "host": "connect.digilean.tools",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/Datasources": {
+      "get": {
+        "tags": [
+          "Datasources"
+        ],
+        "summary": "Datasource List",
+        "description": "Get datasources with an optional filter",
+        "operationId": "Datasources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)",
+            "type": "string"
           }
-        }
-      },
-      "/v1/Datalists/{id}/items": {
-        "get": {
-          "tags": [
-            "Datalists"
-          ],
-          "summary": "DataList Items",
-          "description": "Gets Datalist items",
-          "operationId": "Datalists_Items",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/DataListItem"
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "tags": [
-            "Datalists"
-          ],
-          "summary": "Datalist Item Create",
-          "description": "Create a new item on Datalist",
-          "operationId": "Datalists_CreateItem",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/DataListItem"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/DataList"
-              }
-            }
-          }
-        }
-      },
-      "/v1/Datasources": {
-        "get": {
-          "tags": [
-            "Datasources"
-          ],
-          "summary": "Datasource List",
-          "description": "Get datasources with an optional filter",
-          "operationId": "Datasources_List",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "$filter",
-              "description": "Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)",
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/DataSourceInfo"
-                }
-              }
-            }
-          }
-        }
-      },
-      "/v1/Datasources/{id}": {
-        "get": {
-          "tags": [
-            "Datasources"
-          ],
-          "summary": "Datasource Details",
-          "description": "Get Datasource details",
-          "operationId": "Datasources_Details",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/DataSource"
-              }
-            }
-          }
-        }
-      },
-      "/v1/Datasources/{id}/values": {
-        "get": {
-          "tags": [
-            "Datasources"
-          ],
-          "summary": "Datasource Values",
-          "operationId": "Datasources_Values",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "query",
-              "name": "from",
-              "description": "Filter from valueDate. Greater than",
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "in": "query",
-              "name": "to",
-              "description": "Filter to valueDate. Lesser than",
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "in": "query",
-              "name": "page",
-              "description": "Page default and start value is 1",
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "query",
-              "name": "pageSize",
-              "description": "Page Size default is 1000 and max 10000",
-              "type": "integer",
-              "format": "int32",
-              "maximum": 10000,
-              "minimum": 0
-            },
-            {
-              "in": "query",
-              "name": "$filter",
-              "description": "Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "$orderby",
-              "description": "Generic OData ordering",
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/DataValuesPaged"
-              }
-            }
-          }
-        }
-      },
-      "/v1/Datasources/{dataSourceId}/values": {
-        "post": {
-          "tags": [
-            "Datasources"
-          ],
-          "summary": "Datasource Value Create",
-          "description": "Create a new value on Datasource",
-          "operationId": "Datasources_DatasourceCreateValue",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "dataSourceId",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/DataValueCreate"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/DataValue"
-              }
-            }
-          }
-        }
-      },
-      "/v1/Datasources/{dataSourceId}/values/{valueId}": {
-        "delete": {
-          "tags": [
-            "Datasources"
-          ],
-          "summary": "Datasource Value Delete",
-          "description": "Delete a value from Datasource",
-          "operationId": "Datasources_DatasourceDeleteValue",
-          "parameters": [
-            {
-              "in": "path",
-              "name": "dataSourceId",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "path",
-              "name": "valueId",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-      },
-      "/v1/Tasks/{id}": {
-        "get": {
-          "tags": [
-            "Tasks"
-          ],
-          "summary": "Task Details",
-          "description": "Get a Tasks Details",
-          "operationId": "Tasks_Details",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/TaskInfo"
-              }
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "Tasks"
-          ],
-          "summary": "Task Update",
-          "description": "Update a Task",
-          "operationId": "Tasks_Update",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/TaskBase"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/TaskInfo"
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "Tasks"
-          ],
-          "summary": "Task Delete",
-          "description": "Delete a Task",
-          "operationId": "Tasks_Delete",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/TaskInfo"
-              }
-            }
-          }
-        }
-      },
-      "/v1/Tasks": {
-        "post": {
-          "tags": [
-            "Tasks"
-          ],
-          "summary": "Task Create",
-          "description": "Create a new Task",
-          "operationId": "Tasks_Create",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/TaskBase"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/TaskInfo"
-              }
-            }
-          }
-        }
-      },
-      "/v1/Tasks/{id}/SubTasks": {
-        "post": {
-          "tags": [
-            "Tasks"
-          ],
-          "summary": "Task Subtask Create",
-          "description": "Create a new subtask on a Task",
-          "operationId": "Tasks_CreateSubTask",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "description": "",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/TaskBase"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/TaskInfo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataSourceInfo"
               }
             }
           }
         }
       }
     },
-    "definitions": {
-      "DataList": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "lastModified": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "lastModifiedByUser": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DataListItem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "identifier": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "sortOrder": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DataSource": {
-        "required": [
-          "id"
+    "/v1/Datasources/{id}": {
+      "get": {
+        "tags": [
+          "Datasources"
         ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "objectSource": {
-            "type": "string"
-          },
-          "unitOfTime": {
-            "type": "string"
-          },
-          "primaryInputSource": {
-            "type": "string"
-          },
-          "elements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DataSourceElement"
+        "summary": "Datasource Details",
+        "description": "Get Datasource details",
+        "operationId": "Datasources_Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
             }
           }
-        },
-        "additionalProperties": false
-      },
-      "DataSourceElement": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "label": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "isMandatory": {
-            "type": "boolean"
-          },
-          "sourceColumn": {
-            "type": "string"
-          },
-          "dataSourceId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "dataListId": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DataSourceInfo": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DataValue": {
-        "required": [
-          "dataSourceId",
-          "value",
-          "valueDate"
+        }
+      }
+    },
+    "/v1/Datasources/{id}/values": {
+      "get": {
+        "tags": [
+          "Datasources"
         ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "dataSourceId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "registrationDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "areaId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "assetId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "projectId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "value": {
-            "format": "double",
-            "type": "number"
-          },
-          "description": {
-            "type": "string"
-          },
-          "dimension": {
-            "type": "string"
-          },
-          "dimension2": {
-            "type": "string"
-          },
-          "dimension3": {
-            "type": "string"
-          },
-          "dimension4": {
-            "type": "string"
-          },
-          "valueDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "externalId": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DataValueCreate": {
-        "required": [
-          "value",
-          "valueDate"
+        "summary": "Datasource Values",
+        "operationId": "Datasources_Values",
+        "produces": [
+          "application/json"
         ],
-        "type": "object",
-        "properties": {
-          "areaId": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "description": "Filter from valueDate. Greater than",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "description": "Filter to valueDate. Lesser than",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page default and start value is 1",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "description": "Page Size default is 1000 and max 10000",
+            "type": "integer",
             "format": "int32",
-            "type": "integer"
+            "maximum": 10000,
+            "minimum": 0
           },
-          "assetId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "projectId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "value": {
-            "format": "double",
-            "type": "number"
-          },
-          "description": {
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)",
             "type": "string"
           },
-          "dimension": {
-            "type": "string"
-          },
-          "dimension2": {
-            "type": "string"
-          },
-          "dimension3": {
-            "type": "string"
-          },
-          "dimension4": {
-            "type": "string"
-          },
-          "valueDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "externalId": {
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Generic OData ordering",
             "type": "string"
           }
-        },
-        "additionalProperties": false
-      },
-      "DataValuesPaged": {
-        "type": "object",
-        "properties": {
-          "pageSize": {
-            "format": "int32",
-            "type": "integer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataValuesPaged"
+            }
+          }
+        }
+      }
+    },
+    "/v1/Datasources/{dataSourceId}/values": {
+      "post": {
+        "tags": [
+          "Datasources"
+        ],
+        "summary": "Datasource Value Create",
+        "description": "Create a new value on Datasource",
+        "operationId": "Datasources_DatasourceCreateValue",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceId",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
-          "pageNo": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "count": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "values": {
-            "type": "array",
-            "items": {
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataValueCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
               "$ref": "#/definitions/DataValue"
             }
           }
-        },
-        "additionalProperties": false
-      },
-      "TaskBase": {
-        "required": [
-          "title"
+        }
+      }
+    },
+    "/v1/Datasources/{dataSourceId}/values/{valueId}": {
+      "delete": {
+        "tags": [
+          "Datasources"
         ],
-        "type": "object",
-        "properties": {
-          "externalId": {
-            "type": "string"
+        "summary": "Datasource Value Delete",
+        "description": "Delete a value from Datasource",
+        "operationId": "Datasources_DatasourceDeleteValue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceId",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
-          "boardId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "title": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "status": {
-            "$ref": "#/definitions/TaskStatus"
-          },
-          "responsibleUserId": {
-            "type": "string"
-          },
-          "dueDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "startDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "rowCategoryId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "columnCategoryId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          {
+            "in": "path",
+            "name": "valueId",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           }
-        },
-        "additionalProperties": false
-      },
-      "TaskInfo": {
-        "required": [
-          "title"
         ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "parentId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "lastModified": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "responsibleUser": {
-            "type": "string"
-          },
-          "externalId": {
-            "type": "string"
-          },
-          "boardId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "title": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "status": {
-            "$ref": "#/definitions/TaskStatus"
-          },
-          "responsibleUserId": {
-            "type": "string"
-          },
-          "dueDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "startDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "rowCategoryId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "columnCategoryId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+        "responses": {
+          "200": {
+            "description": "OK"
           }
-        },
-        "additionalProperties": false
-      },
-      "TaskPaged": {
-        "type": "object",
-        "properties": {
-          "total": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "page": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "values": {
-            "type": "array",
-            "items": {
+        }
+      }
+    },
+    "/v1/Tasks/{id}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Task Details",
+        "description": "Get a Tasks Details",
+        "operationId": "Tasks_Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
               "$ref": "#/definitions/TaskInfo"
             }
           }
-        },
-        "additionalProperties": false
+        }
       },
-      "TaskStatus": {
-        "enum": [
-          "NotStarted",
-          "Completed",
-          "Blocked"
+      "put": {
+        "tags": [
+          "Tasks"
         ],
-        "type": "string",
-        "x-enum-varnames": [
-          "NotStarted",
-          "Completed",
-          "Blocked"
-        ]
+        "summary": "Task Update",
+        "description": "Update a Task",
+        "operationId": "Tasks_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TaskBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskInfo"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Task Delete",
+        "description": "Delete a Task",
+        "operationId": "Tasks_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskInfo"
+            }
+          }
+        }
       }
     },
-    "securityDefinitions": {
-      "AuthorizationCode": {
-        "type": "oauth2",
-        "flow": "accessCode",
-        "authorizationUrl": "https://auth.digilean.tools/connect/authorize",
-        "tokenUrl": "https://auth.digilean.tools/connect/token",
-        "scopes": {
-          "Data.Read": "DigiLEAN API Data Read",
-          "Data.ReadWrite": "DigiLEAN API Data Write",
-          "Tasks.Read": "DigiLEAN API Tasks Read",
-          "Tasks.ReadWrite": "DigiLEAN API Tasks Write"
+    "/v1/Tasks": {
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Task Create",
+        "description": "Create a new Task",
+        "operationId": "Tasks_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TaskBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskInfo"
+            }
+          }
+        }
+      }
+    },
+    "/v1/Tasks/{id}/SubTasks": {
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Task Subtask Create",
+        "description": "Create a new subtask on a Task",
+        "operationId": "Tasks_CreateSubTask",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TaskBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskInfo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataSource": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
         },
-        "description": "Authorization Code flow. Authorization header with Bearer token"
-      }
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "objectSource": {
+          "type": "string"
+        },
+        "unitOfTime": {
+          "type": "string"
+        },
+        "primaryInputSource": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSourceElement"
+          }
+        }
+      },
+      "additionalProperties": false
     },
-    "security": [
-      {
-        "AuthorizationCode": [ ]
-      }
-    ]
-  }
+    "DataSourceElement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "isMandatory": {
+          "type": "boolean"
+        },
+        "sourceColumn": {
+          "type": "string"
+        },
+        "dataSourceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "dataListId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataSourceInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataValue": {
+      "required": [
+        "dataSourceId",
+        "value",
+        "valueDate"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "dataSourceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "registrationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "areaId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "assetId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "projectId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dimension": {
+          "type": "string"
+        },
+        "dimension2": {
+          "type": "string"
+        },
+        "dimension3": {
+          "type": "string"
+        },
+        "dimension4": {
+          "type": "string"
+        },
+        "valueDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataValueCreate": {
+      "required": [
+        "value",
+        "valueDate"
+      ],
+      "type": "object",
+      "properties": {
+        "areaId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "assetId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "projectId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dimension": {
+          "type": "string"
+        },
+        "dimension2": {
+          "type": "string"
+        },
+        "dimension3": {
+          "type": "string"
+        },
+        "dimension4": {
+          "type": "string"
+        },
+        "valueDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataValuesPaged": {
+      "type": "object",
+      "properties": {
+        "pageSize": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageNo": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataValue"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TaskBase": {
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "externalId": {
+          "type": "string"
+        },
+        "boardId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "title": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/TaskStatus"
+        },
+        "responsibleUserId": {
+          "type": "string"
+        },
+        "dueDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "rowCategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "columnCategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TaskInfo": {
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "parentId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastModified": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "responsibleUser": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "boardId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "title": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/TaskStatus"
+        },
+        "responsibleUserId": {
+          "type": "string"
+        },
+        "dueDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "rowCategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "columnCategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TaskPaged": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "page": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaskInfo"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TaskStatus": {
+      "enum": [
+        "NotStarted",
+        "Completed",
+        "Blocked"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "NotStarted",
+        "Completed",
+        "Blocked"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "AuthorizationCode": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://auth.digilean.tools/connect/authorize",
+      "tokenUrl": "https://auth.digilean.tools/connect/token",
+      "scopes": {
+        "Data.Read": "DigiLEAN API Data Read",
+        "Data.ReadWrite": "DigiLEAN API Data Write",
+        "Tasks.Read": "DigiLEAN API Tasks Read",
+        "Tasks.ReadWrite": "DigiLEAN API Tasks Write"
+      },
+      "description": "Authorization Code flow. Authorization header with Bearer token"
+    }
+  },
+  "security": [
+    {
+      "AuthorizationCode": []
+    }
+  ]
+}

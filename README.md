@@ -29,3 +29,9 @@ Then create `.env.test` file bases on `.env`with your client credentials.
 Then run `test.ts` file with `npm test`
 
 This client is also packages as a [NPM package](https://www.npmjs.com/package/@digilean/connect)
+
+## Power Platform
+
+The folder `power.platform` contains the definition for creating a [custom connector for Microsoft Power Platform](https://learn.microsoft.com/en-us/connectors/custom-connectors/) 
+
+We will try to publish this connector but in the meantime it can be created using these files.
