@@ -143,9 +143,7 @@
             }
           }
         }
-      }
-    },
-    "/v1/Datasources/{dataSourceId}/values": {
+      },
       "post": {
         "tags": [
           "Datasources"
@@ -162,8 +160,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "dataSourceId",
-            "description": "",
+            "name": "id",
+            "description": "Datasource id",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -171,7 +169,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "",
+            "description": "Datavalue",
             "schema": {
               "$ref": "#/definitions/DataValueCreate"
             }
@@ -187,7 +185,7 @@
         }
       }
     },
-    "/v1/Datasources/{dataSourceId}/values/{valueId}": {
+    "/v1/Datasources/{id}/values/{valueId}": {
       "delete": {
         "tags": [
           "Datasources"
@@ -198,8 +196,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "dataSourceId",
-            "description": "",
+            "name": "id",
+            "description": "Datasource id",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -207,7 +205,7 @@
           {
             "in": "path",
             "name": "valueId",
-            "description": "",
+            "description": "value Id",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -769,10 +767,8 @@
       "authorizationUrl": "https://auth.digilean.tools/connect/authorize",
       "tokenUrl": "https://auth.digilean.tools/connect/token",
       "scopes": {
-        "Data.Read": "DigiLEAN API Data Read",
-        "Data.ReadWrite": "DigiLEAN API Data Write",
-        "Tasks.Read": "DigiLEAN API Tasks Read",
-        "Tasks.ReadWrite": "DigiLEAN API Tasks Write"
+        "public.api.write": "DigiLEAN API Write",
+        "public.api.read": "DigiLEAN API Read"
       },
       "description": "Authorization Code flow. Authorization header with Bearer token"
     }
