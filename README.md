@@ -35,3 +35,5 @@ This client is also packages as a [NPM package](https://www.npmjs.com/package/@d
 The folder `power.platform` contains the definition for creating a [custom connector for Microsoft Power Platform](https://learn.microsoft.com/en-us/connectors/custom-connectors/) 
 
 We will try to publish this connector but in the meantime it can be created using these files.
+
+[How to package Connector for publish](https://learn.microsoft.com/en-us/connectors/custom-connectors/certification-submission#package-your-custom-connector-and-submit-for-certification)
