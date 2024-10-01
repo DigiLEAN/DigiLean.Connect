@@ -3,25 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IncidentSeverity } from './IncidentSeverity.js';
 import type { IncidentStatus } from './IncidentStatus.js';
 
-export type IncidentInfo = {
+export type IncidentUpdate = {
     id?: number;
-    project?: string | null;
-    incidentType?: string | null;
-    severityText?: IncidentSeverity;
-    reportedByGroup?: string | null;
-    reportedByUserId?: string | null;
-    reportedBy?: string | null;
-    reportedDate?: string;
-    followUpGroup?: string | null;
-    responsible?: string | null;
-    responsibleDisplayName?: string | null;
-    lastModified?: string;
-    numberOfComments?: number;
-    numberOfActions?: number;
-    numberOfAttachments?: number;
     status?: number;
     statusText?: IncidentStatus;
     incidentTypeId: number;

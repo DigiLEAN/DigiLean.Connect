@@ -6,9 +6,9 @@
 import type { AssetRoleType } from './AssetRoleType.js';
 
 export type UserGroupMember = {
-    userId?: string | null;
+    userId: string;
     userName?: string | null;
     azureObjectId?: string | null;
     groupId?: number;
-    groupRole?: AssetRoleType;
+    groupRole: AssetRoleType;
 };

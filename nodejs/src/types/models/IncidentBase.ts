@@ -3,29 +3,18 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IncidentSeverity } from './IncidentSeverity.js';
 import type { IncidentStatus } from './IncidentStatus.js';
 
 export type IncidentBase = {
-    id?: number;
     status?: number;
     statusText?: IncidentStatus;
     incidentTypeId: number;
-    severity?: number;
-    severityText?: IncidentSeverity;
+    severity: number;
     reportedByGroupId?: number | null;
-    reportedByGroup?: string | null;
-    reportedByUserId?: string | null;
-    reportedBy?: string | null;
-    reportedDate?: string;
     followUpGroupId?: number | null;
-    followUpGroup?: string | null;
     responsibleUserId?: string | null;
-    responsible?: string | null;
-    responsibleDisplayName?: string | null;
+    title: string;
     text?: string | null;
-    title?: string | null;
-    lastModified?: string;
     incidentDate: string;
     resolvedDate?: string | null;
     dueDate?: string | null;
@@ -34,8 +23,5 @@ export type IncidentBase = {
     isAnonymous?: boolean;
     areaId?: number | null;
     projectId?: number | null;
-    numberOfComments?: number;
-    numberOfActions?: number;
-    numberOfAttachments?: number;
     externalId?: string | null;
 };

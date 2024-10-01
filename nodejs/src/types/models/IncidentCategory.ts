@@ -4,6 +4,6 @@
 /* eslint-disable */
 
 export type IncidentCategory = {
-    id?: number;
+    id: number;
     title?: string | null;
 };

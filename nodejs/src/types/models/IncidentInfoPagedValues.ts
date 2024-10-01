@@ -3,10 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Incident } from './Incident.js';
+import type { IncidentInfo } from './IncidentInfo.js';
 
-export type IncidentPagedValues = {
+export type IncidentInfoPagedValues = {
     total?: number;
     page?: number;
-    values?: Array<Incident> | null;
+    values?: Array<IncidentInfo> | null;
 };

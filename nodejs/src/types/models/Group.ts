@@ -11,4 +11,5 @@ export type Group = {
     parentId?: number | null;
     projectId?: number | null;
     externalId?: string | null;
+    buisnessUnitId?: number | null;
 };

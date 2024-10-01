@@ -3,10 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type DataValue = {
-    id?: number;
-    dataSourceId: number;
-    registrationDate?: string;
+export type DataValueCreate = {
     areaId?: number | null;
     assetId?: number | null;
     projectId?: number | null;

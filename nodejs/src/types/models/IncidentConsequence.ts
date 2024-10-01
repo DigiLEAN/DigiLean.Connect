@@ -6,6 +6,6 @@
 export type IncidentConsequence = {
     unit?: string | null;
     amount?: number | null;
-    id?: number;
+    id: number;
     title?: string | null;
 };

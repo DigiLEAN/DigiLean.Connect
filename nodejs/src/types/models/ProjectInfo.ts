@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Project = {
+export type ProjectInfo = {
     id?: number;
     projectNumber?: string | null;
     status?: string | null;
@@ -14,6 +14,4 @@ export type Project = {
     createdDate?: string;
     startDate?: string | null;
     endDate?: string | null;
-    estimatedStartDate?: string | null;
-    estimatedEndDate?: string | null;
 };

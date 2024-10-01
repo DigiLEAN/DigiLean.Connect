@@ -6,7 +6,8 @@
 import type { DataValue } from './DataValue.js';
 
 export type DataValuesPaged = {
-    total?: number;
-    page?: number;
+    pageSize?: number;
+    pageNo?: number;
+    count?: number;
     values?: Array<DataValue> | null;
 };
