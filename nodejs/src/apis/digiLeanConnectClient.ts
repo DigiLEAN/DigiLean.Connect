@@ -15,7 +15,7 @@ export class DigiLeanConnectClient {
 function getUrls(testmode?: boolean) {
     if (testmode) {
         return {
-            authUrl: "https://authdev.digilean.tools",
+            authUrl: "https://auth-test.digilean.tools",
             apiBaseUrl: "https://apidev.digilean.tools",
         }
     }

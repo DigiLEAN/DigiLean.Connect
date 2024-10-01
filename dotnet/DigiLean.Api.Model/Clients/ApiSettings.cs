@@ -19,7 +19,7 @@
             else if (mode == ApiMode.Localhost)
             {
                 apiUrl = "https://localhost:4001";
-                authUrl = "https://authdev.digilean.tools";
+                authUrl = "https://auth-test.digilean.tools";
             }
             return (apiUrl, authUrl);
         }

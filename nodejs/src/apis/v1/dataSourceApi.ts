@@ -7,7 +7,7 @@ export class DataSourceApiV1 extends ApiEndpointBase {
         super(client, "/v1/datasources")
     }
 
-    async getAll() {
+    async list() {
         const resRaw = await this.http.get(this.basePath)
         const res = JSON.parse(resRaw) as DataSourceInfo[]
         return res
