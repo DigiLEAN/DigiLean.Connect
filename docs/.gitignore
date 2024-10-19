@@ -1,0 +1,9 @@
+.vitepress/cache
+.vitepress/dist
+.vitepress/.temp
+types
+.idea
+
+.env
+
+node_modules

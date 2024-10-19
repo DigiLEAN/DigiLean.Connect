@@ -1,0 +1,141 @@
+:root {
+    /* default theme */
+    --digilean-primary-button: var(--digilean-blue-core);
+
+    --digilean-main-menu-background: var(--digilean-blue-dark);
+    --digilean-main-menu-text: var(--digilean-white);
+
+    --digilean-msteams-background: var(--digilean-msteams);
+    --digilean-template-item: var(--digilean-white-ish);
+    --digilean-template-item-selected: var(--digilean-blue-sky-lightest);
+
+    --digilean-box-shadow: 1px 10px 23px 0px var(--digilean-white-dow);
+    --digilean-box-shadow-hover: -1px 10px 23px 0px var(--digilean-grey-pigeon);
+
+    --digilean-primary: var(--digilean-blue-sharp);
+    --digilean-text-on-dark: var(--digilean-white);
+
+    --digilean-input-border: var(--digilean-grey-sparrow);
+    
+    --digilean-primary-link: var(--digilean-blue-whale);
+    --digilean-primary-link-focus: var(--digilean-blue-berry);
+
+    --digilean-primary-background: var(--digilean-grey-haze);
+    --digilean-primary-text: var(--digilean-grey);
+
+    --digilean-secondary-background: var(--digilean-white);
+    --digilean-secondary-text: var(--digilean-grey-mountain);
+    
+    --digilean-tertiary-background: var(--digilean-grey-lightestx);
+    --digilean-tertiary-text: var(--digilean-greyx);
+
+    --digilean-quaternary-background: var(--digilean-grey-xlight);
+    --digilean-quaternary-text: var(--digilean-white-almost);
+
+    --digilean-selected: var(--digilean-blue-sky-lightest);
+    --digilean-disabled: var(--digilean-grey-light);
+
+    --digilean-dark-label: var(--digilean-blue-raw);
+    --digilean-dark-label-primary: var(--digilean-blue-bird);
+
+    --digilean-info: var(--digilean-cyan);
+    --digilean-error: var(--digilean-red);
+    --digilean-success: var(--digilean-green);
+    --digilean-warning: var(--digilean-orange);
+    --digilean-warning-light: var(--digilean-mandarin);
+
+    --digilean-important: var(--digilean-blue-core);
+    --digilean-danger: var(--digilean-red-cardinal);
+
+    --digilean-wizard-unselected: var(--digilean-blue-lighter);
+
+    --digilean-button-success: var(--digilean-greens);
+    --digilean-button-success-border: var(--digilean-greeny);
+
+    --digilean-button-warning: var(--digilean-orange-sun);
+    --digilean-button-warning-border: var(--digilean-orange-dawn);
+
+    --digilean-funeral-background: black;
+    --digilean-transparent-background: rgba(0,0,0,0.3);
+
+    --logo-top-left-color: var(--digilean-blue-sky-light);
+    --logo-top-right-color: var(--digilean-blue);
+    --logo-bottom-left-color: var(--digilean-blue);
+    --logo-bottom-right-color: var(--digilean-blue);
+
+    --digilean-image-width: 3rem;
+    --digilean-image-height: 3rem;
+
+    --digilean-icon-width: 2rem;
+    --digilean-icon-height: 2rem;
+
+    --digilean-badge-default: var(--digilean-grey);
+    --digilean-badge-color: var(--digilean-badge-default);
+}
+.dark-theme {
+    --digilean-primary-button: var(--digilean-blue-night);
+
+    --digilean-box-shadow: 1px 10px 23px 0px var(--digilean-grey-granite);
+    --digilean-box-shadow-hover: -1px 10px 23px 0px var(--digilean-grey-pigeon);
+
+    --digilean-main-menu-background: black;
+
+    --digilean-msteams-background: black;
+
+    --digilean-template-item: var(--digilean-black-one);
+    --digilean-template-item-selected: var(--digilean-black-two);
+
+    --digilean-primary: var(--digilean-blue-deep);
+
+    --digilean-primary-link: var(--digilean-blue-moon);
+    --digilean-primary-link-focus: var(--digilean-blue-lighter);
+
+    --digilean-input-border: var(--digilean-white-bright);
+
+    --digilean-primary-background: var(--digilean-black);
+    --digilean-primary-text: var(--digilean-grey-light);
+
+    --digilean-secondary-background: var(--digilean-black-one);
+    --digilean-secondary-text: var(--digilean-white-bright);
+    
+    --digilean-tertiary-background: var(--digilean-black-two);
+    --digilean-tertiary-text: var(--digilean-grey-lightest);
+
+    --digilean-quaternary-background: var(--digilean-grey-stone-dark);
+    --digilean-quaternary-text: var(--digilean-grey-granite);
+
+    --digilean-selected: var(--digilean-blue-alt);
+    --digilean-disabled: var(--digilean-greyy);
+
+    --digilean-dark-label: var(--digilean-blue-night);
+    --digilean-dark-label-primary: var(--digilean-blue-moon);
+
+    --digilean-funeral-background: black;
+
+    --digilean-wizard-unselected: var(--digilean-grey-mountain);
+
+    --digilean-info: var(--digilean-blue-dark);
+    --digilean-error: var(--digilean-red-dark);
+    --digilean-success: var(--digilean-green-dark);
+    --digilean-warning: var(--digilean-orange-dark);
+
+    --digilean-important: var(--digilean-green-dark);
+    --digilean-danger: var(--digilean-red-cardinal-dark);
+
+    --digilean-button-success: var(--digilean-green-olive);
+    --digilean-button-success-border: var(--digilean-green-pea);
+
+    --digilean-button-warning: var(--digilean-yellow-gold-dark);
+    --digilean-button-warning-border: var(--digilean-mandarin);
+
+    --digilean-funeral-background: black;
+    --digilean-transparent-background: rgba(0,0,0,0.3);
+}
+
+#app .Layout {
+    --vp-home-hero-name-background: linear-gradient(-45deg, var(--digilean-blue-twilight) 10%, var(--digilean-blue) 90%);
+}
+
+.dark #app .Layout  {
+    --vp-home-hero-name-background: linear-gradient(-45deg, var(--digilean-blue) 10%, var(--digilean-blue-sky-light) 90%);
+}
