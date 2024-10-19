@@ -30,6 +30,16 @@ Then run `test.ts` file with `npm test`
 
 This client is also packages as a [NPM package](https://www.npmjs.com/package/@digilean/connect)
 
+## Authentication
+
+```http
+POST https://auth.digilean.tools/connect/token'
+?client_id={your-id}
+&client_secret={your-secret}
+&grant_type=client_credentials
+Content-Type: application/x-www-form-urlencoded
+```
+
 ## Power Platform
 
 The folder `power.platform` contains the definition for creating a [custom connector for Microsoft Power Platform](https://learn.microsoft.com/en-us/connectors/custom-connectors/) 
