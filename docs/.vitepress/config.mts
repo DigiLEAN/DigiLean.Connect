@@ -27,6 +27,12 @@ export default defineConfig({
             { text: 'Scopes', link: '/docs/scopes' },
           ]
         },
+        {
+          text: 'Querying',
+          items: [
+            { text: 'Filter resource', link: '/docs/filtering' }
+          ]
+        },
         ...sidebar.generateSidebarGroups(),
       ],
       "/examples/": [

@@ -11,17 +11,7 @@ You can also access the full OpenAPI spec
 <a href="/swagger/v1/swagger.yaml" target="_blank">yaml</a>
 
 
-<table style="width: 100%;">
-    <thead>
-        <tr>
-            <th style="width: 30%;">
-                Url
-            </th>
-            <td style="width: 70%;">
-                Value
-            </td>
-        </tr>
-    </thead>
+<table>
     <tbody>
         <tr>
             <td>
