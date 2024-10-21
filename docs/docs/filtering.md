@@ -4,10 +4,10 @@
   filtering which allows to specify conditions to limit the data returned by the
   API.
 
-  The syntax for filtering is adding <code>?$filter={condition}</code> at the
+  The syntax for filtering is adding `?$filter={condition}` at the
   end of the request URL. One could for example make a request asking for all
   users with the name Bob like this:
-  <code>https://connect.digilean.tools/v1/Users?$filter=Name eq 'Bob'&nbsp;</code>
+  `https://connect.digilean.tools/v1/Users?$filter=Name eq 'Bob'`
   
 ## Common filter expressions
 
@@ -43,7 +43,7 @@ Note that the date format has to be YYYY-MM-DDTHH:mm:ssZ.
   This filter is used to return a list of users with the name Bob and that are
   admins.
 
-### Common operations
+## Common operations
 
   Comparison Operators: eq (equal), ne (not equal), gt (greater than), ge
   (greater than or equal), lt (less than), le (less than or equal).

@@ -1,9 +1,7 @@
 # Authentication
 
-<p>
-    DigiLEAN Connect API use <em>Client Credentials</em> and 
-    <em>Bearer token</em> for authentication
-</p>
+ DigiLEAN Connect API use **Client Credentials** and 
+    **Bearer token** for authentication
 
 <p>
     <em>Scopes</em> are used for limiting access to endpoints and operations.
