@@ -76,7 +76,6 @@
 <article>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-    <p>&nbsp;</p>
     <section class="entra-buttons">
         <button id="btn-connect-azure" class="connect-button" 
             :disabled="!btnAzureEnabled" @click="connectAzureAd">

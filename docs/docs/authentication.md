@@ -6,7 +6,7 @@
 <p>
     <em>Scopes</em> are used for limiting access to endpoints and operations.
 </p>
-<p>The lifetime of the access token is 1 hour
+<p>The lifetime of the access token is default 24 hours
 </p>
 
 ## Retrieve access token
@@ -35,7 +35,7 @@ Content-Type: application/x-www-form-urlencoded
 ```json
 {
     "access_token": "eyJhbGciOiJFUzM4NCIsImtpZCI6Ijk2YzU0MTQ4Y2U4MTQzMWNh...",
-    "expires_in": 3600,
+    "expires_in": 86400,
     "token_type": "Bearer",
     "scope": "Data.Read Data.ReadWrite"
 }
