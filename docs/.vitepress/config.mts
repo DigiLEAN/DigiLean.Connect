@@ -33,6 +33,12 @@ export default defineConfig({
             { text: 'Filter resource', link: '/docs/filtering' }
           ]
         },
+        {
+          text: 'Microsoft',
+          items: [
+            { text: 'Entra Id Apps', link: '/docs/microsoft-entra' }
+          ]
+        },
         ...sidebar.generateSidebarGroups(),
       ],
       "/examples/": [

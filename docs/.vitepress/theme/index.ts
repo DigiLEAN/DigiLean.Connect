@@ -10,7 +10,6 @@ import "./colors.css"
 import "./theme.css"
 import { getOpenApi } from "../../services/openApi"
 // import "../../components/digiLeanLogo"
-// import "../../components/digiLeanButton"
 //import "../../components"
 
 export default {
