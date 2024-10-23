@@ -49,7 +49,7 @@ export default defineConfig({
           items: [
             { text: 'Datasources', link: '/examples/datasource-get' },
             { text: 'Datavalue Add', link: '/examples/datasource-value-post' },
-            { text: "Datasource update", link: "/examples/datasource-value-update"}
+            { text: "Datavalue Update", link: "/examples/datasource-value-update"}
           ]
         }
       ]
