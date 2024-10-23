@@ -2,6 +2,8 @@
 
 Example code for consuming our API.
 
+If you are looking for the DigiLEAN main product [contact us here](https://www.digilean.com/)
+
 ## Docs
 
 - [DigiLEAN Connect Full OpenAPI documentation](https://connect.digilean.tools/swagger/index.html)  
