@@ -33,13 +33,14 @@ export default defineConfig({
             { text: 'Filter resource', link: '/docs/filtering' }
           ]
         },
+        /// OpenAPI docs
+        ...sidebar.generateSidebarGroups(),
         {
           text: 'Microsoft',
           items: [
             { text: 'Entra Id Apps', link: '/docs/microsoft-entra' }
           ]
-        },
-        ...sidebar.generateSidebarGroups(),
+        }
       ],
       "/examples/": [
         {
@@ -48,7 +49,7 @@ export default defineConfig({
             { text: 'Datasources', link: '/examples/datasource-get' },
             { text: 'Datavalue Add', link: '/examples/datasource-value-post' },
           ]
-        },
+        }
       ]
     },
     socialLinks: [
