@@ -7,6 +7,7 @@ export default defineConfig({
     ["link", { rel: "icon", type:"image/svg+xml", href: "/logo.svg" }],
     ["link", { rel: "icon", type:"image/x-icon", href: "/favicon.ico" }]
   ],
+  lang: "en-US",
   title: "DigiLEAN Connect",
   description: "API Documentation",
   themeConfig: {
