@@ -15,7 +15,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Docs', link: '/docs' },
-      { text: 'Examples', link: '/examples' }
+      { text: 'Examples', link: '/examples' },
+      { text: 'Enterprise', link: '/enterprise' }
     ],
 
     sidebar: {
@@ -35,13 +36,7 @@ export default defineConfig({
           ]
         },
         /// OpenAPI docs
-        ...sidebar.generateSidebarGroups(),
-        {
-          text: 'Microsoft',
-          items: [
-            { text: 'Entra Id Apps', link: '/docs/microsoft-entra' }
-          ]
-        }
+        ...sidebar.generateSidebarGroups()
       ],
       "/examples/": [
         {
@@ -50,6 +45,14 @@ export default defineConfig({
             { text: 'Datasources', link: '/examples/datasource-get' },
             { text: 'Datavalue Add', link: '/examples/datasource-value-post' },
             { text: "Datavalue Update", link: "/examples/datasource-value-update"}
+          ]
+        }
+      ],
+      "/enterprise/": [
+        {
+          text: 'Microsoft',
+          items: [
+            { text: 'Enterprise Applications', link: '/enterprise/' }
           ]
         }
       ]
