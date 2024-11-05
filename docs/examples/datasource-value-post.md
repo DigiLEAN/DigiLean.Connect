@@ -86,14 +86,14 @@ Response
 Inspect the `elements` array of the response here. 
 
 The three important properties are
- - `sourceColumn` - which column in the data object
- - `type` - what kind of data and what to enter
+ - `sourceColumn` - which column in the dataValue object
+ - `type` - what kind of data to enter
  - `isMandatory` - whether the field is required
 
 
-### The dynamic dimension
+### The dynamic dimensions
 
-#### dynamic columns
+#### Dynamic dimension columns
 The following columns can have different data based on the configuration
 
  - dimension
@@ -101,28 +101,27 @@ The following columns can have different data based on the configuration
  - dimension3
  - dimension4
 
-### dynamic types
+### Dynamic dimension types
 
- - text: free text up to 100 characters
- - number: number with digits
- - bool: true or false
- - list: Id from a DataList. The config will contain a `dataListId` field as well for this option
- - user: User id of a DigiLEAN user
+ - `text`: free text up to 100 unicode characters
+ - `number`: number with digits
+ - `bool`: true or false
+ - `list`: Id from a DataList. The config will contain a `dataListId` field as well for this option
+ - `user`: User id of a DigiLEAN user
 
 ### The static dimensions
-- type *description* - column description: free text up to 255 characters
-- type *asset* - column assetId: Id of DigiLEAN group
-- type *project* - column projectId: Id of DigiLEAN project
+- type `description` - column `description`: free text up to 255 unicode characters
+- type `asset` - column `assetId`: Id of a DigiLEAN group
+- type `project` - column `projectId`: Id of a DigiLEAN project
 
-### Other dimensions
+### Other columns
 
-`externalId` is a optional column just meant for keeping track of IDs when you import from external sources. 
-If a third party system has IDs for its values you can use this to store their ID when synchronizing etc. It's not used for anything else inside DigiLEAN
+`externalId` is a optional column just meant for keeping track when you synchronize from external sources etc. It can contain up to 100 unicode characters. It's not used for anything in DigiLEAN.
 
 
 ## Dimension type text example
 
-To post a dimension of type `text` or `description` you just post the text dimension along with the values and valueDate:
+To post a dimension of type `text` or `description` post the text dimension along with the values and valueDate:
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -138,3 +137,33 @@ content-type: application/json
 ```
 
 ## Dimension type number example
+
+To post a dimension of type `number` post the number as a string. The supported type is `Double-precision floating-point` and you must use period (.) as decimal separator.
+
+```http
+POST https://connect.digilean.tools/v1/datasources/498/values
+content-type: application/json
+```
+```json
+{
+    "valueDate": "2024-02-25T12:00:00",
+    "value": 1,
+    "dimension": "2.5"
+}
+```
+
+## Dimension type bool example
+
+To post a dimension of type `bool` post `true` or `false` as strings
+
+```http
+POST https://connect.digilean.tools/v1/datasources/498/values
+content-type: application/json
+```
+```json
+{
+    "valueDate": "2024-02-25T12:00:00",
+    "value": 1,
+    "dimension": "false"
+}
+```
