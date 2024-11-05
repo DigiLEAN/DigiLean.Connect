@@ -103,9 +103,9 @@ The following columns can have different data based on the configuration
 
 ### Dynamic dimension types
 
- - `text`: free text up to 100 unicode characters
- - `number`: number with digits
- - `bool`: true or false
+ - `text`: free text up to 100 unicode characters. [Example](#dimension-type-text-example)
+ - `number`: number with digits. [Example](#dimension-type-number-example)
+ - `bool`: true or false. [Example](#dimension-type-bool-example)
  - `list`: Id from a DataList. The config will contain a `dataListId` field as well for this option
  - `user`: User id of a DigiLEAN user
 
@@ -167,3 +167,57 @@ content-type: application/json
     "dimension": "false"
 }
 ```
+
+## Dimension type list example
+
+Type datalist element configuration will have a `dataListId`
+
+```json
+{
+  "type": "list",
+  "isMandatory": true,
+  "sourceColumn": "dimension4",
+  "dataListId": 61
+}
+```
+
+This means you need to look up the values of this DataList and then match the item you want to insert and then use the Id of the DataList item
+
+```http
+GET https://connect.digilean.tools/v1/Datalists/61/items 
+Content-Type: application/json
+```
+
+Response 
+
+```json
+[
+  {
+    "id": 1208,
+    "identifier": "success",
+    "name": "Success",
+    "sortOrder": 0
+  },
+  {
+    "id": 1209,
+    "identifier": "failure",
+    "name": "Failure",
+    "sortOrder": 0
+  }
+]
+```
+
+If the display value from the source to insert is "success" then id `1208` must be inserted as the dimension value as a string
+```http
+POST https://connect.digilean.tools/v1/datasources/498/values
+content-type: application/json
+```
+```json
+{
+  "valueDate": "2024-02-25T12:00:00",
+  "value": 1,
+  "dimension": "1208"
+}
+```
+
+If the value is not present it can be [inserted to the list](/docs/operations/Datalists_CreateItem)
