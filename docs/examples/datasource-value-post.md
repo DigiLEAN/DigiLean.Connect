@@ -1,6 +1,6 @@
 # Add datavalue to datasource
 
-## Basic example - value and valueDate
+## Value and ValueDate
 
 This is the simplest form of a DataValue. The column `value` and `valueDate` is the minimum requirement  
 
@@ -45,11 +45,11 @@ location: /v1/datasources/1348/values/291411700
 
 ## Datavalue dimensions
 
-From the previous payload you can see there are more columns in a Datavalue object
+From the previous payload you can see there are more optional columns in a Datavalue object
 
-The more advanced scenario is to including one or more dimensions. This can be useful for extra information or for filtering of dataValues in DigiLEAN.
+The more advanced scenario is to insert one or more dimensions. This can be useful for extra information or for filtering of dataValues in DigiLEAN.
 
-The nature of the dimensions are somewhat dynamic. So based on configuration the values that is to be posted can vary based on the configuration.
+The nature of the dimensions are somewhat dynamic. So based on configuration the values to be posted can vary.
 
 ### The configuration
 
@@ -83,9 +83,9 @@ Response
 }
 ```
 
-Inspect the `elements` array of the response on the datasource you are working with. 
+Inspect the `elements` array of the response of the datasource you are working with. 
 
-The three important properties of each element are
+The important properties of each configuration element are
  - `sourceColumn` - which column in the dataValue object
  - `type` - what kind of data to enter
  - `isMandatory` - whether the column is required
@@ -94,7 +94,7 @@ The three important properties of each element are
 ### The dynamic dimensions
 
 #### Dynamic dimension columns
-The following columns can have different data based on the configuration
+The following columns can have different data based on the type
 
  - dimension
  - dimension2
@@ -103,11 +103,11 @@ The following columns can have different data based on the configuration
 
 ### Dynamic dimension types
 
- - `text`: free text up to 100 unicode characters. [Example](#dimension-type-text-example)
- - `number`: number with decimals. [Example](#dimension-type-number-example)
- - `bool`: true or false. [Example](#dimension-type-bool-example)
- - `list`: Id from a DataList. The config will contain a `dataListId` as well for this option. [Example](#dimension-type-list-example)
- - `user`: User id of a DigiLEAN user
+ - `text` free text up to 100 unicode characters. [Example](#dimension-type-text-example)
+ - `number` number with decimals. [Example](#dimension-type-number-example)
+ - `bool` true or false. [Example](#dimension-type-bool-example)
+ - `list` Id from a DataList. The config will contain a `dataListId` for this option. [Example](#dimension-type-list-example)
+ - `user` User id of a DigiLEAN user
 
 ### The static dimensions
 - type 'description' - column `description`: free text up to 255 characters. [Example](#dimension-type-text-example)
@@ -121,7 +121,7 @@ The following columns can have different data based on the configuration
 
 ## Dimension type text example
 
-To post a dimension of type `text` or `description` post the string to the dimension along with the values and valueDate:
+To post a dimension of type `text` or `description` post the plain string to the dimension along with the values and valueDate:
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -138,7 +138,7 @@ content-type: application/json
 
 ## Dimension type number example
 
-To post a dimension of type `number` post the number as a string. The supported type is `Double-precision floating-point` and you must use period as decimal separator.
+To post a dimension of type `number` post the number as a string. The supported type is `Double-precision floating-point` and you must use dot as decimal separator.
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -219,7 +219,7 @@ content-type: application/json
 }
 ```
 ::: tip
-If the value is not present it can be [inserted to the list](/docs/operations/Datalists_CreateItem)
+If the value is not present it can be [inserted to the Datalist](/docs/operations/Datalists_CreateItem)
 :::
 
 ## Dimension type asset example
