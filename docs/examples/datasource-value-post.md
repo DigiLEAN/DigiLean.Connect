@@ -241,7 +241,7 @@ Content-Type: application/json
 }
 ```
 
-Then insert the Id of the group as a string into the `assetId` column
+Then insert the Id of the group as a integer into the `assetId` column
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -251,7 +251,7 @@ content-type: application/json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
-  "assetId": "3996"
+  "assetId": 3996
 }
 ```
 
@@ -276,7 +276,7 @@ Content-Type: application/json
 }
 ```
 
-Then insert the Id of the project as a string into the `projectId` column
+Then insert the Id of the project as a integer into the `projectId` column
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -286,6 +286,6 @@ content-type: application/json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
-  "projectId": "369"
+  "projectId": 369
 }
 ```
