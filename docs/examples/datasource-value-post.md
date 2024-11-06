@@ -104,7 +104,7 @@ The following columns can have different data based on the configuration
 ### Dynamic dimension types
 
  - `text`: free text up to 100 unicode characters. [Example](#dimension-type-text-example)
- - `number`: number with digits. [Example](#dimension-type-number-example)
+ - `number`: number with decimals. [Example](#dimension-type-number-example)
  - `bool`: true or false. [Example](#dimension-type-bool-example)
  - `list`: Id from a DataList. The config will contain a `dataListId` as well for this option. [Example](#dimension-type-list-example)
  - `user`: User id of a DigiLEAN user
