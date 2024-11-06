@@ -394,7 +394,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DataListItem"
+                "$ref": "#/components/schemas/DataListItemCreate"
               }
             }
           }
@@ -2941,6 +2941,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
           "identifier": {
             "type": "string",
             "nullable": true
@@ -2948,10 +2952,20 @@
           "name": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataListItemCreate": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "nullable": true
           },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32"
+          "name": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

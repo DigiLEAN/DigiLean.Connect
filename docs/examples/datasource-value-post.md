@@ -2,7 +2,7 @@
 
 ## Basic example - value and valueDate
 
-This is the simplest form of a DataValue. The fields `value` and `valueDate` is the minimum requirement  
+This is the simplest form of a DataValue. The column `value` and `valueDate` is the minimum requirement  
 
 Request
 
@@ -45,7 +45,7 @@ location: /v1/datasources/1348/values/291411700
 
 ## Datavalue dimensions
 
-From the previous payload you can see there are more columns in a Datavalue
+From the previous payload you can see there are more columns in a Datavalue object
 
 The more advanced scenario is to including one or more dimensions. This can be useful for extra information or for filtering of dataValues in DigiLEAN.
 
@@ -88,7 +88,7 @@ Inspect the `elements` array of the response on the datasource you are working w
 The three important properties of each element are
  - `sourceColumn` - which column in the dataValue object
  - `type` - what kind of data to enter
- - `isMandatory` - whether the field is required
+ - `isMandatory` - whether the column is required
 
 
 ### The dynamic dimensions
@@ -106,7 +106,7 @@ The following columns can have different data based on the configuration
  - `text`: free text up to 100 unicode characters. [Example](#dimension-type-text-example)
  - `number`: number with digits. [Example](#dimension-type-number-example)
  - `bool`: true or false. [Example](#dimension-type-bool-example)
- - `list`: Id from a DataList. The config will contain a `dataListId` field as well for this option. [Example](#dimension-type-list-example)
+ - `list`: Id from a DataList. The config will contain a `dataListId` as well for this option. [Example](#dimension-type-list-example)
  - `user`: User id of a DigiLEAN user
 
 ### The static dimensions
@@ -182,7 +182,6 @@ Type datalist needs to be looked up first. Type datalist element configuration w
 ```
 
 This means you need to look up the values of this DataList and then match the item you want to insert.  
-Then use the Id of the DataList item
 
 ```http
 GET https://connect.digilean.tools/v1/Datalists/61/items 
@@ -196,19 +195,17 @@ Response
   {
     "id": 1208,
     "identifier": "success",
-    "name": "Success",
-    "sortOrder": 0
+    "name": "Success"
   },
   {
     "id": 1209,
     "identifier": "failure",
-    "name": "Failure",
-    "sortOrder": 0
+    "name": "Failure"
   }
 ]
 ```
 
-If the display value from the source to insert is "success" then id `1208` must be inserted as the dimension value as a string
+If the value from the source to insert is "success" then id `1208` must be inserted as the dimension value as a string
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -221,8 +218,9 @@ content-type: application/json
   "dimension": "1208"
 }
 ```
-
+::: tip
 If the value is not present it can be [inserted to the list](/docs/operations/Datalists_CreateItem)
+:::
 
 ## Dimension type asset example
 
