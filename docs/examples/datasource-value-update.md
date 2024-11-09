@@ -18,7 +18,6 @@ You can delete an array of ids with [Datavalue batch delete](/docs/operations/Da
 DELETE https://connect.digilean.tools/v1/Datasources/{id}/values/batch 
 Content-Type: application/json
 ```
-Request body of ids
 ```json
 [1001,1002,1003]
 ```
@@ -28,7 +27,6 @@ Then insert batch with [Datavalue post batch](/docs/operations/Datasources_Datas
 POST https://connect.digilean.tools/v1/Datasources/{id}/values/batch 
 Content-Type: application/json
 ````
-Request body
 ```json
 [
   {
@@ -52,7 +50,7 @@ If you are working with a specific time period of datavalues it can be convenien
 
 This method accepts a body of new Datavalues and Datetime From - To URL parameters.
 
-It will first delete all values in the time period and then insert the new values
+It will first delete all values in the time period (valueDate) and then insert the new values
 
 ```http
 PUT https://connect.digilean.tools/v1/Datasources/{id}/values/batchReplace
