@@ -107,7 +107,7 @@ The following columns can have different data based on the type
  - `number` number with decimals. [Example](#dimension-type-number-example)
  - `bool` true or false. [Example](#dimension-type-bool-example)
  - `list` Id from a DataList item. The config will contain a `dataListId` for this option. [Example](#dimension-type-list-example)
- - `user` User id of a DigiLEAN user
+ - `user` UserId of a DigiLEAN user. [Example](#dimension-type-user-example)
 
 ### The static dimensions
 - type 'description' - column `description`: free text up to 255 characters. [Example](#dimension-type-text-example)
@@ -170,7 +170,9 @@ content-type: application/json
 
 ## Dimension type list example
 
-Type datalist needs to be looked up first. Type datalist element configuration will have a `dataListId`
+Type datalist needs to be looked up first.  This is done with the [Datalist items endpoint](/docs/operations/Datalists_Items). 
+
+Type datalist element configuration will have a `dataListId`
 
 ```json
 {
@@ -181,7 +183,7 @@ Type datalist needs to be looked up first. Type datalist element configuration w
 }
 ```
 
-This means you need to look up the values of this DataList and then match the item you want to insert.  
+Use dataListId to fetch the items of the DataList and then match the item you want to insert.  
 
 ```http
 GET https://connect.digilean.tools/v1/Datalists/61/items 
@@ -287,5 +289,45 @@ content-type: application/json
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
   "projectId": 369
+}
+```
+
+## Dimension type user example
+
+Type user needs to be looked up first. This is done with the [user endpoint](/docs/operations/Users_List)
+
+```http
+GET https://connect.digilean.tools/v1/Users
+?$filter=userName eq 'user@digilean.com' 
+Content-Type: application/json
+```
+
+```json
+[
+  {
+    "id": "3cfb0ad7-b98e-4032-9f27-1e4f894a655f",
+    "roles": [],
+    "userName": "user@digilean.com",
+    "email": "user@digilean.com",
+    "firstName": "DigiLEAN",
+    "lastName": "User",
+    "fullName": "DigiLEAN User",
+    "screenName": "user",
+    "businessUnitId": 1
+  },
+]
+```
+
+Then insert the Id of the user as a string into the dimension column
+
+```http
+POST https://connect.digilean.tools/v1/datasources/498/values
+content-type: application/json
+```
+```json
+{
+  "valueDate": "2024-02-25T12:00:00",
+  "value": 1,
+  "dimension": "3cfb0ad7-b98e-4032-9f27-1e4f894a655f"
 }
 ```
