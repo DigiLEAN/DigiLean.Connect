@@ -58,7 +58,6 @@ PUT https://connect.digilean.tools/v1/Datasources/{id}/values/batchReplace
 &to=2024-12-26T00:00:00Z 
 Content-Type: application/json
 ```
-Request body
 ```json
 [
   {
