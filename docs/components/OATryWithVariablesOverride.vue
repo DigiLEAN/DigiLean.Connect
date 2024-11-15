@@ -58,9 +58,6 @@ const props = defineProps({
   },
 })
 
-onMounted(() => {
-  console.log(props.parameters)
-})
 
 const request = ref({
   url: `${props.baseUrl}${props.path}`,

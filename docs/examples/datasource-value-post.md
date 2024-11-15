@@ -76,8 +76,7 @@ Response
       "label": "Plain text",
       "type": "text",
       "isMandatory": true,
-      "sourceColumn": "dimension",
-      "dataSourceId": 498
+      "sourceColumn": "dimension"
     }
   ]
 }
@@ -183,7 +182,7 @@ Type datalist element configuration will have a `dataListId`
 }
 ```
 
-Use dataListId to fetch the items of the DataList and then match the item you want to insert.  
+Use dataListId to fetch the DataList *items* and then match the item you want to insert.  
 
 ```http
 GET https://connect.digilean.tools/v1/Datalists/61/items 

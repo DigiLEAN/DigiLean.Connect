@@ -1,11 +1,8 @@
 <script setup lang="ts">
-    import { onMounted, ref } from "vue"
+    import { ref } from "vue"
     import * as msal from "../services/msalConnect"
 
     const errorMsg = ref("")
-    onMounted(() => {
-        //loaded.value = true
-    })
 
     const btnAzureEnabled = ref(true)
     const btnSharePointEnabled = ref(true)

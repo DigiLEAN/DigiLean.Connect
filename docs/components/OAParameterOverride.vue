@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from 'vue';
 
 const props = defineProps({
   parameter: {
@@ -8,9 +7,6 @@ const props = defineProps({
   },
 })
 
-// onMounted(() => {
-//   console.log(props.parameter)
-// })
 </script>
 <style>
   .example {
