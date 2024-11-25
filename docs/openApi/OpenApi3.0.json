@@ -3032,10 +3032,6 @@
             "type": "string",
             "nullable": true
           },
-          "dataSourceId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "dataListId": {
             "type": "integer",
             "format": "int32",
