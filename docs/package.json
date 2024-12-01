@@ -28,6 +28,6 @@
     "dotenv": "^16.4.5",
     "lit": "^3.2.0",
     "openapi3-ts": "^4.4.0",
-    "vitepress-openapi": "^0.0.3-alpha.43"
+    "vitepress-openapi": "0.0.3-alpha.49"
   }
 }

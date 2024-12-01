@@ -566,7 +566,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "valueDate desc'"
+            "example": "valueDate desc"
           }
         ],
         "responses": {
@@ -2946,10 +2946,12 @@
             "format": "int32"
           },
           "identifier": {
+            "maxLength": 255,
             "type": "string",
             "nullable": true
           },
           "name": {
+            "maxLength": 255,
             "type": "string",
             "nullable": true
           }
@@ -2960,10 +2962,12 @@
         "type": "object",
         "properties": {
           "identifier": {
+            "maxLength": 255,
             "type": "string",
             "nullable": true
           },
           "name": {
+            "maxLength": 255,
             "type": "string",
             "nullable": true
           }

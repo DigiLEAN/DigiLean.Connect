@@ -39,7 +39,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
     .connect-button {
         cursor: pointer;
         background: var(--digilean-blue-sharp);
