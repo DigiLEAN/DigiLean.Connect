@@ -120,7 +120,7 @@ The following columns can have different data based on the type
 
 ## Dimension type text example
 
-To post a dimension of type `text` or `description` post the plain string to the dimension along with the values and valueDate:
+To post a dimension of type `text` or `description` post the plain text to the dimension along with the values and valueDate:
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -169,10 +169,10 @@ content-type: application/json
 
 ## Dimension type list example
 
-DataList appears for the users as a text-field that can be filtered by.  
+DataList appears for the users as a text field that can be filtered by.  
 Behind the text there is a [DataList](/docs/operations/Datalists_List) with unique [Datalist items](/docs/operations/Datalists_Items).
 
-Post the text to the dimension and the DataListItem will be looked up or created if not exists
+Post the text to the dimension and the DataList Item will be looked up or created if not exists
 
 
 ```http
@@ -202,10 +202,10 @@ In the return value you will see an ID instead of the text, this is the DataList
 
 
 ::: tip
-If you for some reason want to manage the DataList manually you can [look up the items](/docs/operations/Datalists_Items)
-and [create new values](/docs/operations/Datalists_CreateItem)
+If you want to manage the DataList manually you can [look up the items](/docs/operations/Datalists_Items)
+and [create new values](/docs/operations/Datalists_CreateItem) by using `dataListId` from the [element configuration](#the-configuration)
 
-Then you post the ID as a string instead of the text
+Then you post the ID as a string to the dimension field instead
 :::
 
 ## Dimension type asset example
