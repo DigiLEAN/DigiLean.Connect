@@ -105,7 +105,7 @@ The following columns can have different data based on the type
  - `text` free text up to 100 unicode characters. [Example](#dimension-type-text-example)
  - `number` number with decimals. [Example](#dimension-type-number-example)
  - `bool` true or false. [Example](#dimension-type-bool-example)
- - `list` Id from a DataList item. The config will contain a `dataListId` for this option. [Example](#dimension-type-list-example)
+ - `list` DataList item. [Example](#dimension-type-list-example)
  - `user` UserId of a DigiLEAN user. [Example](#dimension-type-user-example)
 
 ### The static dimensions
@@ -169,44 +169,11 @@ content-type: application/json
 
 ## Dimension type list example
 
-Type datalist needs to be looked up first.  This is done with the [Datalist items endpoint](/docs/operations/Datalists_Items). 
+DataList appears for the users as a text-field that can be filtered by.  
+Behind the text there is a [DataList](/docs/operations/Datalists_List) with unique [Datalist items](/docs/operations/Datalists_Items).
 
-Type datalist element configuration will have a `dataListId`
+Post the text to the dimension and the DataListItem will be looked up or created if not exists
 
-```json
-{
-  "type": "list",
-  "isMandatory": true,
-  "sourceColumn": "dimension4",
-  "dataListId": 61
-}
-```
-
-Use dataListId to fetch the DataList *items* and then match the item you want to insert.  
-
-```http
-GET https://connect.digilean.tools/v1/Datalists/61/items 
-Content-Type: application/json
-```
-
-Response 
-
-```json
-[
-  {
-    "id": 1208,
-    "identifier": "success",
-    "name": "Success"
-  },
-  {
-    "id": 1209,
-    "identifier": "failure",
-    "name": "Failure"
-  }
-]
-```
-
-If the value from the source to insert is "success" then id `1208` must be inserted as the dimension value as a string
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
@@ -216,11 +183,29 @@ content-type: application/json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
-  "dimension": "1208"
+  "dimension": "Success"
 }
 ```
+
+In the return value you will see an ID instead of the text, this is the DataList Item ID mentioned above
+
+```json
+{
+  "id": 5364034,
+  "dataSourceId": 498,
+  "registrationDate": "2024-12-02T07:47:53.6335817Z",
+  "value": 1,
+  "dimension": "1208",
+  "valueDate": "2024-01-02T13:00:00Z"
+}
+```
+
+
 ::: tip
-If the value is not present it can be [inserted to the Datalist](/docs/operations/Datalists_CreateItem)
+If you for some reason want to manage the DataList manually you can [look up the items](/docs/operations/Datalists_Items)
+and [create new values](/docs/operations/Datalists_CreateItem)
+
+Then you post the ID as a string instead of the text
 :::
 
 ## Dimension type asset example

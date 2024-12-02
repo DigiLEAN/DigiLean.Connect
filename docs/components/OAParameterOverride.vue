@@ -8,7 +8,7 @@ const props = defineProps({
 })
 
 </script>
-<style>
+<style scoped>
   .example {
     color: var(--digilean-blue);
   }
