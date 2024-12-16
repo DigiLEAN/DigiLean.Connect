@@ -155,6 +155,107 @@ paths:
       responses:
         '200':
           description: OK
+  /v1/Datasources/{id}/values/batch:
+    post:
+      tags:
+      - Datasources
+      summary: Datasource Value Create Batch
+      description: Create a batch of new values on Datasource
+      operationId: Datasources_DatasourceCreateValuesBatch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Datavalues
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/DataValueCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchResult'
+    delete:
+      tags:
+      - Datasources
+      summary: Datasource Value Delete Batch
+      description: Delete a batch of values from Datasource
+      operationId: Datasources_DatasourceDeleteValuesBatch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Datavalues
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+  /v1/Datasources/{id}/values/batchReplace:
+    put:
+      tags:
+      - Datasources
+      summary: Datasource Value Replace Batch
+      description: Replace a batch of values on Datasource based on period
+      operationId: Datasources_DatasourceValuesBatchReplace
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: query
+        name: from
+        description: From datetime
+        type: string
+        format: date-time
+      - in: query
+        name: to
+        description: To datetime
+        type: string
+        format: date-time
+      - in: body
+        name: body
+        description: values
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/DataValueCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchResult'
   /v1/Tasks/{id}:
     get:
       tags:
@@ -274,6 +375,13 @@ paths:
           schema:
             $ref: '#/definitions/TaskInfo'
 definitions:
+  BatchResult:
+    type: object
+    properties:
+      total:
+        format: int32
+        type: integer
+    additionalProperties: false
   DataSource:
     required:
     - id

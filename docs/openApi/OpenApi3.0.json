@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://connect.digilean.tools",
-      "description": "DigiLEAN Connect"
+      "url": "https://apidev.digilean.tools",
+      "description": "DigiLEAN Connect Test"
     }
   ],
   "paths": {
@@ -3026,8 +3026,7 @@
             "nullable": true
           },
           "type": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/DataSourceElementType"
           },
           "isMandatory": {
             "type": "boolean"
@@ -3043,6 +3042,33 @@
           }
         },
         "additionalProperties": false
+      },
+      "DataSourceElementType": {
+        "enum": [
+          "area",
+          "asset",
+          "board",
+          "bool",
+          "description",
+          "list",
+          "number",
+          "project",
+          "text",
+          "user"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "Area",
+          "Asset",
+          "Board",
+          "Bool",
+          "Description",
+          "List",
+          "Number",
+          "Project",
+          "Text",
+          "User"
+        ]
       },
       "DataSourceInfo": {
         "type": "object",
@@ -4989,7 +5015,7 @@
         "description": "Client Credentials flow. Authorization header with Bearer token",
         "flows": {
           "clientCredentials": {
-            "tokenUrl": "https://auth.digilean.tools/connect/token",
+            "tokenUrl": "https://auth-test.digilean.tools/connect/token",
             "scopes": {
               "public.api.read": "read all",
               "public.api.write": "write all",

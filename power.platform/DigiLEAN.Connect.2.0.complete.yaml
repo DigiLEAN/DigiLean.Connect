@@ -1,0 +1,3184 @@
+swagger: '2.0'
+info:
+  title: DigiLean.Api
+  description: DigiLEAN Connect - REST API v1.0
+  version: v1
+host: connect.digilean.tools
+schemes:
+- http
+paths:
+  /v1/Boards:
+    get:
+      tags:
+      - Boards
+      summary: Boards List
+      description: List boards with an optional filter
+      operationId: Boards_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BoardInfo'
+  '/v1/Boards/{id}':
+    get:
+      tags:
+      - Boards
+      summary: Board Detail
+      description: Get Board Detail
+      operationId: Boards_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Board Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Board'
+  '/v1/Boards/{id}/tasks':
+    get:
+      tags:
+      - Boards
+      summary: Board Tasks
+      description: Get tasks on a board
+      operationId: Boards_Tasks
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Board Id
+        required: true
+        type: integer
+        format: int32
+      - in: query
+        name: Count
+        description: Page Size default is 100 and max 10000
+        type: integer
+        format: int32
+        maximum: 10000
+        minimum: 0
+      - in: query
+        name: Page
+        description: Page default and start value is 1
+        type: integer
+        format: int32
+      - in: query
+        name: From
+        description: Filter BoardDate. Greater than
+        type: string
+        format: date-time
+      - in: query
+        name: To
+        description: Filter BoardDate. Lesser than
+        type: string
+        format: date-time
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskPaged'
+    post:
+      tags:
+      - Boards
+      summary: Board Task Create
+      description: Create task on a board
+      operationId: Boards_TaskCreate
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Board Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: ''
+        schema:
+          $ref: '#/definitions/TaskBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+  /v1/Customers:
+    get:
+      tags:
+      - Customers
+      summary: Customer list
+      description: List customers
+      operationId: Customers_List
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProjectCustomer'
+    post:
+      tags:
+      - Customers
+      summary: Customer Create
+      description: Create new customer
+      operationId: Customers_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Customer object
+        schema:
+          $ref: '#/definitions/ProjectCustomer'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProjectCustomer'
+  '/v1/Customers/{customerNumber}':
+    get:
+      tags:
+      - Customers
+      summary: Customer Details
+      description: Get customer details
+      operationId: Customers_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: customerNumber
+        description: Customer number
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProjectCustomer'
+  /v1/Datalists:
+    get:
+      tags:
+      - Datalists
+      summary: Datalist List
+      description: List Datalists with optional filter
+      operationId: Datalists_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DataList'
+  '/v1/Datalists/{id}/items':
+    get:
+      tags:
+      - Datalists
+      summary: DataList Items
+      description: Gets Datalist items
+      operationId: Datalists_Items
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datalist Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DataListItem'
+    post:
+      tags:
+      - Datalists
+      summary: Datalist Item Create
+      description: Create a new item on Datalist
+      operationId: Datalists_CreateItem
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datalist Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Item object
+        schema:
+          $ref: '#/definitions/DataListItemCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataList'
+  /v1/Datasources:
+    get:
+      tags:
+      - Datasources
+      summary: Datasource List
+      description: Get datasources with an optional filter
+      operationId: Datasources_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DataSourceInfo'
+  '/v1/Datasources/{id}':
+    get:
+      tags:
+      - Datasources
+      summary: Datasource Details
+      description: Get Datasource details
+      operationId: Datasources_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataSource'
+  '/v1/Datasources/{id}/values':
+    get:
+      tags:
+      - Datasources
+      summary: Datasource Values
+      description: 'Gets values from Datasource with paging, optional filter and orderby'
+      operationId: Datasources_Values
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource id
+        required: true
+        type: integer
+        format: int32
+      - in: query
+        name: from
+        description: Filter from ValueDate. Greater than
+        type: string
+        format: date-time
+      - in: query
+        name: to
+        description: Filter to ValueDate. Lesser than
+        type: string
+        format: date-time
+      - in: query
+        name: page
+        description: Page default and start value is 1
+        type: integer
+        format: int32
+      - in: query
+        name: pageSize
+        description: Page Size default is 1000 and max 10000
+        type: integer
+        format: int32
+        maximum: 10000
+        minimum: 0
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      - in: query
+        name: $orderby
+        description: Generic OData ordering
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataValuesPaged'
+    post:
+      tags:
+      - Datasources
+      summary: Datasource Value Create
+      description: Create a new value on Datasource
+      operationId: Datasources_DatasourceCreateValue
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Datavalue
+        schema:
+          $ref: '#/definitions/DataValueCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataValue'
+  '/v1/Datasources/{id}/values/batch':
+    post:
+      tags:
+      - Datasources
+      summary: Datasource Value Create Batch
+      description: Create a batch of new values on Datasource
+      operationId: Datasources_DatasourceCreateValuesBatch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Datavalues
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/DataValueCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchResult'
+    delete:
+      tags:
+      - Datasources
+      summary: Datasource Value Delete Batch
+      description: Delete a batch of values from Datasource
+      operationId: Datasources_DatasourceDeleteValuesBatch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Datavalues
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+  '/v1/Datasources/{id}/values/batchReplace':
+    put:
+      tags:
+      - Datasources
+      summary: Datasource Value Replace Batch
+      description: Replace a batch of values on Datasource based on period
+      operationId: Datasources_DatasourceValuesBatchReplace
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: query
+        name: from
+        description: From datetime
+        type: string
+        format: date-time
+      - in: query
+        name: to
+        description: To datetime
+        type: string
+        format: date-time
+      - in: body
+        name: body
+        description: values
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/DataValueCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BatchResult'
+  '/v1/Datasources/{id}/values/{valueId}':
+    delete:
+      tags:
+      - Datasources
+      summary: Datasource Value Delete
+      description: Delete a value from Datasource
+      operationId: Datasources_DatasourceDeleteValue
+      parameters:
+      - in: path
+        name: id
+        description: Datasource Id
+        required: true
+        type: integer
+        format: int32
+      - in: path
+        name: valueId
+        description: value Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+  /v1/Groups:
+    get:
+      tags:
+      - Groups
+      summary: Groups List
+      description: List groups with an optional filter
+      operationId: Groups_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+    post:
+      tags:
+      - Groups
+      summary: Group Create
+      description: Create a new Group
+      operationId: Groups_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Group object
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Group'
+  '/v1/Groups/{id}/members':
+    get:
+      tags:
+      - Groups
+      summary: Group Members
+      description: Get members of Group
+      operationId: Groups_Members
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Group Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserGroupMember'
+    put:
+      tags:
+      - Groups
+      summary: Group Member Add
+      description: Add a member to group
+      operationId: Groups_AddMember
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Group Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Member object
+        schema:
+          $ref: '#/definitions/UserGroupMember'
+      responses:
+        '200':
+          description: OK
+  '/v1/Groups/{id}/members/{userId}':
+    delete:
+      tags:
+      - Groups
+      summary: Groups Member Remove
+      description: Remove a member from Group
+      operationId: Groups_RemoveMember
+      parameters:
+      - in: path
+        name: id
+        description: Group Id
+        required: true
+        type: integer
+        format: int32
+      - in: path
+        name: userId
+        description: User Id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+  '/v1/Groups/{id}':
+    delete:
+      tags:
+      - Groups
+      summary: Group Delete
+      description: Delete a group
+      operationId: Groups_Delete
+      parameters:
+      - in: path
+        name: id
+        description: Group Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+  /v1/Improvements:
+    get:
+      tags:
+      - Improvements
+      summary: Improvements List
+      description: List Improvements with an optional filter
+      operationId: Improvements_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImprovementsPagedValues'
+  /v1/Incidents:
+    get:
+      tags:
+      - Incidents
+      summary: Incidents List
+      description: List incidents with an optional filter
+      operationId: Incidents_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: TypeId
+        type: integer
+        format: int32
+      - in: query
+        name: IncidentDateFrom
+        type: string
+        format: date-time
+      - in: query
+        name: IncidentDateTo
+        type: string
+        format: date-time
+      - in: query
+        name: LastModifiedFrom
+        type: string
+        format: date-time
+      - in: query
+        name: LastModifiedTo
+        type: string
+        format: date-time
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IncidentPagedValues'
+    post:
+      tags:
+      - Incidents
+      summary: Incident Create
+      description: Create new Incident
+      operationId: Incidents_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Incident Object
+        schema:
+          $ref: '#/definitions/IncidentCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+    put:
+      tags:
+      - Incidents
+      summary: Incident Update (deprecated)
+      description: 'use PUT incident/{id} instead'
+      operationId: Incidents_UpdateObsolete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: ''
+        schema:
+          $ref: '#/definitions/IncidentUpdate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+      deprecated: true
+  '/v1/Incidents/{id}':
+    get:
+      tags:
+      - Incidents
+      summary: Incident Details
+      description: Get Incident details
+      operationId: Incidents_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+    put:
+      tags:
+      - Incidents
+      summary: Incident Update
+      description: Update Incident
+      operationId: Incidents_Update
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Incident object
+        schema:
+          $ref: '#/definitions/IncidentBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+    delete:
+      tags:
+      - Incidents
+      summary: Incident Delete
+      description: Delete an Incident
+      operationId: Incidents_Delete
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+  /v1/Incidents/types:
+    get:
+      tags:
+      - Incidents
+      summary: Incident Types
+      description: Get Incident types
+      operationId: Incidents_ListTypes
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/IncidentType'
+  '/v1/Incidents/types/{id}':
+    get:
+      tags:
+      - Incidents
+      summary: Incident Type Detail
+      description: Get Incident Type details
+      operationId: Incidents_TypeConfiguration
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Type Detail Id
+        required: true
+        type: integer
+        format: int32
+      - in: query
+        name: language
+        description: Language Code
+        type: string
+        default: ''
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IncidentTypeConfiguration'
+  '/v1/Incidents/{id}/comments':
+    get:
+      tags:
+      - Incidents
+      summary: Incident Comments
+      description: Get comments on Incident
+      operationId: Incidents_Comments
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/IncidentComment'
+  '/v1/Incidents/{id}/attachments':
+    get:
+      tags:
+      - Incidents
+      summary: Incident Attachments
+      description: Get attachments on Incident
+      operationId: Incidents_Attachments
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Attachment'
+  '/v1/Incidents/{id}/tasks':
+    get:
+      tags:
+      - Incidents
+      summary: Incident Tasks
+      description: Get action list (tasks) on Incident
+      operationId: Incidents_Tasks
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TaskInfo'
+  '/v1/Incidents/{id}/responsible':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Responsible Update
+      description: Update responsible on Incident
+      operationId: Incidents_UpdateResponsible
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Responsible user
+        schema:
+          $ref: '#/definitions/IncidentResponsible'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  '/v1/Incidents/{id}/status':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Status Update
+      description: Update status on Incident
+      operationId: Incidents_UpdateStatus
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Status
+        schema:
+          $ref: '#/definitions/IncidentStatusCode'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  '/v1/Incidents/{id}/externalId':
+    put:
+      tags:
+      - Incidents
+      summary: Incident ExternalId Update
+      description: Update ExternalId on Incident
+      operationId: Incidents_UpdateExternalId
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: External Id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  '/v1/Incidents/{id}/severity':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Severity Update
+      description: Update severity on Incident
+      operationId: Incidents_UpdateSeverity
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Severity
+        schema:
+          $ref: '#/definitions/IncidentSeverityCode'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  '/v1/Incidents/{id}/categories':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Categories Update
+      description: Update categories on Incident
+      operationId: Incidents_UpdateCategories
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: ''
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/IncidentCategory'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  '/v1/Incidents/{id}/causes':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Causes Update
+      description: Update causes on Incident
+      operationId: Incidents_UpdateCauses
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: ''
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/IncidentCause'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  '/v1/Incidents/{id}/consequences':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Consequences Update
+      description: Update consequences on Incident
+      operationId: Incidents_UpdateConsequences
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: ''
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/IncidentConsequence'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  /v1/Incidents/trash:
+    get:
+      tags:
+      - Incidents
+      summary: Incident Trash
+      description: List Recently Deleted (30 days) Incidents
+      operationId: Incidents_GetTrashIncidents
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: ''
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IncidentInfoPagedValues'
+  '/v1/Incidents/trash/{id}/restore':
+    put:
+      tags:
+      - Incidents
+      summary: Incident Trash Restore
+      description: Restore a recently deleted Incident
+      operationId: Incidents_PutRestore
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Incident Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Incident'
+  /v1/Projects:
+    get:
+      tags:
+      - Projects
+      summary: Project List
+      description: List projects with an optional filter
+      operationId: Projects_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProjectInfo'
+    post:
+      tags:
+      - Projects
+      summary: Project Create
+      description: Create a new Project
+      operationId: Projects_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Project object
+        schema:
+          $ref: '#/definitions/ProjectCreate'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
+  '/v1/Projects/{projectNumber}':
+    get:
+      tags:
+      - Projects
+      summary: Project Details
+      description: Get Project Details
+      operationId: Projects_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
+    delete:
+      tags:
+      - Projects
+      summary: Project Delete
+      description: Delete a project
+      operationId: Projects_Delete
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+  '/v1/Projects/{projectNumber}/milestones':
+    get:
+      tags:
+      - Projects
+      summary: Project Milestones
+      description: Get a Project's Milestones
+      operationId: Projects_Milestones
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProjectMilestone'
+    post:
+      tags:
+      - Projects
+      summary: Project Milestones Create
+      description: Create a new milestone on Project
+      operationId: Projects_CreateMilestones
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Milestone object
+        schema:
+          $ref: '#/definitions/ProjectMilestone'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProjectMilestone'
+  '/v1/Projects/{projectNumber}/milestones/{milestoneId}':
+    put:
+      tags:
+      - Projects
+      summary: Project Milestone Update
+      description: Update a Milestone on Project
+      operationId: Projects_UpdateMilestone
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      - in: path
+        name: milestoneId
+        description: Milestone Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Milestone object
+        schema:
+          $ref: '#/definitions/ProjectMilestone'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProjectMilestone'
+    delete:
+      tags:
+      - Projects
+      summary: Project Milestone Delete
+      description: Delete a Milestone on a Project
+      operationId: Projects_DeleteMilestone
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      - in: path
+        name: milestoneId
+        description: Milestone Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/Projects/{projectNumber}/tasks':
+    get:
+      tags:
+      - Projects
+      summary: Project Tasks
+      description: Get Tasks from Project
+      operationId: Projects_Tasks
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TaskInfo'
+    post:
+      tags:
+      - Projects
+      summary: Project Task Create
+      description: Create a new Task on Project
+      operationId: Projects_CreateTask
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: projectNumber
+        description: Project No
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Task object
+        schema:
+          $ref: '#/definitions/TaskBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+  '/v1/Tasks/{id}':
+    get:
+      tags:
+      - Tasks
+      summary: Task Details
+      description: Get a Tasks Details
+      operationId: Tasks_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Task Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+    put:
+      tags:
+      - Tasks
+      summary: Task Update
+      description: Update a Task
+      operationId: Tasks_Update
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Task Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Task object
+        schema:
+          $ref: '#/definitions/TaskBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+    delete:
+      tags:
+      - Tasks
+      summary: Task Delete
+      description: Delete a Task
+      operationId: Tasks_Delete
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Task Id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+  /v1/Tasks:
+    post:
+      tags:
+      - Tasks
+      summary: Task Create
+      description: Create a new Task
+      operationId: Tasks_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Task object
+        schema:
+          $ref: '#/definitions/TaskBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+  '/v1/Tasks/{id}/SubTasks':
+    post:
+      tags:
+      - Tasks
+      summary: Task Subtask Create
+      description: Create a new subtask on a Task
+      operationId: Tasks_CreateSubTask
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Parent Task Id
+        required: true
+        type: integer
+        format: int32
+      - in: body
+        name: body
+        description: Subtask object
+        schema:
+          $ref: '#/definitions/TaskBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInfo'
+  /v1/Users:
+    get:
+      tags:
+      - Users
+      summary: Users List
+      description: List users with optional filter
+      operationId: Users_List
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: $filter
+        description: 'Generic OData filtering. See [documentation](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#filter)'
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  '/v1/Users/{id}':
+    get:
+      tags:
+      - Users
+      summary: User Details
+      description: Get a User's Details
+      operationId: Users_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+  '/v1/Users/{id}/groups':
+    get:
+      tags:
+      - Users
+      summary: User Groups
+      description: Get a User's Groups
+      operationId: Users_GroupsList
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+  '/v1/Users/{id}/roles':
+    get:
+      tags:
+      - Users
+      summary: User Roles
+      operationId: Users_ListRoles
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+  '/v1/Users/roles/{role}':
+    get:
+      tags:
+      - Users
+      summary: User by role
+      operationId: Users_GetUsersWithRole
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: role
+        description: Role
+        required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+definitions:
+  AssetRoleType:
+    enum:
+    - Member
+    - Viewer
+    - Owner
+    type: string
+    x-enum-varnames:
+    - Member
+    - Viewer
+    - Owner
+  Attachment:
+    type: object
+    properties:
+      id:
+        type: string
+      fileName:
+        type: string
+      fileExtension:
+        type: string
+      fileSizeInKb:
+        format: int64
+        type: integer
+      url:
+        type: string
+      createdDate:
+        format: date-time
+        type: string
+      createdByUserId:
+        type: string
+      createdByUser:
+        type: string
+      contentType:
+        type: string
+    additionalProperties: false
+  BatchResult:
+    type: object
+    properties:
+      total:
+        format: int32
+        type: integer
+    additionalProperties: false
+  Board:
+    type: object
+    properties:
+      rows:
+        type: array
+        items:
+          $ref: '#/definitions/BoardCategory'
+      columns:
+        type: array
+        items:
+          $ref: '#/definitions/BoardCategory'
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      boardType:
+        type: string
+      isPublic:
+        type: boolean
+      groupId:
+        format: int32
+        type: integer
+      groupName:
+        type: string
+    additionalProperties: false
+  BoardCategory:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      weekDay:
+        type: string
+      isColumnCategory:
+        type: boolean
+      style:
+        type: string
+      sortOrder:
+        format: int32
+        type: integer
+      responsibleUserId:
+        type: string
+      responsibleUser:
+        type: string
+    additionalProperties: false
+  BoardInfo:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      boardType:
+        type: string
+      isPublic:
+        type: boolean
+      groupId:
+        format: int32
+        type: integer
+      groupName:
+        type: string
+    additionalProperties: false
+  Category:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      sortOrder:
+        format: int32
+        type: integer
+      parentId:
+        format: int32
+        type: integer
+      children:
+        type: array
+        items:
+          $ref: '#/definitions/Category'
+    additionalProperties: false
+  Cause:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      sortOrder:
+        format: int32
+        type: integer
+    additionalProperties: false
+  CustomField:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      label:
+        type: string
+      type:
+        type: string
+      sortOrder:
+        format: int32
+        type: integer
+      dataListId:
+        format: int32
+        type: integer
+    additionalProperties: false
+  CustomFieldValue:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      value:
+        type: string
+    additionalProperties: false
+  DataList:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      lastModifiedByUser:
+        type: string
+    additionalProperties: false
+  DataListItem:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      sortOrder:
+        format: int32
+        type: integer
+      identifier:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+    additionalProperties: false
+  DataListItemCreate:
+    type: object
+    properties:
+      identifier:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+    additionalProperties: false
+  DataSource:
+    required:
+    - id
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      objectSource:
+        type: string
+      unitOfTime:
+        type: string
+      primaryInputSource:
+        type: string
+      elements:
+        type: array
+        items:
+          $ref: '#/definitions/DataSourceElement'
+    additionalProperties: false
+  DataSourceElement:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      label:
+        type: string
+      type:
+        $ref: '#/definitions/DataSourceElementType'
+      isMandatory:
+        type: boolean
+      sourceColumn:
+        type: string
+      dataListId:
+        format: int32
+        type: integer
+    additionalProperties: false
+  DataSourceElementType:
+    enum:
+    - area
+    - asset
+    - board
+    - bool
+    - description
+    - list
+    - number
+    - project
+    - text
+    - user
+    type: string
+    x-enum-varnames:
+    - Area
+    - Asset
+    - Board
+    - Bool
+    - Description
+    - List
+    - Number
+    - Project
+    - Text
+    - User
+  DataSourceInfo:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+    additionalProperties: false
+  DataValue:
+    required:
+    - dataSourceId
+    - value
+    - valueDate
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      dataSourceId:
+        format: int32
+        type: integer
+      registrationDate:
+        format: date-time
+        type: string
+      areaId:
+        format: int32
+        type: integer
+      assetId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      value:
+        format: double
+        type: number
+      description:
+        maxLength: 255
+        type: string
+      dimension:
+        maxLength: 100
+        type: string
+      dimension2:
+        maxLength: 100
+        type: string
+      dimension3:
+        maxLength: 100
+        type: string
+      dimension4:
+        maxLength: 100
+        type: string
+      valueDate:
+        format: date-time
+        type: string
+      externalId:
+        maxLength: 255
+        type: string
+    additionalProperties: false
+  DataValueCreate:
+    description: Base class for DataValue for API
+    required:
+    - value
+    - valueDate
+    type: object
+    properties:
+      areaId:
+        format: int32
+        type: integer
+      assetId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      value:
+        format: double
+        type: number
+      description:
+        maxLength: 255
+        type: string
+      dimension:
+        maxLength: 100
+        type: string
+      dimension2:
+        maxLength: 100
+        type: string
+      dimension3:
+        maxLength: 100
+        type: string
+      dimension4:
+        maxLength: 100
+        type: string
+      valueDate:
+        format: date-time
+        type: string
+      externalId:
+        maxLength: 255
+        type: string
+    additionalProperties: false
+  DataValuesPaged:
+    type: object
+    properties:
+      pageSize:
+        format: int32
+        type: integer
+      pageNo:
+        format: int32
+        type: integer
+      count:
+        format: int32
+        type: integer
+      values:
+        type: array
+        items:
+          $ref: '#/definitions/DataValue'
+    additionalProperties: false
+  Group:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      type:
+        type: string
+      description:
+        type: string
+      parentId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+      buisnessUnitId:
+        format: int32
+        type: integer
+    additionalProperties: false
+  Improvement:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      status:
+        type: string
+      priorityStatus:
+        format: int32
+        type: integer
+      groupId:
+        format: int32
+        type: integer
+      group:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+      categoryId:
+        format: int32
+        type: integer
+      category:
+        type: string
+      projectId:
+        format: int32
+        type: integer
+      project:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      suggestedByUserId:
+        type: string
+      suggestedBy:
+        type: string
+      suggestionDate:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      plannedDate:
+        format: date-time
+        type: string
+      inProgressDate:
+        format: date-time
+        type: string
+      implementedDate:
+        format: date-time
+        type: string
+      evaluatedDate:
+        format: date-time
+        type: string
+      archivedDate:
+        format: date-time
+        type: string
+      responsibleUserId:
+        type: string
+      responsibleUser:
+        type: string
+      responsibleDisplayName:
+        type: string
+      attachmentCount:
+        format: int32
+        type: integer
+      actionListCount:
+        format: int32
+        type: integer
+      commentCount:
+        format: int32
+        type: integer
+      likeCount:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+      costOfInvestment:
+        format: double
+        type: number
+      gainOfInvestment:
+        format: double
+        type: number
+      costOfInvestmentHours:
+        format: double
+        type: number
+      gainOfInvestmentHours:
+        format: double
+        type: number
+      estimatedCostOfInvestment:
+        format: double
+        type: number
+      estimatedGainOfInvestment:
+        format: double
+        type: number
+      estimatedCostOfInvestmentHours:
+        format: double
+        type: number
+      estimatedGainOfInvestmentHours:
+        format: double
+        type: number
+    additionalProperties: false
+  ImprovementsPagedValues:
+    type: object
+    properties:
+      total:
+        format: int32
+        type: integer
+      page:
+        format: int32
+        type: integer
+      values:
+        type: array
+        items:
+          $ref: '#/definitions/Improvement'
+    additionalProperties: false
+  Incident:
+    required:
+    - incidentDate
+    - incidentTypeId
+    - severity
+    - title
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      project:
+        type: string
+      incidentType:
+        type: string
+      severityText:
+        $ref: '#/definitions/IncidentSeverity'
+      reportedByGroup:
+        type: string
+      reportedByUserId:
+        type: string
+      reportedBy:
+        type: string
+      reportedDate:
+        format: date-time
+        type: string
+      followUpGroup:
+        type: string
+      responsible:
+        type: string
+      responsibleDisplayName:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      numberOfComments:
+        format: int32
+        type: integer
+      numberOfActions:
+        format: int32
+        type: integer
+      numberOfAttachments:
+        format: int32
+        type: integer
+      consequences:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentConsequence'
+      categories:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentCategory'
+      causes:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentCause'
+      customFields:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentCustomField'
+      status:
+        format: int32
+        description: " New = 0,\r
+
+          InProgress = 10,\r
+
+          Resolved = 20,\r
+
+          Rejected = 30"
+        type: integer
+      statusText:
+        $ref: '#/definitions/IncidentStatus'
+      incidentTypeId:
+        format: int32
+        type: integer
+      severity:
+        format: int32
+        description: " None = 0,\r
+
+          Low = 1,\r
+
+          Medium = 2,\r
+
+          High = 3"
+        type: integer
+      reportedByGroupId:
+        format: int32
+        type: integer
+      followUpGroupId:
+        format: int32
+        type: integer
+      responsibleUserId:
+        type: string
+      title:
+        minLength: 1
+        type: string
+      text:
+        type: string
+      incidentDate:
+        format: date-time
+        type: string
+      resolvedDate:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      evaluationStatus:
+        format: int32
+        type: integer
+      evaluationText:
+        type: string
+      isAnonymous:
+        type: boolean
+      areaId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+    additionalProperties: false
+  IncidentBase:
+    required:
+    - incidentDate
+    - incidentTypeId
+    - severity
+    - title
+    type: object
+    properties:
+      status:
+        format: int32
+        description: " New = 0,\r
+
+          InProgress = 10,\r
+
+          Resolved = 20,\r
+
+          Rejected = 30"
+        type: integer
+      statusText:
+        $ref: '#/definitions/IncidentStatus'
+      incidentTypeId:
+        format: int32
+        type: integer
+      severity:
+        format: int32
+        description: " None = 0,\r
+
+          Low = 1,\r
+
+          Medium = 2,\r
+
+          High = 3"
+        type: integer
+      reportedByGroupId:
+        format: int32
+        type: integer
+      followUpGroupId:
+        format: int32
+        type: integer
+      responsibleUserId:
+        type: string
+      title:
+        minLength: 1
+        type: string
+      text:
+        type: string
+      incidentDate:
+        format: date-time
+        type: string
+      resolvedDate:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      evaluationStatus:
+        format: int32
+        type: integer
+      evaluationText:
+        type: string
+      isAnonymous:
+        type: boolean
+      areaId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+    additionalProperties: false
+  IncidentCategory:
+    required:
+    - id
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+    additionalProperties: false
+  IncidentCause:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+    additionalProperties: false
+  IncidentComment:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      comment:
+        type: string
+      commentDate:
+        format: date-time
+        type: string
+      commentedBy:
+        type: string
+      commentedByUserId:
+        type: string
+      parentId:
+        format: int32
+        type: integer
+      level:
+        format: int32
+        type: integer
+    additionalProperties: false
+  IncidentConsequence:
+    required:
+    - id
+    type: object
+    properties:
+      unit:
+        type: string
+      amount:
+        format: double
+        type: number
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+    additionalProperties: false
+  IncidentCreate:
+    required:
+    - incidentDate
+    - incidentTypeId
+    - severity
+    - title
+    type: object
+    properties:
+      statusModifiedDate:
+        format: date-time
+        type: string
+      severityText:
+        $ref: '#/definitions/IncidentSeverity'
+      responsible:
+        type: string
+      responsibleDisplayName:
+        type: string
+      createdDate:
+        format: date-time
+        type: string
+      createdByUserId:
+        type: string
+      createdByUser:
+        type: string
+      createdByUserDisplayName:
+        type: string
+      statusNewDate:
+        format: date-time
+        type: string
+      consequences:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentConsequence'
+      categories:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentCategory'
+      causes:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentCause'
+      customFields:
+        type: array
+        items:
+          $ref: '#/definitions/CustomFieldValue'
+      status:
+        format: int32
+        description: " New = 0,\r
+
+          InProgress = 10,\r
+
+          Resolved = 20,\r
+
+          Rejected = 30"
+        type: integer
+      statusText:
+        $ref: '#/definitions/IncidentStatus'
+      incidentTypeId:
+        format: int32
+        type: integer
+      severity:
+        format: int32
+        description: " None = 0,\r
+
+          Low = 1,\r
+
+          Medium = 2,\r
+
+          High = 3"
+        type: integer
+      reportedByGroupId:
+        format: int32
+        type: integer
+      followUpGroupId:
+        format: int32
+        type: integer
+      responsibleUserId:
+        type: string
+      title:
+        minLength: 1
+        type: string
+      text:
+        type: string
+      incidentDate:
+        format: date-time
+        type: string
+      resolvedDate:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      evaluationStatus:
+        format: int32
+        type: integer
+      evaluationText:
+        type: string
+      isAnonymous:
+        type: boolean
+      areaId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+    additionalProperties: false
+  IncidentCustomField:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      value:
+        type: string
+      dataListValue:
+        type: string
+      dataListId:
+        format: int32
+        type: integer
+      dataListName:
+        type: string
+      registrationDate:
+        format: date-time
+        type: string
+      label:
+        type: string
+      type:
+        type: string
+    additionalProperties: false
+  IncidentInfo:
+    required:
+    - incidentDate
+    - incidentTypeId
+    - severity
+    - title
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      project:
+        type: string
+      incidentType:
+        type: string
+      severityText:
+        $ref: '#/definitions/IncidentSeverity'
+      reportedByGroup:
+        type: string
+      reportedByUserId:
+        type: string
+      reportedBy:
+        type: string
+      reportedDate:
+        format: date-time
+        type: string
+      followUpGroup:
+        type: string
+      responsible:
+        type: string
+      responsibleDisplayName:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      numberOfComments:
+        format: int32
+        type: integer
+      numberOfActions:
+        format: int32
+        type: integer
+      numberOfAttachments:
+        format: int32
+        type: integer
+      status:
+        format: int32
+        description: " New = 0,\r
+
+          InProgress = 10,\r
+
+          Resolved = 20,\r
+
+          Rejected = 30"
+        type: integer
+      statusText:
+        $ref: '#/definitions/IncidentStatus'
+      incidentTypeId:
+        format: int32
+        type: integer
+      severity:
+        format: int32
+        description: " None = 0,\r
+
+          Low = 1,\r
+
+          Medium = 2,\r
+
+          High = 3"
+        type: integer
+      reportedByGroupId:
+        format: int32
+        type: integer
+      followUpGroupId:
+        format: int32
+        type: integer
+      responsibleUserId:
+        type: string
+      title:
+        minLength: 1
+        type: string
+      text:
+        type: string
+      incidentDate:
+        format: date-time
+        type: string
+      resolvedDate:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      evaluationStatus:
+        format: int32
+        type: integer
+      evaluationText:
+        type: string
+      isAnonymous:
+        type: boolean
+      areaId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+    additionalProperties: false
+  IncidentInfoPagedValues:
+    type: object
+    properties:
+      total:
+        format: int32
+        type: integer
+      page:
+        format: int32
+        type: integer
+      values:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentInfo'
+    additionalProperties: false
+  IncidentPagedValues:
+    description: For API v1
+    type: object
+    properties:
+      total:
+        format: int32
+        type: integer
+      page:
+        format: int32
+        type: integer
+      values:
+        type: array
+        items:
+          $ref: '#/definitions/Incident'
+    additionalProperties: false
+  IncidentResponsible:
+    required:
+    - followUpGroupId
+    - responsibleUserId
+    type: object
+    properties:
+      followUpGroupId:
+        format: int32
+        type: integer
+      responsibleUserId:
+        minLength: 1
+        type: string
+    additionalProperties: false
+  IncidentSeverity:
+    enum:
+    - None
+    - Low
+    - Medium
+    - High
+    type: string
+    x-enum-varnames:
+    - None
+    - Low
+    - Medium
+    - High
+  IncidentSeverityCode:
+    type: object
+    properties:
+      severity:
+        $ref: '#/definitions/IncidentSeverity'
+    additionalProperties: false
+  IncidentStatus:
+    enum:
+    - New
+    - InProgress
+    - Resolved
+    - Rejected
+    type: string
+    x-enum-varnames:
+    - New
+    - InProgress
+    - Resolved
+    - Rejected
+  IncidentStatusCode:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/IncidentStatus'
+    additionalProperties: false
+  IncidentType:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+    additionalProperties: false
+  IncidentTypeConfiguration:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      customFields:
+        type: array
+        items:
+          $ref: '#/definitions/CustomField'
+      categories:
+        type: array
+        items:
+          $ref: '#/definitions/Category'
+      consequences:
+        type: array
+        items:
+          $ref: '#/definitions/IncidentTypeConsequence'
+      causes:
+        type: array
+        items:
+          $ref: '#/definitions/Cause'
+    additionalProperties: false
+  IncidentTypeConsequence:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      title:
+        type: string
+      unit:
+        type: string
+    additionalProperties: false
+  IncidentUpdate:
+    required:
+    - incidentDate
+    - incidentTypeId
+    - severity
+    - title
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      status:
+        format: int32
+        description: " New = 0,\r
+
+          InProgress = 10,\r
+
+          Resolved = 20,\r
+
+          Rejected = 30"
+        type: integer
+      statusText:
+        $ref: '#/definitions/IncidentStatus'
+      incidentTypeId:
+        format: int32
+        type: integer
+      severity:
+        format: int32
+        description: " None = 0,\r
+
+          Low = 1,\r
+
+          Medium = 2,\r
+
+          High = 3"
+        type: integer
+      reportedByGroupId:
+        format: int32
+        type: integer
+      followUpGroupId:
+        format: int32
+        type: integer
+      responsibleUserId:
+        type: string
+      title:
+        minLength: 1
+        type: string
+      text:
+        type: string
+      incidentDate:
+        format: date-time
+        type: string
+      resolvedDate:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      evaluationStatus:
+        format: int32
+        type: integer
+      evaluationText:
+        type: string
+      isAnonymous:
+        type: boolean
+      areaId:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      externalId:
+        type: string
+    additionalProperties: false
+  Project:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      projectNumber:
+        type: string
+      status:
+        type: string
+      externalId:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      customerNumber:
+        type: string
+      createdDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+      endDate:
+        format: date-time
+        type: string
+      estimatedStartDate:
+        format: date-time
+        type: string
+      estimatedEndDate:
+        format: date-time
+        type: string
+    additionalProperties: false
+  ProjectCreate:
+    required:
+    - name
+    - projectNumber
+    type: object
+    properties:
+      projectNumber:
+        minLength: 1
+        type: string
+      name:
+        minLength: 1
+        type: string
+      status:
+        type: string
+      description:
+        type: string
+      startDate:
+        format: date-time
+        type: string
+      endDate:
+        format: date-time
+        type: string
+      estimatedStartDate:
+        format: date-time
+        type: string
+      estimatedEndDate:
+        format: date-time
+        type: string
+      customerNumber:
+        type: string
+      ownerEmail:
+        type: string
+      membersEmail:
+        type: array
+        items:
+          type: string
+      externalId:
+        type: string
+    additionalProperties: false
+  ProjectCustomer:
+    required:
+    - customerNumber
+    - name
+    type: object
+    properties:
+      customerNumber:
+        minLength: 1
+        type: string
+      name:
+        minLength: 1
+        type: string
+    additionalProperties: false
+  ProjectInfo:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      projectNumber:
+        type: string
+      status:
+        type: string
+      externalId:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      customerNumber:
+        type: string
+      createdDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+      endDate:
+        format: date-time
+        type: string
+    additionalProperties: false
+  ProjectMilestone:
+    required:
+    - name
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      projectId:
+        format: int32
+        type: integer
+      name:
+        minLength: 1
+        type: string
+      plannedDate:
+        format: date-time
+        type: string
+      actualDate:
+        format: date-time
+        type: string
+    additionalProperties: false
+  TaskBase:
+    required:
+    - title
+    type: object
+    properties:
+      externalId:
+        type: string
+      boardId:
+        format: int32
+        type: integer
+      title:
+        minLength: 1
+        type: string
+      description:
+        type: string
+      status:
+        $ref: '#/definitions/TaskStatus'
+      responsibleUserId:
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+      rowCategoryId:
+        format: int32
+        type: integer
+      columnCategoryId:
+        format: int32
+        type: integer
+      tags:
+        type: array
+        items:
+          type: string
+    additionalProperties: false
+  TaskInfo:
+    required:
+    - title
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      parentId:
+        format: int32
+        type: integer
+      lastModified:
+        format: date-time
+        type: string
+      responsibleUser:
+        type: string
+      externalId:
+        type: string
+      boardId:
+        format: int32
+        type: integer
+      title:
+        minLength: 1
+        type: string
+      description:
+        type: string
+      status:
+        $ref: '#/definitions/TaskStatus'
+      responsibleUserId:
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+      rowCategoryId:
+        format: int32
+        type: integer
+      columnCategoryId:
+        format: int32
+        type: integer
+      tags:
+        type: array
+        items:
+          type: string
+    additionalProperties: false
+  TaskPaged:
+    type: object
+    properties:
+      total:
+        format: int32
+        type: integer
+      page:
+        format: int32
+        type: integer
+      values:
+        type: array
+        items:
+          $ref: '#/definitions/TaskInfo'
+    additionalProperties: false
+  TaskStatus:
+    enum:
+    - NotStarted
+    - Completed
+    - Blocked
+    type: string
+    x-enum-varnames:
+    - NotStarted
+    - Completed
+    - Blocked
+  User:
+    required:
+    - email
+    - firstName
+    - lastName
+    - userName
+    type: object
+    properties:
+      id:
+        type: string
+      roles:
+        type: array
+        items:
+          type: string
+      userName:
+        format: email
+        minLength: 1
+        type: string
+      email:
+        format: email
+        minLength: 1
+        type: string
+      useAD:
+        type: boolean
+      azureAdObjectId:
+        type: string
+      firstName:
+        minLength: 1
+        type: string
+      lastName:
+        minLength: 1
+        type: string
+      fullName:
+        type: string
+        readOnly: true
+      screenName:
+        maxLength: 6
+        type: string
+      isInfoScreenUser:
+        type: boolean
+      isMobileUser:
+        type: boolean
+      preferredLanguage:
+        type: string
+      businessUnitId:
+        format: int32
+        type: integer
+    additionalProperties: false
+  UserGroupMember:
+    required:
+    - groupRole
+    - userId
+    type: object
+    properties:
+      userId:
+        minLength: 1
+        type: string
+      userName:
+        type: string
+      azureObjectId:
+        type: string
+      groupId:
+        format: int32
+        type: integer
+      groupRole:
+        $ref: '#/definitions/AssetRoleType'
+    additionalProperties: false
+  UserRoleType:
+    enum:
+    - KaizenAdmin
+    - Admin
+    - Support
+    - BusinessunitAdmin
+    - BoardDesigner
+    - SystemApi
+    - A3Admin
+    - ImprovementAdmin
+    - DeviationAdmin
+    - ProjectAdmin
+    - StrategyAdmin
+    - LearningAdmin
+    - DataAdmin
+    - MessageWriter
+    type: string
+    x-enum-varnames:
+    - KaizenAdmin
+    - Admin
+    - Support
+    - BusinessunitAdmin
+    - BoardDesigner
+    - SystemApi
+    - A3Admin
+    - ImprovementAdmin
+    - DeviationAdmin
+    - ProjectAdmin
+    - StrategyAdmin
+    - LearningAdmin
+    - DataAdmin
+    - MessageWriter
+securityDefinitions:
+  ClientCredentials:
+    type: oauth2
+    flow: application
+    tokenUrl: https://auth-test.digilean.tools/connect/token
+    scopes:
+      public.api.read: read all
+      public.api.write: write all
+      Boards.Read: Boards Read
+      Boards.ReadWrite: Boards Write
+      Improvements.Read: Improvements Read
+      Improvements.ReadWrite: Improvements Write
+      Incidents.Read: Incidents Read
+      Incidents.ReadWrite: Incidents Write
+      Data.Read: Data Read
+      Data.ReadWrite: Data Write
+      Projects.Read: Projects Read
+      Projects.ReadWrite: Projects Write
+      Tasks.Read: Tasks Read
+      Tasks.ReadWrite: Tasks Write
+      UserManagement.Read: Users and Groups Read
+      UserManagement.ReadWrite: Users and Groups Write
+    description: Client Credentials flow. Authorization header with Bearer token
+security:
+- ClientCredentials: []
