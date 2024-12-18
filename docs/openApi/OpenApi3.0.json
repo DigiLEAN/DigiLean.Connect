@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://apidev.digilean.tools",
-      "description": "DigiLEAN Connect Test"
+      "url": "https://connect.digilean.tools",
+      "description": "DigiLEAN Connect"
     }
   ],
   "paths": {
@@ -5015,7 +5015,7 @@
         "description": "Client Credentials flow. Authorization header with Bearer token",
         "flows": {
           "clientCredentials": {
-            "tokenUrl": "https://auth-test.digilean.tools/connect/token",
+            "tokenUrl": "https://auth.digilean.tools/connect/token",
             "scopes": {
               "public.api.read": "read all",
               "public.api.write": "write all",
