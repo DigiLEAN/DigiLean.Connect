@@ -3158,27 +3158,15 @@ definitions:
     - DataAdmin
     - MessageWriter
 securityDefinitions:
-  ClientCredentials:
+  oauth2-auth:
     type: oauth2
-    flow: application
-    tokenUrl: https://auth-test.digilean.tools/connect/token
+    flow: accessCode
+    authorizationUrl: https://auth.digilean.tools/connect/authorize
+    tokenUrl: https://auth.digilean.tools/connect/token
     scopes:
-      public.api.read: read all
-      public.api.write: write all
-      Boards.Read: Boards Read
-      Boards.ReadWrite: Boards Write
-      Improvements.Read: Improvements Read
-      Improvements.ReadWrite: Improvements Write
-      Incidents.Read: Incidents Read
-      Incidents.ReadWrite: Incidents Write
-      Data.Read: Data Read
-      Data.ReadWrite: Data Write
-      Projects.Read: Projects Read
-      Projects.ReadWrite: Projects Write
-      Tasks.Read: Tasks Read
-      Tasks.ReadWrite: Tasks Write
-      UserManagement.Read: Users and Groups Read
-      UserManagement.ReadWrite: Users and Groups Write
-    description: Client Credentials flow. Authorization header with Bearer token
+      public.api.write: public.api.write
+      public.api.read: public.api.read
 security:
-- ClientCredentials: []
+- oauth2-auth:
+  - public.api.write
+  - public.api.read
