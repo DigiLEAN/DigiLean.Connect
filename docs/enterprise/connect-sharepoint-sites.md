@@ -1,14 +1,14 @@
 # Enable Sharepoint Site access for DigiLEAN Connect
 
-To integrate DigiLEAN Connect with data in Sharepoint we need access to read content in your Sharepoint site
+To integrate DigiLEAN with data in Sharepoint, DigiLEAN Connect needs access to read the content.
 
-This document explains how to give DigiLEAN Connect access to read a specific Sharepoint Site where you have Excel files, Lists etc
+This document explains how to grant DigiLEAN Connect access to read a specific Sharepoint Site where you store Excel files, Lists etc
 that you want to read into DigiLEAN
 
 ## Two steps
 
  1. Grant permission to the “DigiLEAN Connect Sharepoint Site” App registration in Entra ID
- 2. Grant access to specific site(s) for App registration with Graph Explorer 
+ 2. Grant access to specific site(s) to “DigiLEAN Connect Sharepoint Site” with Graph Explorer 
 
 ::: info
 `https://leanhub.sharepoint.com/sites/Excellence` is used as an example in this document. Replace with your own site url.
@@ -17,9 +17,9 @@ that you want to read into DigiLEAN
 
 ## Grant permission to App registration
 
-This step is to register the “DigiLEAN  Connect Sharepoint Site” app to your Entra Id 
+This step is to register “DigiLEAN  Connect Sharepoint Site” app to your Entra Id and grant consent for "Sites.Selected" claim
 
- 1. Go to [DigiLEAN Enterprise Applications](/enterprise/)
+ 1. Go to [DigiLEAN Enterprise Applications](/enterprise/) here on this page
  2. Click “Connect Sharepoint Selected Site” button
  3. A popup should appear. Follow the steps to add the app to your tenant’s Enterprise Applications. Click “Accept”
 
@@ -28,12 +28,14 @@ This step is to register the “DigiLEAN  Connect Sharepoint Site” app to your
  4. Login to https://portal.azure.com
  5. Go to Microsoft Entra Id => “Enterprise Applications”
  6. Find and Click on the “DigiLEAN Connect Sharepoint Site”
- 7. Go to Permission and “Grant admin consent” to the app. (This will not give access to any site, just open the ability to do so.)
+ 7. Go to Permission and “Grant admin consent” to the app. (This will not grant any access yet, just open the ability to do so.)
  8. Click “Refresh” and make sure the Permissions are now enabled for “Sites.Selected”
 
 ![Sharepoint site admin consent](/images/Sharepoint_site_admin_grant_consent.jpg)
 
 ## Grant permission to Site with Graph Explorer
+
+How to grant read permission to a Sharepoint site
 
  1. Go to [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) and log in as a Sharepoint Administrator 
 
@@ -62,6 +64,7 @@ Response
 ```
 
 3. Use the `Create permissions` method to grant “read” permission to the site for the "DigiLEAN Connect Sharepoint Site" app. 
+Using the `id` and `displayName` from previous step.
 
 
 ```http
@@ -77,7 +80,7 @@ POST https://graph.microsoft.com/v1.0/sites/leanhub.sharepoint.com,91ba15c7-3398
 }
 ```
 
-Response
+Response if successful
 ```json
 {
     "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#sites('leanhub.sharepoint.com%2C91ba15c7-3398-4798-8dfd-56b8c124552a%2C7f96db8a-2214-4271-8b3c-1e91413d5267')/permissions/$entity",
@@ -105,9 +108,10 @@ Response
 ```
 
 ::: info
-Note that as a minimum the “Sites.FullControl.All” permission is required for the user to be able to grant permissions in Graph Explorer. See below how to this
+If you got an error message in this step
 
-[Complete Microsoft Graph REST API v1.0 endpoint documentation for reference](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0&preserve-view=true)
+Note that as a minimum the “Sites.FullControl.All” permission is required for the user to be able to grant permissions when using Graph Explorer.
+See below how to this
 :::
 
 ## Consent to permissions in Graph Explorer
