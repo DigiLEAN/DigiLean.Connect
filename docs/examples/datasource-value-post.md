@@ -2,15 +2,13 @@
 
 ## Value and ValueDate
 
-This is the simplest form of a DataValue. The column `value` and `valueDate` is the minimum requirement  
+This is the simplest form of a DataValue. The column `value` and `valueDate` are the minimum requirement  
 
 Request
 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 2
@@ -22,9 +20,6 @@ Response
 ```http
 content-type: application/json; charset=utf-8
 location: /v1/datasources/1348/values/291411700
-```
-
-```json
 {
   "id": 291411700,
   "dataSourceId": 1348,
@@ -125,8 +120,6 @@ To post a dimension of type `text` or `description` post the plain text to the d
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 2,
@@ -142,8 +135,6 @@ To post a dimension of type `number` post the number as a string. The supported 
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
@@ -158,8 +149,6 @@ To post a dimension of type `bool` post `true` or `false` as strings
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
@@ -178,8 +167,6 @@ Post the text to the dimension and the DataList Item will be looked up or create
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
@@ -187,7 +174,7 @@ content-type: application/json
 }
 ```
 
-In the return value you will see an ID instead of the text, this is the DataList Item ID mentioned above
+In the response you will see an ID instead of the text, this is the DataList Item ID mentioned above
 
 ```json
 {
@@ -218,6 +205,8 @@ GET https://connect.digilean.tools/v1/Groups
 ?$filter=name eq 'mygroup' 
 Content-Type: application/json
 ```
+
+Response
 ```json
 {
   "id": 3996,
@@ -232,8 +221,6 @@ Then insert the Id of the group as a integer into the `assetId` column
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
@@ -251,6 +238,8 @@ GET https://connect.digilean.tools/v1/Projects
 ?$filter=projectNumber eq '007' 
 Content-Type: application/json
 ```
+
+Response
 ```json
 {
   "id": 369,
@@ -267,8 +256,6 @@ Then insert the Id of the project as a integer into the `projectId` column
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
@@ -286,6 +273,7 @@ GET https://connect.digilean.tools/v1/Users
 Content-Type: application/json
 ```
 
+Response
 ```json
 [
   {
@@ -307,8 +295,6 @@ Then insert the Id of the user as a string into the dimension column
 ```http
 POST https://connect.digilean.tools/v1/datasources/498/values
 content-type: application/json
-```
-```json
 {
   "valueDate": "2024-02-25T12:00:00",
   "value": 1,
