@@ -2,8 +2,8 @@
 
 ## Two steps
 
- - Grant permission to the “DigiLEAN Connect Sharepoint Site” App registration in Entra ID
- - Grant access to specific site(s) for App registration with Graph Explorer 
+ 1. Grant permission to the “DigiLEAN Connect Sharepoint Site” App registration in Entra ID
+ 2. Grant access to specific site(s) for App registration with Graph Explorer 
 
 ::: info
 https://leanhub.sharepoint.com/sites/Excellence is used as an example in this document. Replace with your own site url.
@@ -14,21 +14,25 @@ https://leanhub.sharepoint.com/sites/Excellence is used as an example in this do
 
 This step is to register the “DigiLEAN  Connect Sharepoint Site” app to your Entra Id 
 
- - Go to https://connect.digilean.tools
- - Click “Connect Sharepoint Selected Site” button
- - A popup should appear. Follow the steps to add the app to your tenant’s Enterprise Applications. Click “Accept”
- - Login to https://portal.azure.com
- - Go to Microsoft Entra Id => “Enterprise Applications”
- - Find and Click on the “DigiLEAN Connect Sharepoint Site”
- - Go to Permission and “Grant admin consent” to the app. (This will not give access to any site, just open the ability to do so.)
- - Click “Refresh” and make sure the Permissions are now enabled for “Sites.Selected”
+ 1. Go to https://connect.digilean.tools
+ 2. Click “Connect Sharepoint Selected Site” button
+ 3. A popup should appear. Follow the steps to add the app to your tenant’s Enterprise Applications. Click “Accept”
 
+![Sharepoint site consent](/images/Sharepoint_site_consent.jpg)  
+
+ 4. Login to https://portal.azure.com
+ 5. Go to Microsoft Entra Id => “Enterprise Applications”
+ 6. Find and Click on the “DigiLEAN Connect Sharepoint Site”
+ 7. Go to Permission and “Grant admin consent” to the app. (This will not give access to any site, just open the ability to do so.)
+ 8. Click “Refresh” and make sure the Permissions are now enabled for “Sites.Selected”
+
+![Sharepoint site admin consent](/images/Sharepoint_site_admin_grant_consent.jpg)
 
 ## Grant permission to Site with Graph Explorer
 
-- Go to [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) and log in as a Sharepoint Administrator 
+ 1. Go to [Microsoft Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) and log in as a Sharepoint Administrator 
 
-- Use the Get site by path method to find the Sharepoint site id. The site id is needed in the next step to grant read permission to the Sharepoint site for the “DigiLEAN  Connect Sharepoint Site” app.  
+ 2. Use the `Get site by path` method to find the Sharepoint site id. The site id is needed in the next step to grant read permission to the Sharepoint site for the “DigiLEAN  Connect Sharepoint Site” app.  
 
 ```http
 GET https://graph.microsoft.com/v1.0/sites/leanhub.sharepoint.com:/sites/Excellence
@@ -52,18 +56,11 @@ Response
 }
 ```
 
-- Pick out the `id` and `displayName` values
+3. Use the `Create permissions` method to create “read” permission to the site for the DigiLEAN Connector app. 
 
-- Use the Create permissions method to create “read” permission to the site for the DigiLEAN Connector app. 
-
-::: tip 
-Use the request body as is from the example below as this is the correct app id for the “DigiLEAN Connect Sharepoint Site” app 
-:::
 
 ```http
 POST https://graph.microsoft.com/v1.0/sites/leanhub.sharepoint.com,91ba15c7-3398-4798-8dfd-56b8c124552a,7f96db8a-2214-4271-8b3c-1e91413d5267/permissions
-```
-```json
 {
     "roles": ["read"],
     "grantedToIdentities": [{
@@ -101,3 +98,28 @@ Response
     ]
 }
 ```
+
+::: info
+Note that as a minimum the “Sites.FullControl.All” permission is required for the user to be able to create permissions. 
+
+[Complete Microsoft Graph REST API v1.0 endpoint documentation for reference](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0&preserve-view=true)
+:::
+
+## Consent to permissions in Graph Explorer
+
+If needed, consent to the Sites.FullControl.All permission in Graph Explorer.
+
+ 1.	Click on the user in the top right corner in Graph Explorer. 
+![Graph Explorer Consent step 1](/images/Sharepoint_site_graph_explorer_consent1.jpg)
+
+ 2.	Click “Consent to permissions”
+![Graph Explorer Consent step 1](/images/Sharepoint_site_graph_explorer_consent2.jpg)
+
+ 3. Search for “sites” and click “Consent” on the permission “Sites.FullControl.All”.
+![Graph Explorer Consent step 1](/images/Sharepoint_site_graph_explorer_consent3.jpg)
+
+ 4. Click “Accept”
+![Graph Explorer Consent step 1](/images/Sharepoint_site_graph_explorer_consent4.jpg)
+
+ 5. The button should now have the label “Unconsent” and the user should be allowed to create permissions for a site.
+![Graph Explorer Consent step 1](/images/Sharepoint_site_graph_explorer_consent5.jpg)

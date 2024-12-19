@@ -4,14 +4,14 @@ import { sidebar } from "../services/openApi"
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   head: [
-    ["link", { rel: "icon", type:"image/svg+xml", href: "/logo.svg" }],
+    ["link", { rel: "icon", type:"image/svg+xml", href: "/images/logo.svg" }],
     ["link", { rel: "icon", type:"image/x-icon", href: "/favicon.ico" }]
   ],
   lang: "en-US",
   title: "DigiLEAN Connect",
   description: "API Documentation",
   themeConfig: {
-    logo: "logo.svg",
+    logo: "/images/logo.svg",
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Docs', link: '/docs' },
@@ -52,7 +52,8 @@ export default defineConfig({
         {
           text: 'Microsoft',
           items: [
-            { text: 'Enterprise Applications', link: '/enterprise/' }
+            { text: 'Enterprise Applications', link: '/enterprise/' },
+            { text: 'Enable Sharepoint site access', link: "/enterprise/connect-sharepoint-sites"}
           ]
         }
       ]
