@@ -21,3 +21,8 @@ features:
     details: Automate data flows 
 ---
 
+<script setup lang="ts">
+    import DigiLean3dLogo from "./components/DigiLean3dLogo.vue"
+</script>
+
+<DigiLean3dLogo />
