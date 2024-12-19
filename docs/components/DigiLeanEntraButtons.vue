@@ -76,11 +76,7 @@
     <section class="entra-buttons">
         <button id="btn-connect-azure" class="connect-button" 
             :disabled="!btnAzureEnabled" @click="connectAzureAd">
-            Connect Azure AD
-        </button>
-        <button id="btn-connect-sharepoint" class="connect-button" 
-            :disabled="!btnSharePointEnabled" @click="connectSharePoint">
-            Connect Sharepoint
+            Connect Entra Id users and groups
         </button>
         <button id="btn-connect-sharepoint-site" class="connect-button" 
             :disabled="!btnSharePointSiteEnabled" @click="connectSharepointSite">

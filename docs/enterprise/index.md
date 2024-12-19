@@ -7,7 +7,10 @@ title: Microsoft Entra
     import DigiLeanEntraButtons from "../components/DigiLeanEntraButtons.vue"
 </script>
 
-# Connect to DigiLEAN Entra Id Enterprise applications
+# DigiLEAN Connect Entra Id applications
 
+To get DigiLEAN Connect Entra Applications into your list of "Enterprise Applications"
+
+This is a prerequisite to be able to grant permissions to DigiLEAN Connect for integration scenarios.
 
 <DigiLeanEntraButtons />
