@@ -18,7 +18,9 @@ export default defineConfig({
       { text: 'Examples', link: '/examples' },
       { text: 'Enterprise', link: '/enterprise' }
     ],
-
+    search: {
+      provider: "local"
+    },
     sidebar: {
       "/docs/": [
         {
