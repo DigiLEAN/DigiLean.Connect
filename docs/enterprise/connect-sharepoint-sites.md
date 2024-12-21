@@ -51,7 +51,7 @@ Response
     "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET sites('<key>')/microsoft.graph.getByPath(path=<key>)?$select=displayName,error",
     "createdDateTime": "2021-11-03T10:58:09.133Z",
     "description": "Excellence",
-    "id": "leanhub.sharepoint.com,91ba15c7-3398-4798-8dfd-56b8c124552a,7f96db8a-2214-4271-8b3c-1e91413d5267",
+    "id": "leanhub.sharepoint.com,91ba15c7-3398-4798-8dfd-56b8c124552a,7f96db8a-2214-4271-8b3c-1e91413d5267", // [!code focus]
     "lastModifiedDateTime": "2024-12-18T09:52:43Z",
     "name": "Excellence",
     "webUrl": "https://leanhub.sharepoint.com/sites/Excellence",
