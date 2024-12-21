@@ -45,7 +45,7 @@ How to grant read permission to a Sharepoint site
 GET https://graph.microsoft.com/v1.0/sites/leanhub.sharepoint.com:/sites/Excellence
 ```
 Response
-```json
+```json{6,10}
 {
     "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#sites/$entity",
     "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET sites('<key>')/microsoft.graph.getByPath(path=<key>)?$select=displayName,error",
