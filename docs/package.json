@@ -26,6 +26,7 @@
   "dependencies": {
     "@azure/msal-browser": "^3.26.1",
     "@babylonjs/core": "^7.41.0",
+    "@babylonjs/loaders": "^7.41.1",
     "dotenv": "^16.4.5",
     "lit": "^3.2.0",
     "openapi3-ts": "^4.4.0",
