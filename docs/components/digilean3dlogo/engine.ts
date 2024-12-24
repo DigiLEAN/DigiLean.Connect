@@ -30,9 +30,7 @@ export class dSpinner {
         myMaterial.diffuseColor = new B.Color3(1, 1, 1);
         myMaterial.specularColor = new B.Color3(1, 0, 0.87);
         myMaterial.ambientColor = new B.Color3(1, 0, 1);
-        const result = await B.SceneLoader.ImportMeshAsync(null, "/3d/", "digilean3d.glb", this.scene, (e) => {
-            console.log(e)
-        })
+        const result = await B.SceneLoader.ImportMeshAsync(null, "/3d/", "digilean3d.glb", this.scene)
         
         const meshRoot = result.meshes[0] as B.Mesh
         const meshes = meshRoot.getChildMeshes()
@@ -73,7 +71,9 @@ export class dSpinner {
 
         const cameraAngle = new B.Vector3(1, 0, 0) //B.Vector3.Zero()
         const camera = new B.ArcRotateCamera("Camera", 1, 5, 4, cameraAngle, this.scene)
-        camera.attachControl(this.canvas, false)
+        camera.lowerRadiusLimit = 4
+        camera.upperRadiusLimit = 5
+        camera.attachControl(this.canvas, false) // make user able to drag
 
         const light = new B.HemisphericLight("light1", new B.Vector3(1, 5, 8), this.scene)
         light.intensity = 1
