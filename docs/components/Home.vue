@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import "./digilean3dlogo/component"
+    import { VPButton } from "vitepress/theme"
 </script>
 <style scoped>
     section {
@@ -20,9 +21,23 @@
         justify-content: center;
         align-items: center;
     }
+    h1 {
+        color: var(--vp-home-hero-name-color);
+        font-size: 3rem;
+        font-weight: 700;
+        span.clip {
+            background: var(--vp-home-hero-name-background);
+            background-clip: text;
+            -webkit-text-fill-color: var(--vp-home-hero-name-color);
+        }
+    }
+    div.actions {
+        display: flex;
+    }
+    
 </style>
 <template>
-    <section>
+    <section class="VPHero VPHomeHero">
         <div class="main">
             <h1 class="name">
                 <span class="clip">DigiLEAN Connect</span>
@@ -30,10 +45,22 @@
             <p class="text">API Documentation</p>
             <div class="actions">
                 <div class="action">
-                    <a class="VPButton medium brand" href="/docs">Api Docs</a>
+                    <VPButton
+                        tag="a"
+                        size="medium"
+                        theme="brand"
+                        text="API Docs"
+                        href="/docs"
+                    />
                 </div>
                 <div class="action">
-                    <a  class="VPButton medium alt" href="/examples">API Examples</a>
+                    <VPButton
+                        tag="a"
+                        size="medium"
+                        theme="alt"
+                        text="API Examples"
+                        href="/examples"
+                    />
                 </div>
             </div>
         </div>
