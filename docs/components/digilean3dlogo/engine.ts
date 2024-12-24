@@ -1,5 +1,5 @@
 import * as B from "@babylonjs/core"
-import "@babylonjs/loaders/glTF"
+import "@babylonjs/loaders/glTF/2.0"
 
 
 // https://www.youtube.com/watch?v=b7-VKQeQiV4 

@@ -49,22 +49,24 @@
         display: flex;
     }
     article.box {
-        padding: 1rem;
+        padding: 1.2rem 2rem;
+        flex: auto;
         display: block;
         border: 1px solid var(--vp-c-bg-soft);
         border-radius: 12px;
         background-color: var(--vp-c-bg-soft);
         transition: border-color .25s,background-color .25s;
         h2 {
-            margin: 1rem 0;
+            margin: 0;
             border-top: 0;
-            font-size: 1.2rem;
+            font-size: 1rem;
             line-height: 1.5rem;
             padding-top: 0;
         }
         p {
             color: var(--vp-c-text-2);
-            font-size: 1rem;
+            font-size: 0.9rem;
+            margin: 0;
         }
     }
 </style>
