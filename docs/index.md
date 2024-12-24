@@ -1,8 +1,8 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
-page: true
-layput: hero
-title: DigiLEAN Connect
+layout: home
+
+
 ---
 
 <script setup lang="ts">

@@ -4,6 +4,7 @@
 </script>
 <style scoped>
     section {
+        margin-top: 5rem;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -37,7 +38,7 @@
     
 </style>
 <template>
-    <section class="VPHero VPHomeHero">
+    <section>
         <div class="main">
             <h1 class="name">
                 <span class="clip">DigiLEAN Connect</span>

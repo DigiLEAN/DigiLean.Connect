@@ -7,17 +7,17 @@ import "@babylonjs/loaders/glTF"
 export class dSpinner {
     ownerEl: HTMLElement
     canvas: HTMLCanvasElement
-    engine: B.WebGPUEngine
+    engine: B.Engine
     scene: B.Scene | undefined
 
     constructor(ownerEl: HTMLElement, canv: HTMLCanvasElement) {
         this.ownerEl = ownerEl
         this.canvas = canv
-        this.engine = new B.WebGPUEngine(this.canvas)
+        this.engine = new B.Engine(this.canvas)
     }
 
     async start(width: number, height: number) {
-        await this.engine.initAsync()
+        //await this.engine.initAsync()
         
         this.engine.setSize(width, height)
         this.scene = new B.Scene(this.engine)
