@@ -47,6 +47,12 @@
     }
     div.actions {
         display: flex;
+        gap: 1rem;
+        .action {
+            .VPButton.medium {
+                border-radius: 5px;
+            }
+        }
     }
     article.box {
         padding: 1.2rem 2rem;
