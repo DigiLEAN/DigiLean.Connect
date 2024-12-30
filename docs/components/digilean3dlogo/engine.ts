@@ -100,7 +100,7 @@ export class dSpinner {
         if (!mesh)
             return
         
-        const fps = 60
+        const fps = 30
 
         // spinner
         const keyFramesSpin = [

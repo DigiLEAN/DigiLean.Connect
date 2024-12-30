@@ -5,7 +5,8 @@ import { sidebar } from "../services/openApi"
 export default defineConfig({
   head: [
     ["link", { rel: "icon", type:"image/svg+xml", href: "/images/logo.svg" }],
-    ["link", { rel: "icon", type:"image/x-icon", href: "/favicon.ico" }]
+    ["link", { rel: "icon", type:"image/x-icon", href: "/favicon.ico" }],
+    ["script", { src: "/3d/digilean3dlogo.js" }]
   ],
   lang: "en-US",
   title: "DigiLEAN Connect",
@@ -75,4 +76,11 @@ export default defineConfig({
         }
     }
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ["/3d/digilean3dlogo.js"]
+      }
+    }
+  }
 })

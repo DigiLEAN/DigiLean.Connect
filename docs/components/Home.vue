@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import "./digilean3dlogo/component"
+    import DigiLean3dLogo from "./DigiLean3dLogo.vue"
     import { VPButton } from "vitepress/theme"
 </script>
 <style scoped>
@@ -105,17 +105,19 @@
             </div>
             <section class="boxes">
                 <article class="box">
-                    <h2 class="title">Read/write DigiLEAN data</h2>
+                    <h2 class="title">Query DigiLEAN data</h2>
                     <p class="details">See docs and examples</p>
                 </article>
                 <article class="box">
-                    <h2 class="title">Integrate with other systems</h2>
-                    <p class="details">Automate data flows</p>
+                    <h2 class="title">Write data to DigiLEAN</h2>
+                    <p class="details">Integrate with other systems</p>
                 </article>
             </section>
         </div>
         <div class="logo">
-            <digilean-3d-spinner></digilean-3d-spinner>
+            <ClientOnly>
+                <DigiLean3dLogo />
+            </ClientOnly>
         </div>
     </section>
     
