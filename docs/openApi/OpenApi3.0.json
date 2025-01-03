@@ -3508,9 +3508,6 @@
             "type": "string",
             "nullable": true
           },
-          "severityText": {
-            "$ref": "#/components/schemas/IncidentSeverity"
-          },
           "reportedByGroup": {
             "type": "string",
             "nullable": true
@@ -3584,11 +3581,6 @@
             "nullable": true
           },
           "status": {
-            "type": "integer",
-            "description": " New = 0,\r\nInProgress = 10,\r\nResolved = 20,\r\nRejected = 30",
-            "format": "int32"
-          },
-          "statusText": {
             "$ref": "#/components/schemas/IncidentStatus"
           },
           "incidentTypeId": {
@@ -3596,9 +3588,7 @@
             "format": "int32"
           },
           "severity": {
-            "type": "integer",
-            "description": " None = 0,\r\nLow = 1,\r\nMedium = 2,\r\nHigh = 3",
-            "format": "int32"
+            "$ref": "#/components/schemas/IncidentSeverity"
           },
           "reportedByGroupId": {
             "type": "integer",
@@ -3637,9 +3627,7 @@
             "nullable": true
           },
           "evaluationStatus": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "$ref": "#/components/schemas/IncidentEvaluation"
           },
           "evaluationText": {
             "type": "string",
@@ -3675,11 +3663,6 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "integer",
-            "description": " New = 0,\r\nInProgress = 10,\r\nResolved = 20,\r\nRejected = 30",
-            "format": "int32"
-          },
-          "statusText": {
             "$ref": "#/components/schemas/IncidentStatus"
           },
           "incidentTypeId": {
@@ -3687,9 +3670,7 @@
             "format": "int32"
           },
           "severity": {
-            "type": "integer",
-            "description": " None = 0,\r\nLow = 1,\r\nMedium = 2,\r\nHigh = 3",
-            "format": "int32"
+            "$ref": "#/components/schemas/IncidentSeverity"
           },
           "reportedByGroupId": {
             "type": "integer",
@@ -3728,9 +3709,7 @@
             "nullable": true
           },
           "evaluationStatus": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "$ref": "#/components/schemas/IncidentEvaluation"
           },
           "evaluationText": {
             "type": "string",
@@ -3857,41 +3836,8 @@
         ],
         "type": "object",
         "properties": {
-          "statusModifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "severityText": {
-            "$ref": "#/components/schemas/IncidentSeverity"
-          },
-          "responsible": {
-            "type": "string",
-            "nullable": true
-          },
-          "responsibleDisplayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
           "createdByUserId": {
             "type": "string",
-            "nullable": true
-          },
-          "createdByUser": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdByUserDisplayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "statusNewDate": {
-            "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "consequences": {
@@ -3923,11 +3869,6 @@
             "nullable": true
           },
           "status": {
-            "type": "integer",
-            "description": " New = 0,\r\nInProgress = 10,\r\nResolved = 20,\r\nRejected = 30",
-            "format": "int32"
-          },
-          "statusText": {
             "$ref": "#/components/schemas/IncidentStatus"
           },
           "incidentTypeId": {
@@ -3935,9 +3876,7 @@
             "format": "int32"
           },
           "severity": {
-            "type": "integer",
-            "description": " None = 0,\r\nLow = 1,\r\nMedium = 2,\r\nHigh = 3",
-            "format": "int32"
+            "$ref": "#/components/schemas/IncidentSeverity"
           },
           "reportedByGroupId": {
             "type": "integer",
@@ -3976,9 +3915,7 @@
             "nullable": true
           },
           "evaluationStatus": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "$ref": "#/components/schemas/IncidentEvaluation"
           },
           "evaluationText": {
             "type": "string",
@@ -4042,6 +3979,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "IncidentEvaluation": {
+        "enum": [
+          "Medium",
+          "Good",
+          "Bad"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "Medium",
+          "Good",
+          "Bad"
+        ]
       },
       "IncidentInfo": {
         "required": [
@@ -4112,11 +4062,6 @@
             "format": "int32"
           },
           "status": {
-            "type": "integer",
-            "description": " New = 0,\r\nInProgress = 10,\r\nResolved = 20,\r\nRejected = 30",
-            "format": "int32"
-          },
-          "statusText": {
             "$ref": "#/components/schemas/IncidentStatus"
           },
           "incidentTypeId": {
@@ -4124,9 +4069,7 @@
             "format": "int32"
           },
           "severity": {
-            "type": "integer",
-            "description": " None = 0,\r\nLow = 1,\r\nMedium = 2,\r\nHigh = 3",
-            "format": "int32"
+            "$ref": "#/components/schemas/IncidentSeverity"
           },
           "reportedByGroupId": {
             "type": "integer",
@@ -4165,9 +4108,7 @@
             "nullable": true
           },
           "evaluationStatus": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "$ref": "#/components/schemas/IncidentEvaluation"
           },
           "evaluationText": {
             "type": "string",
@@ -4398,11 +4339,6 @@
             "format": "int32"
           },
           "status": {
-            "type": "integer",
-            "description": " New = 0,\r\nInProgress = 10,\r\nResolved = 20,\r\nRejected = 30",
-            "format": "int32"
-          },
-          "statusText": {
             "$ref": "#/components/schemas/IncidentStatus"
           },
           "incidentTypeId": {
@@ -4410,9 +4346,7 @@
             "format": "int32"
           },
           "severity": {
-            "type": "integer",
-            "description": " None = 0,\r\nLow = 1,\r\nMedium = 2,\r\nHigh = 3",
-            "format": "int32"
+            "$ref": "#/components/schemas/IncidentSeverity"
           },
           "reportedByGroupId": {
             "type": "integer",
@@ -4451,9 +4385,7 @@
             "nullable": true
           },
           "evaluationStatus": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "$ref": "#/components/schemas/IncidentEvaluation"
           },
           "evaluationText": {
             "type": "string",
