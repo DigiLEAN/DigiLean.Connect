@@ -957,7 +957,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserGroupMember"
+                "$ref": "#/components/schemas/GroupMemberCreate"
               }
             }
           }
@@ -2798,7 +2798,8 @@
             "description": "UserName",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "user@company.com"
           }
         ],
         "requestBody": {
@@ -3457,30 +3458,33 @@
         "additionalProperties": false
       },
       "Group": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
           "type": {
             "type": "string",
             "nullable": true
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
           },
           "description": {
             "type": "string",
             "nullable": true
           },
           "parentId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "projectId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -3493,6 +3497,23 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupMemberCreate": {
+        "required": [
+          "groupRole",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "groupRole": {
+            "$ref": "#/components/schemas/AssetRoleType"
           }
         },
         "additionalProperties": false
@@ -5026,6 +5047,11 @@
             },
             "nullable": true
           },
+          "fullName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
           "userName": {
             "minLength": 1,
             "type": "string",
@@ -5051,11 +5077,6 @@
             "minLength": 1,
             "type": "string"
           },
-          "fullName": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
           "screenName": {
             "maxLength": 6,
             "type": "string",
@@ -5066,10 +5087,6 @@
           },
           "isMobileUser": {
             "type": "boolean"
-          },
-          "preferredLanguage": {
-            "type": "string",
-            "nullable": true
           },
           "businessUnitId": {
             "type": "integer",
@@ -5113,11 +5130,6 @@
             "minLength": 1,
             "type": "string"
           },
-          "fullName": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
           "screenName": {
             "maxLength": 6,
             "type": "string",
@@ -5128,10 +5140,6 @@
           },
           "isMobileUser": {
             "type": "boolean"
-          },
-          "preferredLanguage": {
-            "type": "string",
-            "nullable": true
           },
           "businessUnitId": {
             "type": "integer",
@@ -5148,10 +5156,6 @@
         ],
         "type": "object",
         "properties": {
-          "userId": {
-            "minLength": 1,
-            "type": "string"
-          },
           "userName": {
             "type": "string",
             "nullable": true
@@ -5164,6 +5168,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "userId": {
+            "minLength": 1,
+            "type": "string"
+          },
           "groupRole": {
             "$ref": "#/components/schemas/AssetRoleType"
           }
@@ -5172,37 +5180,31 @@
       },
       "UserRoleType": {
         "enum": [
-          "KaizenAdmin",
           "Admin",
-          "Support",
           "BusinessunitAdmin",
           "BoardDesigner",
-          "SystemApi",
           "A3Admin",
-          "ImprovementAdmin",
+          "DataAdmin",
+          "MessageWriter",
           "DeviationAdmin",
+          "ImprovementAdmin",
           "ProjectAdmin",
           "StrategyAdmin",
-          "LearningAdmin",
-          "DataAdmin",
-          "MessageWriter"
+          "LearningAdmin"
         ],
         "type": "string",
         "x-enum-varnames": [
-          "KaizenAdmin",
           "Admin",
-          "Support",
           "BusinessunitAdmin",
           "BoardDesigner",
-          "SystemApi",
           "A3Admin",
-          "ImprovementAdmin",
+          "DataAdmin",
+          "MessageWriter",
           "DeviationAdmin",
+          "ImprovementAdmin",
           "ProjectAdmin",
           "StrategyAdmin",
-          "LearningAdmin",
-          "DataAdmin",
-          "MessageWriter"
+          "LearningAdmin"
         ]
       }
     },
