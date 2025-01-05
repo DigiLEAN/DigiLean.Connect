@@ -2492,6 +2492,36 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Create",
+        "description": "Create a new user",
+        "operationId": "Users_Create",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBase"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/v1/Users/{id}": {
@@ -2512,6 +2542,78 @@
               "type": "string"
             },
             "example": "0dcd07a1-a28d-4dc8-81f2-7695a7dc50f1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Update",
+        "description": "Update a user",
+        "operationId": "Users_Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBase"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Delete",
+        "description": "Delete a user",
+        "operationId": "Users_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2565,48 +2667,12 @@
         }
       }
     },
-    "/v1/Users/{id}/roles": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "User Roles",
-        "operationId": "Users_ListRoles",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "User Id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "0dcd07a1-a28d-4dc8-81f2-7695a7dc50f1"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/v1/Users/roles/{role}": {
       "get": {
         "tags": [
           "Users"
         ],
-        "summary": "User by role",
+        "summary": "Users List by role",
         "operationId": "Users_GetUsersWithRole",
         "parameters": [
           {
@@ -2630,6 +2696,128 @@
                   "items": {
                     "$ref": "#/components/schemas/User"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Users/{id}/roles/{role}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Role Add",
+        "operationId": "Users_AddRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "description": "Role Name",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserRoleType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Role Remove",
+        "operationId": "Users_RemoveRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "description": "Role Name",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserRoleType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Users/UpdateByUserName": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Update by Username",
+        "description": "Update a user by their username",
+        "operationId": "Users_UpdateByUserName",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "description": "UserName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -4838,6 +5026,68 @@
             },
             "nullable": true
           },
+          "userName": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "useAD": {
+            "type": "boolean"
+          },
+          "azureAdObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "lastName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "screenName": {
+            "maxLength": 6,
+            "type": "string",
+            "nullable": true
+          },
+          "isInfoScreenUser": {
+            "type": "boolean"
+          },
+          "isMobileUser": {
+            "type": "boolean"
+          },
+          "preferredLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessUnitId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserBase": {
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
           "userName": {
             "minLength": 1,
             "type": "string",
