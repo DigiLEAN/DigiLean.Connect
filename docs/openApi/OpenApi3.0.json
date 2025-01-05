@@ -1080,42 +1080,57 @@
           {
             "name": "TypeId",
             "in": "query",
+            "description": "Incident Type. Lookup ID from sub endpoint",
             "schema": {
               "type": "integer",
-              "format": "int32"
-            }
+              "format": "int32",
+              "example": 1
+            },
+            "example": 1
           },
           {
             "name": "IncidentDateFrom",
             "in": "query",
+            "description": "Filter Incident Date. Greater than",
             "schema": {
               "type": "string",
-              "format": "date-time"
-            }
+              "format": "date-time",
+              "example": "2024-12-01T00:00:00Z"
+            },
+            "example": "2024-12-01T00:00:00Z"
           },
           {
             "name": "IncidentDateTo",
             "in": "query",
+            "description": "Filter Incident Date. Less than",
             "schema": {
               "type": "string",
-              "format": "date-time"
-            }
+              "format": "date-time",
+              "example": "2024-12-31T00:00:00Z"
+            },
+            "example": "2024-12-31T00:00:00Z"
           },
           {
             "name": "LastModifiedFrom",
             "in": "query",
+            "description": "Filter LastModified Date. Greater than",
             "schema": {
               "type": "string",
-              "format": "date-time"
-            }
+              "format": "date-time",
+              "example": "2024-12-01T00:00:00Z"
+            },
+            "example": "2024-12-01T00:00:00Z"
           },
           {
             "name": "LastModifiedTo",
             "in": "query",
+            "description": "Filter LastModified Date. Less than",
             "schema": {
               "type": "string",
-              "format": "date-time"
-            }
+              "format": "date-time",
+              "example": "2024-12-01T00:00:00Z"
+            },
+            "example": "2024-12-01T00:00:00Z"
           },
           {
             "name": "$filter",
@@ -1124,7 +1139,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "severity eq 2"
+            "example": "severity eq 'Low'"
           }
         ],
         "responses": {
