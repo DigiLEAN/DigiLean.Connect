@@ -3732,6 +3732,12 @@
             "type": "string",
             "nullable": true
           },
+          "severityText": {
+            "$ref": "#/components/schemas/IncidentSeverity"
+          },
+          "statusText": {
+            "$ref": "#/components/schemas/IncidentStatus"
+          },
           "reportedByGroup": {
             "type": "string",
             "nullable": true
@@ -4237,9 +4243,6 @@
           "incidentType": {
             "type": "string",
             "nullable": true
-          },
-          "severityText": {
-            "$ref": "#/components/schemas/IncidentSeverity"
           },
           "reportedByGroup": {
             "type": "string",
