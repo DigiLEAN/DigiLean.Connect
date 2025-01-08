@@ -575,7 +575,7 @@ paths:
         name: body
         description: Member object
         schema:
-          $ref: '#/definitions/UserGroupMember'
+          $ref: '#/definitions/GroupMemberCreate'
       responses:
         '200':
           description: OK
@@ -649,22 +649,27 @@ paths:
       parameters:
       - in: query
         name: TypeId
+        description: Incident Type. Lookup ID from sub endpoint
         type: integer
         format: int32
       - in: query
         name: IncidentDateFrom
+        description: Filter Incident Date. Greater than
         type: string
         format: date-time
       - in: query
         name: IncidentDateTo
+        description: Filter Incident Date. Less than
         type: string
         format: date-time
       - in: query
         name: LastModifiedFrom
+        description: Filter LastModified Date. Greater than
         type: string
         format: date-time
       - in: query
         name: LastModifiedTo
+        description: Filter LastModified Date. Less than
         type: string
         format: date-time
       - in: query
@@ -697,28 +702,6 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Incident'
-    put:
-      tags:
-      - Incidents
-      summary: Incident Update (deprecated)
-      description: 'use PUT incident/{id} instead'
-      operationId: Incidents_UpdateObsolete
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: body
-        description: ''
-        schema:
-          $ref: '#/definitions/IncidentUpdate'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Incident'
-      deprecated: true
   '/v1/Incidents/{id}':
     get:
       tags:
@@ -1502,6 +1485,27 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
+    post:
+      tags:
+      - Users
+      summary: User Create
+      description: Create a new user
+      operationId: Users_Create
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: ''
+        schema:
+          $ref: '#/definitions/UserBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
   '/v1/Users/{id}':
     get:
       tags:
@@ -1509,6 +1513,51 @@ paths:
       summary: User Details
       description: Get a User's Details
       operationId: Users_Details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+    put:
+      tags:
+      - Users
+      summary: User Update
+      description: Update a user
+      operationId: Users_Update
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: ''
+        schema:
+          $ref: '#/definitions/UserBase'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+    delete:
+      tags:
+      - Users
+      summary: User Delete
+      description: Delete a user
+      operationId: Users_Delete
       produces:
       - application/json
       parameters:
@@ -1544,32 +1593,11 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Group'
-  '/v1/Users/{id}/roles':
-    get:
-      tags:
-      - Users
-      summary: User Roles
-      operationId: Users_ListRoles
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: id
-        description: User Id
-        required: true
-        type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: array
-            items:
-              type: string
   '/v1/Users/roles/{role}':
     get:
       tags:
       - Users
-      summary: User by role
+      summary: Users List by role
       operationId: Users_GetUsersWithRole
       produces:
       - application/json
@@ -1585,6 +1613,77 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
+  '/v1/Users/{id}/roles/{role}':
+    put:
+      tags:
+      - Users
+      summary: User Role Add
+      operationId: Users_AddRole
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      - in: path
+        name: role
+        description: Role Name
+        required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+    delete:
+      tags:
+      - Users
+      summary: User Role Remove
+      operationId: Users_RemoveRole
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: User Id
+        required: true
+        type: string
+      - in: path
+        name: role
+        description: Role Name
+        required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+  /v1/Users/UpdateByUserName:
+    put:
+      tags:
+      - Users
+      summary: User Update by Username
+      description: Update a user by their username
+      operationId: Users_UpdateByUserName
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userName
+        description: UserName
+        type: string
+      - in: body
+        name: body
+        description: User object
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
 definitions:
   AssetRoleType:
     enum:
@@ -1985,21 +2084,24 @@ definitions:
           $ref: '#/definitions/DataValue'
     additionalProperties: false
   Group:
+    required:
+    - name
     type: object
     properties:
       id:
         format: int32
         type: integer
-      name:
-        type: string
       type:
+        type: string
+      projectId:
+        format: int32
+        type: integer
+      name:
+        minLength: 1
         type: string
       description:
         type: string
       parentId:
-        format: int32
-        type: integer
-      projectId:
         format: int32
         type: integer
       externalId:
@@ -2007,6 +2109,18 @@ definitions:
       buisnessUnitId:
         format: int32
         type: integer
+    additionalProperties: false
+  GroupMemberCreate:
+    required:
+    - groupRole
+    - userId
+    type: object
+    properties:
+      userId:
+        minLength: 1
+        type: string
+      groupRole:
+        $ref: '#/definitions/AssetRoleType'
     additionalProperties: false
   Improvement:
     type: object
@@ -2140,8 +2254,6 @@ definitions:
         type: string
       incidentType:
         type: string
-      severityText:
-        $ref: '#/definitions/IncidentSeverity'
       reportedByGroup:
         type: string
       reportedByUserId:
@@ -2186,30 +2298,12 @@ definitions:
         items:
           $ref: '#/definitions/IncidentCustomField'
       status:
-        format: int32
-        description: " New = 0,\r
-
-          InProgress = 10,\r
-
-          Resolved = 20,\r
-
-          Rejected = 30"
-        type: integer
-      statusText:
         $ref: '#/definitions/IncidentStatus'
       incidentTypeId:
         format: int32
         type: integer
       severity:
-        format: int32
-        description: " None = 0,\r
-
-          Low = 1,\r
-
-          Medium = 2,\r
-
-          High = 3"
-        type: integer
+        $ref: '#/definitions/IncidentSeverity'
       reportedByGroupId:
         format: int32
         type: integer
@@ -2233,8 +2327,7 @@ definitions:
         format: date-time
         type: string
       evaluationStatus:
-        format: int32
-        type: integer
+        $ref: '#/definitions/IncidentEvaluation'
       evaluationText:
         type: string
       isAnonymous:
@@ -2257,30 +2350,12 @@ definitions:
     type: object
     properties:
       status:
-        format: int32
-        description: " New = 0,\r
-
-          InProgress = 10,\r
-
-          Resolved = 20,\r
-
-          Rejected = 30"
-        type: integer
-      statusText:
         $ref: '#/definitions/IncidentStatus'
       incidentTypeId:
         format: int32
         type: integer
       severity:
-        format: int32
-        description: " None = 0,\r
-
-          Low = 1,\r
-
-          Medium = 2,\r
-
-          High = 3"
-        type: integer
+        $ref: '#/definitions/IncidentSeverity'
       reportedByGroupId:
         format: int32
         type: integer
@@ -2304,8 +2379,7 @@ definitions:
         format: date-time
         type: string
       evaluationStatus:
-        format: int32
-        type: integer
+        $ref: '#/definitions/IncidentEvaluation'
       evaluationText:
         type: string
       isAnonymous:
@@ -2385,26 +2459,7 @@ definitions:
     - title
     type: object
     properties:
-      statusModifiedDate:
-        format: date-time
-        type: string
-      severityText:
-        $ref: '#/definitions/IncidentSeverity'
-      responsible:
-        type: string
-      responsibleDisplayName:
-        type: string
-      createdDate:
-        format: date-time
-        type: string
       createdByUserId:
-        type: string
-      createdByUser:
-        type: string
-      createdByUserDisplayName:
-        type: string
-      statusNewDate:
-        format: date-time
         type: string
       consequences:
         type: array
@@ -2423,30 +2478,12 @@ definitions:
         items:
           $ref: '#/definitions/CustomFieldValue'
       status:
-        format: int32
-        description: " New = 0,\r
-
-          InProgress = 10,\r
-
-          Resolved = 20,\r
-
-          Rejected = 30"
-        type: integer
-      statusText:
         $ref: '#/definitions/IncidentStatus'
       incidentTypeId:
         format: int32
         type: integer
       severity:
-        format: int32
-        description: " None = 0,\r
-
-          Low = 1,\r
-
-          Medium = 2,\r
-
-          High = 3"
-        type: integer
+        $ref: '#/definitions/IncidentSeverity'
       reportedByGroupId:
         format: int32
         type: integer
@@ -2470,8 +2507,7 @@ definitions:
         format: date-time
         type: string
       evaluationStatus:
-        format: int32
-        type: integer
+        $ref: '#/definitions/IncidentEvaluation'
       evaluationText:
         type: string
       isAnonymous:
@@ -2508,6 +2544,16 @@ definitions:
       type:
         type: string
     additionalProperties: false
+  IncidentEvaluation:
+    enum:
+    - Medium
+    - Good
+    - Bad
+    type: string
+    x-enum-varnames:
+    - Medium
+    - Good
+    - Bad
   IncidentInfo:
     required:
     - incidentDate
@@ -2523,8 +2569,6 @@ definitions:
         type: string
       incidentType:
         type: string
-      severityText:
-        $ref: '#/definitions/IncidentSeverity'
       reportedByGroup:
         type: string
       reportedByUserId:
@@ -2553,30 +2597,12 @@ definitions:
         format: int32
         type: integer
       status:
-        format: int32
-        description: " New = 0,\r
-
-          InProgress = 10,\r
-
-          Resolved = 20,\r
-
-          Rejected = 30"
-        type: integer
-      statusText:
         $ref: '#/definitions/IncidentStatus'
       incidentTypeId:
         format: int32
         type: integer
       severity:
-        format: int32
-        description: " None = 0,\r
-
-          Low = 1,\r
-
-          Medium = 2,\r
-
-          High = 3"
-        type: integer
+        $ref: '#/definitions/IncidentSeverity'
       reportedByGroupId:
         format: int32
         type: integer
@@ -2600,8 +2626,7 @@ definitions:
         format: date-time
         type: string
       evaluationStatus:
-        format: int32
-        type: integer
+        $ref: '#/definitions/IncidentEvaluation'
       evaluationText:
         type: string
       isAnonymous:
@@ -2740,80 +2765,6 @@ definitions:
       title:
         type: string
       unit:
-        type: string
-    additionalProperties: false
-  IncidentUpdate:
-    required:
-    - incidentDate
-    - incidentTypeId
-    - severity
-    - title
-    type: object
-    properties:
-      id:
-        format: int32
-        type: integer
-      status:
-        format: int32
-        description: " New = 0,\r
-
-          InProgress = 10,\r
-
-          Resolved = 20,\r
-
-          Rejected = 30"
-        type: integer
-      statusText:
-        $ref: '#/definitions/IncidentStatus'
-      incidentTypeId:
-        format: int32
-        type: integer
-      severity:
-        format: int32
-        description: " None = 0,\r
-
-          Low = 1,\r
-
-          Medium = 2,\r
-
-          High = 3"
-        type: integer
-      reportedByGroupId:
-        format: int32
-        type: integer
-      followUpGroupId:
-        format: int32
-        type: integer
-      responsibleUserId:
-        type: string
-      title:
-        minLength: 1
-        type: string
-      text:
-        type: string
-      incidentDate:
-        format: date-time
-        type: string
-      resolvedDate:
-        format: date-time
-        type: string
-      dueDate:
-        format: date-time
-        type: string
-      evaluationStatus:
-        format: int32
-        type: integer
-      evaluationText:
-        type: string
-      isAnonymous:
-        type: boolean
-      areaId:
-        format: int32
-        type: integer
-      projectId:
-        format: int32
-        type: integer
-      externalId:
         type: string
     additionalProperties: false
   Project:
@@ -3072,6 +3023,9 @@ definitions:
         type: array
         items:
           type: string
+      fullName:
+        type: string
+        readOnly: true
       userName:
         format: email
         minLength: 1
@@ -3090,9 +3044,6 @@ definitions:
       lastName:
         minLength: 1
         type: string
-      fullName:
-        type: string
-        readOnly: true
       screenName:
         maxLength: 6
         type: string
@@ -3100,8 +3051,43 @@ definitions:
         type: boolean
       isMobileUser:
         type: boolean
-      preferredLanguage:
+      businessUnitId:
+        format: int32
+        type: integer
+    additionalProperties: false
+  UserBase:
+    required:
+    - email
+    - firstName
+    - lastName
+    - userName
+    type: object
+    properties:
+      userName:
+        format: email
+        minLength: 1
         type: string
+      email:
+        format: email
+        minLength: 1
+        type: string
+      useAD:
+        type: boolean
+      azureAdObjectId:
+        type: string
+      firstName:
+        minLength: 1
+        type: string
+      lastName:
+        minLength: 1
+        type: string
+      screenName:
+        maxLength: 6
+        type: string
+      isInfoScreenUser:
+        type: boolean
+      isMobileUser:
+        type: boolean
       businessUnitId:
         format: int32
         type: integer
@@ -3112,9 +3098,6 @@ definitions:
     - userId
     type: object
     properties:
-      userId:
-        minLength: 1
-        type: string
       userName:
         type: string
       azureObjectId:
@@ -3122,41 +3105,38 @@ definitions:
       groupId:
         format: int32
         type: integer
+      userId:
+        minLength: 1
+        type: string
       groupRole:
         $ref: '#/definitions/AssetRoleType'
     additionalProperties: false
   UserRoleType:
     enum:
-    - KaizenAdmin
     - Admin
-    - Support
     - BusinessunitAdmin
     - BoardDesigner
-    - SystemApi
     - A3Admin
-    - ImprovementAdmin
+    - DataAdmin
+    - MessageWriter
     - DeviationAdmin
+    - ImprovementAdmin
     - ProjectAdmin
     - StrategyAdmin
     - LearningAdmin
-    - DataAdmin
-    - MessageWriter
     type: string
     x-enum-varnames:
-    - KaizenAdmin
     - Admin
-    - Support
     - BusinessunitAdmin
     - BoardDesigner
-    - SystemApi
     - A3Admin
-    - ImprovementAdmin
+    - DataAdmin
+    - MessageWriter
     - DeviationAdmin
+    - ImprovementAdmin
     - ProjectAdmin
     - StrategyAdmin
     - LearningAdmin
-    - DataAdmin
-    - MessageWriter
 securityDefinitions:
   oauth2-auth:
     type: oauth2

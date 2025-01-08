@@ -1184,37 +1184,6 @@
             }
           }
         }
-      },
-      "put": {
-        "tags": [
-          "Incidents"
-        ],
-        "summary": "Incident Update (deprecated)",
-        "description": "use PUT incident/{id} instead",
-        "operationId": "Incidents_UpdateObsolete",
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/IncidentUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Incident"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
       }
     },
     "/v1/Incidents/{id}": {
@@ -3732,12 +3701,6 @@
             "type": "string",
             "nullable": true
           },
-          "severityText": {
-            "$ref": "#/components/schemas/IncidentSeverity"
-          },
-          "statusText": {
-            "$ref": "#/components/schemas/IncidentStatus"
-          },
           "reportedByGroup": {
             "type": "string",
             "nullable": true
@@ -4546,92 +4509,6 @@
             "nullable": true
           },
           "unit": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "IncidentUpdate": {
-        "required": [
-          "incidentDate",
-          "incidentTypeId",
-          "severity",
-          "title"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "$ref": "#/components/schemas/IncidentStatus"
-          },
-          "incidentTypeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "severity": {
-            "$ref": "#/components/schemas/IncidentSeverity"
-          },
-          "reportedByGroupId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "followUpGroupId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "responsibleUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "text": {
-            "type": "string",
-            "nullable": true
-          },
-          "incidentDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "resolvedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "dueDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "evaluationStatus": {
-            "$ref": "#/components/schemas/IncidentEvaluation"
-          },
-          "evaluationText": {
-            "type": "string",
-            "nullable": true
-          },
-          "isAnonymous": {
-            "type": "boolean"
-          },
-          "areaId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "projectId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "externalId": {
             "type": "string",
             "nullable": true
           }
