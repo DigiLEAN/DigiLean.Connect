@@ -1,5 +1,7 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from "vitepress"
 import { sidebar } from "../services/openApi"
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -19,9 +21,9 @@ export default defineConfig({
       { text: 'Examples', link: '/examples' },
       { text: 'Enterprise', link: '/enterprise' }
     ],
-    search: {
-      provider: "local"
-    },
+    // search: {
+    //   provider: "local"
+    // },
     sidebar: {
       "/docs/": [
         {
@@ -77,6 +79,12 @@ export default defineConfig({
     }
   },
   vite: {
+    plugins: [pagefindPlugin({
+      btnPlaceholder: 'Search',
+      placeholder: 'Search docs and examples',
+      emptyText: 'empty',
+      heading: 'result: {{searchResult}}',
+    })],
     build: {
       rollupOptions: {
         external: ["/3d/digilean3dlogo.js"]
