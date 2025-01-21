@@ -6,8 +6,8 @@
 
   The syntax for filtering is adding `?$filter={condition}` at the
   end of the request URL. One could for example make a request asking for all
-  users with the name Bob like this:
-  `https://connect.digilean.tools/v1/Users?$filter=Name eq 'Bob'`
+  users with the first name Bob like this:
+  `https://connect.digilean.tools/v1/Users?$filter=firstName eq 'Bob'`
   
 ## Common filter expressions
 
@@ -29,7 +29,7 @@ Note that the date format has to be YYYY-MM-DDTHH:mm:ssZ.
 
 ### Filtering by equality
 
-`?$filter=Name eq 'Bob'`
+`?$filter=lastName eq 'Gates'`
 
   This filter used to return a list of recources with Name that equals 'Bob'
 
@@ -38,7 +38,7 @@ Note that the date format has to be YYYY-MM-DDTHH:mm:ssZ.
   It is also possible to *combine filters* by using the operators
   "and" / "or".
 
-`?$filter=Name eq 'Bob' and isAdmin eq true`
+`?$filter=firstName eq 'Bob' or email eq 'bob@company.com'`
 
   This filter is used to return a list of users with the name Bob and that are
   admins.
