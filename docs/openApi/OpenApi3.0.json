@@ -3495,8 +3495,7 @@
             "format": "int32"
           },
           "status": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ImprovementStatus"
           },
           "priorityStatus": {
             "type": "integer",
@@ -3655,9 +3654,52 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "evaluationStatus": {
+            "$ref": "#/components/schemas/ImprovementEvaluation"
+          },
+          "evaluationText": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "ImprovementEvaluation": {
+        "enum": [
+          "Medium",
+          "Good",
+          "Bad"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "Medium",
+          "Good",
+          "Bad"
+        ]
+      },
+      "ImprovementStatus": {
+        "enum": [
+          "Suggested",
+          "Planned",
+          "InProgress",
+          "Implemented",
+          "Evaluated",
+          "Archived",
+          "Activated",
+          "Open"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "Suggested",
+          "Planned",
+          "InProgress",
+          "Implemented",
+          "Evaluated",
+          "Archived",
+          "Activated",
+          "Open"
+        ]
       },
       "ImprovementsPagedValues": {
         "type": "object",
