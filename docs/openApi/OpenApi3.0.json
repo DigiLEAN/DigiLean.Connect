@@ -2794,6 +2794,87 @@
           }
         }
       }
+    },
+    "/v1/Users/{id}/notifications": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Notifications",
+        "description": "Get a User's Notifications settings",
+        "operationId": "Users_Notifications",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0dcd07a1-a28d-4dc8-81f2-7695a7dc50f1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserNotification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "User Notifications Update",
+        "description": "Update notification for a user",
+        "operationId": "Users_NotificationsUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Notification",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserNotificationUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserNotification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4557,6 +4638,43 @@
         },
         "additionalProperties": false
       },
+      "NotificationType": {
+        "enum": [
+          "All",
+          "TaskAssigned",
+          "TaskComment",
+          "UpdatedResponsibleSuggestion",
+          "ImprovementChangedStatus",
+          "ImprovementComment",
+          "NewDeviation",
+          "UpdatedResponsibleDeviation",
+          "DeviationComment",
+          "ProjectMessageAdded",
+          "A3Participant",
+          "A3Updated",
+          "PageCommentAdded",
+          "CommentMentions",
+          "WeeklyTaskStatus"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "All",
+          "TaskAssigned",
+          "TaskComment",
+          "UpdatedResponsibleSuggestion",
+          "ImprovementChangedStatus",
+          "ImprovementComment",
+          "NewDeviation",
+          "UpdatedResponsibleDeviation",
+          "DeviationComment",
+          "ProjectMessageAdded",
+          "A3Participant",
+          "A3Updated",
+          "PageCommentAdded",
+          "CommentMentions",
+          "WeeklyTaskStatus"
+        ]
+      },
       "Project": {
         "type": "object",
         "properties": {
@@ -5096,6 +5214,41 @@
           },
           "groupRole": {
             "$ref": "#/components/schemas/AssetRoleType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserNotification": {
+        "type": "object",
+        "properties": {
+          "lastModified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/NotificationType"
+          },
+          "email": {
+            "type": "boolean"
+          },
+          "mobile": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserNotificationUpdate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/NotificationType"
+          },
+          "email": {
+            "type": "boolean"
+          },
+          "mobile": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
