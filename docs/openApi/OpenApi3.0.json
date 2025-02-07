@@ -3930,7 +3930,7 @@
           },
           "incidentDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "resolvedDate": {
             "type": "string",
@@ -4012,7 +4012,7 @@
           },
           "incidentDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "resolvedDate": {
             "type": "string",
@@ -4145,6 +4145,7 @@
       },
       "IncidentCreate": {
         "required": [
+          "categories",
           "incidentDate",
           "incidentTypeId",
           "severity",
@@ -4167,8 +4168,7 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentCategory"
-            },
-            "nullable": true
+            }
           },
           "causes": {
             "type": "array",
@@ -4218,7 +4218,7 @@
           },
           "incidentDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "resolvedDate": {
             "type": "string",
@@ -4408,7 +4408,7 @@
           },
           "incidentDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "resolvedDate": {
             "type": "string",
