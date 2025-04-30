@@ -1,11 +1,20 @@
 ﻿namespace DigiLean.Api.Model.Clients
 {
+    /// <summary>ApiSettings</summary>
     public class ApiSettings
     {
+        /// <summary>ClientId</summary>
         public string ClientId { get; set; } = string.Empty;
+
+        /// <summary>ClientSecret</summary>
         public string ClientSecret { get; set; } = string.Empty;
+
+        /// <summary>Scopes</summary>
         public string Scopes { get; set; } = string.Empty;
 
+        /// <summary>Resolve</summary>
+        /// <param name="mode"></param>
+        /// <returns></returns>
         public static (string apiUrl, string authUrl) Resolve(ApiMode mode)
         {
             // Default production

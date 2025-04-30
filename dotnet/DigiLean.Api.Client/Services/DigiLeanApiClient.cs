@@ -22,7 +22,11 @@ namespace DigiLean.Api.Client
         {
             Url = apiUrl;
             _handler = new DigiLeanHttpApiHandler(settings, authUrl);
-            httpClient = new HttpClient(_handler) { BaseAddress = new Uri(apiUrl) };
+            httpClient = new HttpClient(_handler)
+            {
+                BaseAddress = new Uri(apiUrl),
+                Timeout = TimeSpan.FromMinutes(2)
+            };
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             ILogger? logger = null;

@@ -2,7 +2,6 @@
 using DigiLean.Api.Model.V1.Incident;
 using DigiLean.Api.Model.Common;
 using DigiLean.Api.Model.Clients;
-using DigiLean.Api.Model.Extensions;
 using System.Text;
 using DigiLean.Api.Model.V1.Attachments;
 using DigiLean.Api.Model.V1.Tasks;
@@ -15,45 +14,29 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<Incident> Create(IncidentCreate newIncident)
+        public Task<Incident> Create(IncidentCreate newIncident)
         {
             var url = $"{BasePath}";
-
-            var response = await Client.PostAsync(url, newIncident.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PostGetResponseAndHandleError<Incident>(url, newIncident);
         }
 
-        public async Task<Incident> Update(IncidentBase incident)
+
+        public Task<Incident> Update(IncidentBase incident, int incidentId)
         {
-            var url = $"{BasePath}";
-            var response = await Client.PutAsync(url, incident.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            var url = $"{BasePath}/{incidentId}";
+            return PutGetResponseAndHandleError<Incident>(url, incident);
         }
 
-        public async Task<Incident> UpdateResponsible(int incidentId, IncidentResponsible responsible)
+        public Task<Incident> UpdateResponsible(int incidentId, IncidentResponsible responsible)
         {
             var url = $"{BasePath}/{incidentId}/responsible";
-            var response = await Client.PutAsync(url, responsible.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PutGetResponseAndHandleError<Incident>(url, responsible);
         }
 
-        public async Task<Incident> UpdateStatus(int incidentId, int statusCode)
+        public Task<Incident> UpdateStatus(int incidentId, IncidentStatus statusCode)
         {
             var url = $"{BasePath}/{incidentId}/status";
-            var response = await Client.PutAsync(url, new IncidentStatusCode(statusCode).AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PutGetResponseAndHandleError<Incident>(url, new IncidentStatusCode(statusCode));
         }
 
         public async Task<Incident> UpdateExternalId(int incidentId, string externalId)
@@ -66,65 +49,55 @@ namespace DigiLean.Api.Client.V1
             return null;
         }
 
-        public async Task<Incident> UpdateSeverity(int incidentId, int severityCode)
+        public Task<Incident> UpdateSeverity(int incidentId, IncidentSeverity severityCode)
         {
             var url = $"{BasePath}/{incidentId}/severity";
-            var response = await Client.PutAsync(url, new IncidentSeverityCode(severityCode).AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PutGetResponseAndHandleError<Incident>(url, new IncidentSeverityCode(severityCode));
         }
 
-        public async Task<Incident> UpdateCategories(int incidentId, List<IncidentCategory> categories)
+        public Task<Incident> UpdateCategories(int incidentId, List<IncidentCategory> categories)
         {
             var url = $"{BasePath}/{incidentId}/categories";
-            var response = await Client.PutAsync(url, categories.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PutGetResponseAndHandleError<Incident>(url, categories);
         }
 
-        public async Task<Incident> UpdateCauses(int incidentId, List<IncidentCause> causes)
+        public Task<Incident> UpdateCauses(int incidentId, List<IncidentCause> causes)
         {
             var url = $"{BasePath}/{incidentId}/causes";
-            var response = await Client.PutAsync(url, causes.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PutGetResponseAndHandleError<Incident>(url, causes);
         }
 
-        public async Task<Incident> UpdateConsequences(int incidentId, List<IncidentConsequence> consequences)
+        public Task<Incident> UpdateConsequences(int incidentId, List<IncidentConsequence> consequences)
         {
             var url = $"{BasePath}/{incidentId}/consequences";
-            var response = await Client.PutAsync(url, consequences.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Incident>(response);
-            await HandleError(response);
-            return null;
+            return PutGetResponseAndHandleError<Incident>(url, consequences);
         }
 
-        public Task<Incident> Get(int id)
+        public Task<Incident> GetIncident(int id)
         {
             var url = $"{BasePath}/{id}";
             return GetResponseAndHandleError<Incident>(url);
         }
 
-        public Task<IncidentPagedValues> GetFilteredIncidents(string filter)
+        public Task<IncidentPagedValues> ListFilteredIncidents(string filter)
         {
             var url = $"{BasePath}?$filter={filter}";
             return GetResponseAndHandleError<IncidentPagedValues>(url);
         }
 
-        public Task<IncidentPagedValues> GetList(IncidentQueryParams queryParams)
+        public Task<IncidentPagedValues> List(IncidentQueryParams queryParams)
         {
             var url = BasePath + queryParams.GetParamsAsUrl();
             return GetResponseAndHandleError<IncidentPagedValues>(url);
         }
 
-        public Task<List<IncidentType>> GetTypes()
+        public Task<IncidentInfoPagedValues> GetTrash()
+        {
+            var url = $"{BasePath}/trash";
+            return GetResponseAndHandleError<IncidentInfoPagedValues>(url);
+        }
+
+        public Task<List<IncidentType>> ListTypes()
         {
             var url = $"{BasePath}/types"; ;
             return GetResponseAndHandleError<List<IncidentType>>(url);

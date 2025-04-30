@@ -2,11 +2,11 @@
 {
     public class IncidentStatusCode
     {
-        public IncidentStatusCode(int status = 0)
+        public IncidentStatusCode(IncidentStatus status = IncidentStatus.New)
         {
             Status = status;
         }
 
-        public int Status { get; set; }
+        public IncidentStatus Status { get; set; }
     }
 }

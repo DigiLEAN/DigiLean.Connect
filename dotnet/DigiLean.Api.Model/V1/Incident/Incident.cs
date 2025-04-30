@@ -2,10 +2,14 @@
 {
     public class Incident : IncidentBase
     {
+        public int Id { get; set; }
         public string? Project { get; set; }
         public string? IncidentType { get; set; }
-        public IncidentSeverity SeverityText => (IncidentSeverity)Severity;
-        
+        [Obsolete("Use Severity instead")]
+        public IncidentSeverity SeverityText => Severity; // to not break API for current consumers of Incident API V1.
+
+        [Obsolete("Use Status instead")]
+        public IncidentStatus StatusText => Status; // to not break API for current consumers of Incident API V1.
         public string? ReportedByGroup { get; set; }
         public string? ReportedByUserId { get; set; }
         public string? ReportedBy { get; set; }

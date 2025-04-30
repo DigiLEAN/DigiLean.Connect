@@ -14,7 +14,10 @@ namespace DigiLean.Api.Model.Clients
         public string? Detail { get; set; }
         [JsonPropertyName("instance")]
         public string? Instance { get; set; }
-        
+
+        [JsonPropertyName("traceId")]
+        public string? TraceId { get; set; }
+
         [JsonExtensionData]
         public IDictionary<string, object>? Extensions { get; }
 

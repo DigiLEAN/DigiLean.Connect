@@ -1,6 +1,7 @@
 ﻿using DigiLean.Api.Model.Clients;
 using DigiLean.Api.Model.Extensions;
 using DigiLean.Api.Model.V1;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
 namespace DigiLean.Api.Client.V1
@@ -14,9 +15,14 @@ namespace DigiLean.Api.Client.V1
         /// <summary>
         /// Get all datalists
         /// </summary>
-        public Task<List<DataList>> GetAll()
+        public Task<List<DataList>> List(string? filter = null)
         {
-            return GetResponseAndHandleError<List<DataList>>(BasePath);
+            var url = BasePath;
+            
+            if (!string.IsNullOrEmpty(filter))
+                url = QueryHelpers.AddQueryString(url, "$filter", filter);
+            
+            return GetResponseAndHandleError<List<DataList>>(url);
         }
 
 

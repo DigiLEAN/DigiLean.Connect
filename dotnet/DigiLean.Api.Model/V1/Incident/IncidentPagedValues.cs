@@ -8,4 +8,8 @@ namespace DigiLean.Api.Model.V1.Incident
     public class IncidentPagedValues : PagedValues<Incident>
     {
     }
+
+    public class IncidentInfoPagedValues : PagedValues<IncidentInfo>
+    {
+    }
 }

@@ -13,16 +13,12 @@ namespace DigiLean.Api.Client.V1
         {
         }
 
-        public async Task<Group> Create(Group group)
+        public Task<Group> Create(GroupCreate group)
         {
-            var response = await Client.PostAsync($"{BasePath}", group.AsJson());
-            if (response.IsSuccessStatusCode)
-                return await SerializePayload<Group>(response);
-            await HandleError(response);
-            return null;
+            return PostGetResponseAndHandleError<Group>(BasePath, group);
         }
 
-        public Task<List<Group>> GetGroups(string? filter = null)
+        public Task<List<Group>> List(string? filter = null)
         {
             var url = BasePath;
             if (!string.IsNullOrEmpty(filter))
@@ -46,7 +42,7 @@ namespace DigiLean.Api.Client.V1
             return GetResponseAndHandleError<List<UserGroupMember>>(url);
         }
 
-        public async Task<bool> AddMember(int groupId, UserGroupMember member)
+        public async Task<bool> AddMember(int groupId, GroupMemberCreate member)
         {
             var response = await Client.PutAsync($"{BasePath}/{groupId}/members", member.AsJson());
             if (response.IsSuccessStatusCode)
@@ -67,7 +63,7 @@ namespace DigiLean.Api.Client.V1
 
         public Task<List<Group>> GetOnlyAdGroups()
         {
-            return GetGroups("externalId ne null and externalId ne ''"); // OData filter to get only those with externalId
+            return List("externalId ne null and externalId ne ''"); // OData filter to get only those with externalId
         }
     }
 }

@@ -2,11 +2,11 @@
 {
     public class IncidentSeverityCode
     {
-        public IncidentSeverityCode(int severity = 0)
+        public IncidentSeverityCode(IncidentSeverity severity = 0)
         {
             Severity = severity;
         }
 
-        public int Severity { get; set; }
+        public IncidentSeverity Severity { get; set; }
     }
 }

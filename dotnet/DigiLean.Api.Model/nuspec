@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DigiLean.Api.Model</id>
+    <version>4.10.2</version>
+    <description>DigiLEAN API Model</description>
+    <authors>atledigilean</authors>
+    <owners>digilean</owners>
+    <license type="expression">BSD-3-Clause</license>
+    <icon>digilean-logo-128.png</icon>
+    <readme>README.md</readme>
+    <repository type="git" url="https://github.com/DigiLEAN/DigiLean.Connect.git" branch="main" commit="e1c65e4524cd70ee6e22abe33e6cb6ec73938cb3" />
+    <projectUrl>http://connect.digilean.tools</projectUrl>
+    <releaseNotes>Published first version</releaseNotes>
+    <description>DigiLEAN API Model</description>
+    <tags>rest http json</tags>
+  </metadata>
+  <files>
+    <file src="../../digilean-logo-128.png" target="" />
+    <file src="README.md" target="" />
+  </files>
+</package>

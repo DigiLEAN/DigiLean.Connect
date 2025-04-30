@@ -17,7 +17,7 @@ namespace DigiLean.Api.Model.Extensions
             return JsonConvert.SerializeObject(o, Formatting.Indented);
         }
 
-        public static async Task<ProblemDetails> ParseProblemDetails(this HttpContent content)
+        public static async Task<ProblemDetails?> ParseProblemDetails(this HttpContent content)
         {
             var errorString = await content.ReadAsStringAsync();
             try

@@ -1,5 +1,5 @@
 ﻿using DigiLean.Api.Model.Clients;
-using DigiLean.Api.Model.V1;
+using DigiLean.Api.Model.V1.Improvements;
 using Microsoft.Extensions.Logging;
 
 namespace DigiLean.Api.Client.V1

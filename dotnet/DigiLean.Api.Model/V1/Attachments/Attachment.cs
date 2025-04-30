@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace DigiLean.Api.Model.V1.Attachments
+﻿namespace DigiLean.Api.Model.V1.Attachments
 {
     public class Attachment
     {

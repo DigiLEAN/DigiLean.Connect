@@ -1,15 +1,31 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace DigiLean.Api.Model.Common
 {
+    /// <summary>
+    /// Task query parameters
+    /// </summary>
     public class TaskQueryParams
     {
-        public int? BoardId { get; set; }
+        /// <summary>Page Size default is 100 and max 10000</summary>
+        /// <example>200</example>
+        [Range(0, 10000)]
         public int Count { get; set; } = 100;
+
+        /// <summary>Page default and start value is 1</summary>
+        /// <example>2</example>
         public int Page { get; set; } = 1;
+
+        /// <summary>Filter BoardDate. Greater than</summary>
+        /// <example>2023-12-01T00:00:00Z</example>
         public DateTime? From { get; set; }
+
+        /// <summary>Filter BoardDate. Lesser than</summary>
+        /// <example>2023-12-24T00:00:00Z</example>
         public DateTime? To { get; set; }
 
+        /// <summary>Get as query string</summary>
         public Dictionary<string, string> GetQueryDictionary()
         {
             var activeItems = new Dictionary<string, string>
@@ -18,18 +34,14 @@ namespace DigiLean.Api.Model.Common
                 { "Page", Page.ToString() }
             };
 
-            if (BoardId.HasValue) activeItems.Add("BoardId", BoardId.ToString());
-            if (From.HasValue) activeItems.Add("From", GetFormattedDate(From));
-            if (To.HasValue) activeItems.Add("To", GetFormattedDate(To));
+            if (From.HasValue) activeItems.Add("From", GetFormattedDate(From.Value));
+            if (To.HasValue) activeItems.Add("To", GetFormattedDate(To.Value));
             return activeItems;
         }
 
-        private string GetFormattedDate(DateTime? date)
+        private string GetFormattedDate(DateTime date)
         {
-            string utcDateOut = DateTime.UtcNow.ToString("s", CultureInfo.InvariantCulture);
-            DateTime utcDateIn = DateTime.ParseExact(utcDateOut, "s",
-                              CultureInfo.InvariantCulture,
-                              DateTimeStyles.AdjustToUniversal);
+            string utcDateOut = date.ToString("s", CultureInfo.InvariantCulture);
             return utcDateOut;
         }
     }

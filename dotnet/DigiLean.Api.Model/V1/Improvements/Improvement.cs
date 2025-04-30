@@ -1,6 +1,6 @@
 ﻿using DigiLean.Api.Model.Common;
 
-namespace DigiLean.Api.Model.V1
+namespace DigiLean.Api.Model.V1.Improvements
 {
     public class ImprovementsPagedValues : PagedValues<Improvement>
     {
@@ -9,7 +9,7 @@ namespace DigiLean.Api.Model.V1
     public class Improvement
     {
         public int Id { get; set; }
-        public string? Status { get; set; }
+        public ImprovementStatus Status { get; set; }
         public int PriorityStatus { get; set; }
         public int? GroupId { get; set; }
         public string? Group { get; set; }
@@ -50,5 +50,8 @@ namespace DigiLean.Api.Model.V1
         public double? EstimatedGainOfInvestment { get; set; }
         public double? EstimatedCostOfInvestmentHours { get; set; }
         public double? EstimatedGainOfInvestmentHours { get; set; }
+
+        public ImprovementEvaluation? EvaluationStatus { get; set; }
+        public string? EvaluationText { get; set; }
     }
 }

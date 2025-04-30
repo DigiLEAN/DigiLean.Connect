@@ -80,35 +80,37 @@ namespace DigiLean.Api.Client.V1
         /// <summary>
         /// Write one datavalue
         /// </summary>
-        public async Task<bool> WriteDataValue(DataValue dataValue, int dataSourceId)
+        public Task<DataValue> WriteDataValue(DataValueCreate dataValue, int dataSourceId)
         {
             if (dataSourceId == 0)
                 throw new ApplicationException("DataSourceId cant be 0");
 
             var url = $"{BasePath}/{dataSourceId}/values";
-            var response = await Client.PostAsync(url, dataValue.AsJson());
-            if (!response.IsSuccessStatusCode)
-                await HandleError(response, false);
-            return response.IsSuccessStatusCode;
+            return PostGetResponseAndHandleError<DataValue>(url, dataValue);
         }
 
         /// <summary>
         /// Write many datavalues in batch
         /// </summary>
-        public async Task<bool> WriteDataValues(int dataSourceId, List<DataValue> dataValues)
+        public async Task<bool> WriteDataValues<T>(int dataSourceId, List<T> dataValues)
+            where T : DataValueCreate
         {
             if (dataSourceId == 0)
                 throw new ApplicationException("DataSourceId cant be 0");
 
             var url = $"{BasePath}/{dataSourceId}/values/batch";
-            var response = await Client.PostAsync(url, dataValues.AsJson());
+
+            var data = dataValues.AsJson();
+
+            var response = await Client.PostAsync(url, data);
             if (!response.IsSuccessStatusCode)
                 await HandleError(response);
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> BatchReplace(int dataSourceId, List<DataValue> dataValues, DateTime from, DateTime to)
+        public async Task<bool> BatchReplace<T>(int dataSourceId, List<T> dataValues, DateTime from, DateTime to)
+            where T : DataValueCreate
         {
             if (dataSourceId == 0)
                 throw new ApplicationException("DataSourceId cant be 0");

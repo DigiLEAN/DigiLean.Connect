@@ -5,6 +5,15 @@ namespace DigiLean.Api.Model.Common
 {
     public class Validation
     {
+        public Validation()
+        {
+        }
+
+        public Validation(ICollection<ValidationResult>? errors)
+        {
+            if (errors is not null)
+                Errors = errors;
+        }
         public bool IsValid
         {
             get
@@ -12,7 +21,7 @@ namespace DigiLean.Api.Model.Common
                 return !(Errors != null && Errors.Count > 0); // Valid if no errors are found
             }
         }
-        public ICollection<ValidationResult> Errors { get; set; } = new List<ValidationResult>();
+        public ICollection<ValidationResult> Errors { get; set; } = [];
         
         public void AddResults(IEnumerable<ValidationResult> results)
         {

@@ -25,7 +25,7 @@ internal class Program
 
         Console.WriteLine($" ############################ Using ClientId: {clientId}##########################");
         // Create our API client, API mode will determine which endpoint to use.
-        var apiClient = DigiLeanApi.Create(clientId, secretKey, ApiMode.Production);
+        var apiClient = DigiLeanApi.Create(clientId, secretKey, ApiMode.Test);
 
 
         try
