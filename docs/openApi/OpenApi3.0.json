@@ -1798,6 +1798,61 @@
         }
       }
     },
+    "/v1/Incidents/{incidentId}/customfields/{customFieldId}": {
+      "put": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Updates Incidents Custom Field",
+        "description": "Update incidents custom field",
+        "operationId": "Incidents_UpdateCustomFields",
+        "parameters": [
+          {
+            "name": "incidentId",
+            "in": "path",
+            "description": "Incident Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "customFieldId",
+            "in": "path",
+            "description": "Custom Field Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Custom Field object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFieldValueDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/Incidents/trash": {
       "get": {
         "tags": [
@@ -2420,6 +2475,194 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TaskInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ThreeC/{itemId}": {
+      "get": {
+        "tags": [
+          "ThreeC"
+        ],
+        "summary": "Retrieves a specific ThreeC item by its unique identifier.",
+        "description": "Requires read permissions. Only users with the appropriate policy can access this endpoint.",
+        "operationId": "ThreeC_Get",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The unique identifier of the ThreeC item to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreeCItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ThreeC"
+        ],
+        "summary": "Updates an existing ThreeC item with new information.",
+        "description": "Requires write permissions. Only users with the appropriate policy can update items.",
+        "operationId": "ThreeC_Update",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The unique identifier of the ThreeC item to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated information for the ThreeC item.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThreeCItemInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreeCItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ThreeC"
+        ],
+        "summary": "Deletes a ThreeC item by its identifier.",
+        "description": "Requires write permissions. Only users with the appropriate policy can create items.",
+        "operationId": "ThreeC_Delete",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The unique identifier of the ThreeC item to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/ThreeC/{boardId}/items": {
+      "get": {
+        "tags": [
+          "ThreeC"
+        ],
+        "summary": "Fetches a paged list of ThreeC items for a specified board.",
+        "description": "Requires read permissions. Only users with the appropriate policy can list items.",
+        "operationId": "ThreeC_List",
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "description": "The ID of the ThreeC board.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Optional OData filter string to filter the results.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreeCPaged"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ThreeC/{boardId}": {
+      "post": {
+        "tags": [
+          "ThreeC"
+        ],
+        "summary": "Creates a new ThreeC item on the specified board.",
+        "description": "Requires write permissions. Only users with the appropriate policy can create items.",
+        "operationId": "ThreeC_Create",
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "description": "The unique identifier of the board where the item will be created.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The information for the ThreeC item to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThreeCItemInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreeCItem"
                 }
               }
             }
@@ -3158,6 +3401,19 @@
           "value": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomFieldValueDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -4706,6 +4962,10 @@
             "type": "string",
             "nullable": true
           },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -4844,6 +5104,10 @@
             "nullable": true
           },
           "customerNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerName": {
             "type": "string",
             "nullable": true
           },
@@ -5066,6 +5330,120 @@
           "Completed",
           "Blocked"
         ]
+      },
+      "ThreeCItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "concern": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cause": {
+            "type": "string",
+            "nullable": true
+          },
+          "causeCellId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "counterMeasure": {
+            "type": "string",
+            "nullable": true
+          },
+          "counterMeasureCellId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pdca": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleDisplayName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ThreeCItemInfo": {
+        "type": "object",
+        "properties": {
+          "concern": {
+            "type": "string",
+            "nullable": true
+          },
+          "cause": {
+            "type": "string",
+            "nullable": true
+          },
+          "counterMeasure": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "pdca": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ThreeCPaged": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ThreeCItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "User": {
         "required": [
