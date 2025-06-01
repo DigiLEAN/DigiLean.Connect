@@ -5338,10 +5338,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
           "concern": {
             "type": "string",
             "nullable": true
@@ -5360,25 +5356,11 @@
             "type": "string",
             "nullable": true
           },
-          "causeCellId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "counterMeasure": {
             "type": "string",
             "nullable": true
           },
-          "counterMeasureCellId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "pdca": {
-            "type": "string",
-            "nullable": true
-          },
-          "responsibleUser": {
             "type": "string",
             "nullable": true
           },
