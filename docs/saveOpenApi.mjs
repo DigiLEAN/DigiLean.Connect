@@ -1,4 +1,5 @@
 import * as fs from "fs"
+import * as fsp from "fs/promises"
 import * as path from "path"
 import * as http from "https"
 
@@ -6,19 +7,12 @@ let swaggerUrl = "https://connect.digilean.tools/swagger/v1/swagger.json"
 let localFolder = "openApi"
 let localFile = "OpenApi3.0.json"
 
-function saveFile(content, directory, name){
-    return new Promise((resolve, reject) => {
-        if (!fs.existsSync(directory)){
-            fs.mkdirSync(directory)
-        }
-        const fullPath = path.join(directory, name)
-        fs.writeFile(fullPath, content, (err) => {
-            if(err)
-                reject(err)
-            else
-                resolve(fullPath)
-        })
-    })
+async function saveFile(content, directory, name){
+    if (!fs.existsSync(directory)){
+        fs.mkdirSync(directory)
+    }
+    const fullPath = path.join(directory, name)
+    return fsp.writeFile(fullPath, content)
 }
 
 function getFileFromHttp(url) {
