@@ -11,8 +11,8 @@
     "rm": "rm -rf .vitepress/dist",
     "preview": "vitepress preview",
     "import-api": "node saveOpenApi.mjs",
-    "deploy-swa": "swa deploy .vitepress/dist --env Production",
-    "deploy": "npm run build && npm run deploy-swa",
+    "deploy:swa": "swa deploy .vitepress/dist --env Production",
+    "deploy": "npm run build && npm run deploy:swa",
     "build:logo": "esbuild ./components/digilean3dlogo/component.ts --bundle --minify --tree-shaking=true --outfile=./public/3d/digilean3dlogo.js",
     "serve": "cd .vitepress/dist && serve"
   },
