@@ -1,6 +1,6 @@
 # build digilean teams client
 # variable $(environment) should be test or prod
-name: $(environment)-$(BuildID)
+name: Connect-Docs-Test-$(BuildID)
 
 pr: none
 
