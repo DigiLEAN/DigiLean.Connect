@@ -3,7 +3,7 @@ import * as fsp from "fs/promises"
 import * as path from "path"
 import * as http from "https"
 
-let swaggerUrl = "https://connect.digilean.tools/swagger/v1/swagger.json"
+let swaggerUrl = "https://api-test.digilean.tools/swagger/v1/swagger.json" // "https://connect.digilean.tools/swagger/v1/swagger.json"
 let localFolder = "openApi"
 let localFile = "OpenApi3.0.json"
 

@@ -1,0 +1,43 @@
+# build digilean teams client
+# variable $(environment) should be test or prod
+name: $(environment)-$(BuildID)
+
+pr: none
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - 'docs/*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: gitversion/setup@3.1.11
+  displayName: Install GitVersion
+  inputs:
+    versionSpec: '5.x'
+
+- task: gitversion/execute@3.1.11
+  displayName: Determine Version
+  inputs:
+    useConfigFile: true
+    configFilePath: 'GitVersion.yml'
+
+- task: UseNode@1
+  inputs:
+    version: '22.x'
+
+- script: npm install
+  workingDirectory: docs/
+  displayName: 'npm install docs'
+
+- script: npm run build
+  workingDirectory: docs/
+  displayName: 'npm run build'
+
+- script: npm run deploy:test --swa_token=$(swa_token)
+  workingDirectory: docs/
