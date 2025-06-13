@@ -1035,6 +1035,107 @@
         }
       }
     },
+    "/v1/Improvements/{improvementId}": {
+      "get": {
+        "tags": [
+          "Improvements"
+        ],
+        "summary": "Improvement Details",
+        "description": "Get Improvement details",
+        "operationId": "Improvements_Get",
+        "parameters": [
+          {
+            "name": "improvementId",
+            "in": "path",
+            "description": "The unique identifier of the improvement to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Improvement"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Improvements"
+        ],
+        "summary": "Improvement Delete",
+        "description": "Deletes an improvement item by its unique identifier.",
+        "operationId": "Improvements_Delete",
+        "parameters": [
+          {
+            "name": "improvementId",
+            "in": "path",
+            "description": "The unique identifier of the improvement to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Improvements"
+        ],
+        "summary": "Improvement Update",
+        "description": "Updates an improvement.",
+        "operationId": "Improvements_Update",
+        "parameters": [
+          {
+            "name": "improvementId",
+            "in": "path",
+            "description": "The unique identifier of the improvement to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The DigiLean.Api.Model.V1.Improvements.ImprovementCreate object containing the updated details for the improvement.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImprovementUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Improvement"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/Improvements": {
       "get": {
         "tags": [
@@ -1061,6 +1162,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImprovementsPagedValues"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Improvements"
+        ],
+        "summary": "Improvement Create",
+        "description": "Creates a new improvement.",
+        "operationId": "Improvements_Create",
+        "requestBody": {
+          "description": "The DigiLean.Api.Model.V1.Improvements.ImprovementCreate object containing the details of the improvement to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImprovementCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Improvement"
                 }
               }
             }
@@ -2487,8 +2618,8 @@
         "tags": [
           "ThreeC"
         ],
-        "summary": "Retrieves a specific ThreeC item by its unique identifier.",
-        "description": "Requires read permissions. Only users with the appropriate policy can access this endpoint.",
+        "summary": "3C Details",
+        "description": "Retrieves a specific ThreeC item by its unique identifier",
         "operationId": "ThreeC_Get",
         "parameters": [
           {
@@ -2519,8 +2650,8 @@
         "tags": [
           "ThreeC"
         ],
-        "summary": "Updates an existing ThreeC item with new information.",
-        "description": "Requires write permissions. Only users with the appropriate policy can update items.",
+        "summary": "3C Item update",
+        "description": "Updates an existing ThreeC item with new information.",
         "operationId": "ThreeC_Update",
         "parameters": [
           {
@@ -2561,8 +2692,8 @@
         "tags": [
           "ThreeC"
         ],
-        "summary": "Deletes a ThreeC item by its identifier.",
-        "description": "Requires write permissions. Only users with the appropriate policy can create items.",
+        "summary": "3C Item Delete",
+        "description": "Deletes a ThreeC item by its identifier.",
         "operationId": "ThreeC_Delete",
         "parameters": [
           {
@@ -2588,8 +2719,8 @@
         "tags": [
           "ThreeC"
         ],
-        "summary": "Fetches a paged list of ThreeC items for a specified board.",
-        "description": "Requires read permissions. Only users with the appropriate policy can list items.",
+        "summary": "3C Items",
+        "description": "Fetches a paged list of ThreeC items for a specified board",
         "operationId": "ThreeC_List",
         "parameters": [
           {
@@ -2631,8 +2762,8 @@
         "tags": [
           "ThreeC"
         ],
-        "summary": "Creates a new ThreeC item on the specified board.",
-        "description": "Requires write permissions. Only users with the appropriate policy can create items.",
+        "summary": "3C Item Create",
+        "description": "Creates a new ThreeC item on the specified board.",
         "operationId": "ThreeC_Create",
         "parameters": [
           {
@@ -3387,6 +3518,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -3835,8 +3969,7 @@
             "$ref": "#/components/schemas/ImprovementStatus"
           },
           "priorityStatus": {
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/components/schemas/ImprovementPriorityStatus"
           },
           "groupId": {
             "type": "integer",
@@ -3876,6 +4009,10 @@
           "lastModified": {
             "type": "string",
             "format": "date-time"
+          },
+          "lastModifiedByUserId": {
+            "type": "string",
+            "nullable": true
           },
           "suggestedByUserId": {
             "type": "string",
@@ -4002,6 +4139,110 @@
         },
         "additionalProperties": false
       },
+      "ImprovementCreate": {
+        "required": [
+          "suggestedByUserId",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "suggestedByUserId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "priorityStatus": {
+            "$ref": "#/components/schemas/ImprovementPriorityStatus"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ImprovementStatus"
+          },
+          "groupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "responsibleUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "costOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "gainOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "costOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "gainOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedCostOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedGainOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedCostOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedGainOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "evaluationStatus": {
+            "$ref": "#/components/schemas/ImprovementEvaluation"
+          },
+          "evaluationText": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ImprovementEvaluation": {
         "enum": [
           "Medium",
@@ -4013,6 +4254,23 @@
           "Medium",
           "Good",
           "Bad"
+        ]
+      },
+      "ImprovementPriorityStatus": {
+        "enum": [
+          "NotPrioritized",
+          "LowEffortHighEffect",
+          "HighEffortHighEffect",
+          "LowEffortLowEffect",
+          "HighEffortLowEffect"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "NotPrioritized",
+          "LowEffortHighEffect",
+          "HighEffortHighEffect",
+          "LowEffortLowEffect",
+          "HighEffortLowEffect"
         ]
       },
       "ImprovementStatus": {
@@ -4037,6 +4295,107 @@
           "Activated",
           "Open"
         ]
+      },
+      "ImprovementUpdate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "suggestedByUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ImprovementStatus"
+          },
+          "priorityStatus": {
+            "$ref": "#/components/schemas/ImprovementPriorityStatus"
+          },
+          "groupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "responsibleUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "costOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "gainOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "costOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "gainOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedCostOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedGainOfInvestment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedCostOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedGainOfInvestmentHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "evaluationStatus": {
+            "$ref": "#/components/schemas/ImprovementEvaluation"
+          },
+          "evaluationText": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ImprovementsPagedValues": {
         "type": "object",
@@ -4804,6 +5163,9 @@
         ]
       },
       "IncidentStatusCode": {
+        "required": [
+          "status"
+        ],
         "type": "object",
         "properties": {
           "status": {
