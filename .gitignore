@@ -1,7 +1,11 @@
 .DS_Store
 
 power.platform/publish
-
+node_modules
 nugetPackage
 
 .env
+
+.vitepress/cache
+.vitepress/dist
+.vitepress/.temp

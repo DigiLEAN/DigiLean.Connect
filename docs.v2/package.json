@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "vitepress-openapi": "^0.1.9"
+  }
+}

@@ -1,7 +1,7 @@
-import { paths } from "../../services/openApi"
+import { getPaths } from "../../services/openApi"
 
 export default {
     paths() {
-        return paths()
+        return getPaths()
     }
 }

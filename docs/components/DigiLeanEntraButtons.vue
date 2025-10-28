@@ -5,7 +5,6 @@
     const errorMsg = ref("")
 
     const btnAzureEnabled = ref(true)
-    const btnSharePointEnabled = ref(true)
     const btnSharePointSiteEnabled = ref(true)
 
     async function connectAzureAd() {
@@ -13,16 +12,6 @@
         try {
             const res = await msal.signInAzureAdApp()
             errorMsg.value = "Successfully connected to DigiLEAN Connect Azure AD"
-        }
-        catch(err) {
-            errorMsg.value = "error occured"
-        }
-    }
-    async function connectSharePoint() {
-        btnSharePointEnabled.value = false
-        try {
-            const res = await msal.signInSharePointApp()
-            errorMsg.value = "Successfully connected to DigiLEAN Connect Sharepoint"
         }
         catch(err) {
             errorMsg.value = "error occured"
