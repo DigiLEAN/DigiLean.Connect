@@ -1,5 +1,4 @@
 import * as fs from "fs"
-import * as fsp from "fs/promises"
 import * as path from "path"
 import * as http from "https"
 
@@ -10,7 +9,7 @@ function saveFile(content, directory, name){
         fs.mkdirSync(directory)
     }
     const fullPath = path.join(directory, name)
-    return fsp.writeFile(fullPath, content)
+    return fs.writeFileSync(fullPath, content)
 }
 
 function getFileFromHttp(url) {
