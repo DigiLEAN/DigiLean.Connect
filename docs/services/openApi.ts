@@ -2,7 +2,7 @@ import { useOpenapi, httpVerbs } from "vitepress-openapi"
 import { oas30 } from "openapi3-ts"
 import { useSidebar, generateCodeSample } from "vitepress-openapi"
 
-import spec from "../openApi/OpenApi3.0.json" with { type: "json" }
+import spec from "../openApi/OpenApi3.0.v1.json" with { type: "json" }
 
 let openapi = useOpenapi({
     spec,
