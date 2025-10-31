@@ -6,7 +6,7 @@ title: DigiLEAN Connect Docs
 
 <script setup lang="ts">
   import { useRoute, useData } from 'vitepress'
-  import { useTheme } from "vitepress-openapi"
+  import { useTheme } from "vitepress-openapi/client"
   import OAParametersOverride from "../../components/OAParametersOverride.vue"
   import OATryWithVariablesOverride from "../../components/OATryWithVariablesOverride.vue"
 
@@ -27,7 +27,7 @@ title: DigiLEAN Connect Docs
 </script>
 
 <!--override and hide stuff-->
-<OAOperation :operationId="operationId" :isDark="isDark" :hideBranding="true">
+<OAOperation :operationId="operationId" :hideBranding="true">
     <template #parameters="parameters">
         <h2>Parameters</h2>
         <OAParametersOverride 
@@ -39,16 +39,9 @@ title: DigiLEAN Connect Docs
     </template>
     <template #code-samples="codeSamples">
     </template>
-    <template #try-it="tryIt">
+    <template #playground="slotProps">
         <OATryWithVariablesOverride 
-        :operation-id="tryIt.operationId"
-        :path="tryIt.path"
-        :method="tryIt.method"
-        :base-url="tryIt.baseUrl"
-        :parameters="tryIt.parameters"
-        :schema="tryIt.schema"
-        :security-schemes="tryIt.securitySchemes"
-        :is-dark="isDark"
+          v-bind="{...slotProps, isDark}"
         />
     </template>
 </OAOperation>

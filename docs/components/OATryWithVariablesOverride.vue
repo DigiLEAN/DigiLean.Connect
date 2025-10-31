@@ -24,8 +24,8 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  baseUrl: {
-    type: String,
+  servers: {
+    type: Array<{ url: string, description: string}>,
     required: true,
   },
   path: {
@@ -54,13 +54,13 @@ const props = defineProps({
   },
   securitySchemes: {
     type: Object,
-    required: true,
+    required: false
   },
 })
 
 
 const request = ref({
-  url: `${props.baseUrl}${props.path}`,
+  url: (props.servers[0]?.url || '') + props.path,
   headers: {},
 })
 
