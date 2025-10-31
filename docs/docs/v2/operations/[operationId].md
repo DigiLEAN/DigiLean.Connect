@@ -7,9 +7,9 @@ title: DigiLEAN Connect Docs
 <script setup lang="ts">
   import { useRoute, useData } from 'vitepress'
   import { useTheme } from "vitepress-openapi/client"
-  import OAParametersOverride from "../../components/OAParametersOverride.vue"
-  import OATryWithVariablesOverride from "../../components/OATryWithVariablesOverride.vue"
-  import spec from "../../openApi/OpenApi3.0.v1.json" with { type: "json" }
+  import OAParametersOverride from "../../../components/OAParametersOverride.vue"
+  import OATryWithVariablesOverride from "../../../components/OATryWithVariablesOverride.vue"
+  import spec from "../../../openApi/OpenApi3.0.v2.json" with { type: "json" }
 
   const route = useRoute()
 
@@ -28,7 +28,7 @@ title: DigiLEAN Connect Docs
 </script>
 
 <!--override and hide stuff-->
-<OAOperation :operationId="operationId" :hideBranding="true" :spec>
+<OAOperation :operationId="operationId" :hideBranding="true":spec>
     <template #parameters="parameters">
         <h2>Parameters</h2>
         <OAParametersOverride 
