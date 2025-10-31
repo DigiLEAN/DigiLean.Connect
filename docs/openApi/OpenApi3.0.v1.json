@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://connect.digilean.tools",
+      "url": "https://api-test.digilean.tools",
       "description": "DigiLEAN Connect"
     }
   ],
@@ -5700,18 +5700,17 @@
             "type": "integer",
             "format": "int32"
           },
-          "concern": {
-            "type": "string",
-            "nullable": true
-          },
           "createdDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "dueDate": {
+          "responsibleUser": {
             "type": "string",
-            "format": "date-time",
+            "nullable": true
+          },
+          "concern": {
+            "type": "string",
             "nullable": true
           },
           "cause": {
@@ -5722,15 +5721,16 @@
             "type": "string",
             "nullable": true
           },
-          "pdca": {
-            "type": "string",
-            "nullable": true
-          },
           "responsibleUserId": {
             "type": "string",
             "nullable": true
           },
-          "responsibleDisplayName": {
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "pdca": {
             "type": "string",
             "nullable": true
           }
@@ -6011,7 +6011,7 @@
         "description": "Client Credentials flow. Authorization header with Bearer token",
         "flows": {
           "clientCredentials": {
-            "tokenUrl": "https://auth.digilean.tools/connect/token",
+            "tokenUrl": "https://auth-test.digilean.tools/connect/token",
             "scopes": {
               "public.api.read": "read all",
               "public.api.write": "write all",

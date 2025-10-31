@@ -1,18 +1,15 @@
 import * as fs from "fs"
-import * as fsp from "fs/promises"
 import * as path from "path"
 import * as http from "https"
 
-let swaggerUrl = "https://api-test.digilean.tools/swagger/v1/swagger.json" // "https://connect.digilean.tools/swagger/v1/swagger.json"
-let localFolder = "openApi"
-let localFile = "OpenApi3.0.json"
+const localFolder = "openApi"
 
-async function saveFile(content, directory, name){
+function saveFile(content, directory, name){
     if (!fs.existsSync(directory)){
         fs.mkdirSync(directory)
     }
     const fullPath = path.join(directory, name)
-    return fsp.writeFile(fullPath, content)
+    return fs.writeFileSync(fullPath, content)
 }
 
 function getFileFromHttp(url) {
@@ -27,16 +24,20 @@ function getFileFromHttp(url) {
     })
 }
 
-const getAndSave = async () => {
+const getFromUrlAndSaveAs = async (url, fileName) => {
     try {
-        const fileContent = await getFileFromHttp(swaggerUrl)
+        const fileContent = await getFileFromHttp(url)
         if (!fileContent)
-            console.error(`no file content for ${swaggerUrl}`)
-        await saveFile(fileContent, localFolder, localFile)
+            throw new Error(`no file content for ${url}`)
+        saveFile(fileContent, localFolder, fileName)
     }
     catch (err) {
         console.error(err)
     }
 }
-getAndSave().then(() => console.log("done"))
+
+Promise.all([
+    getFromUrlAndSaveAs("https://api-test.digilean.tools/swagger/v1/swagger.json", "OpenApi3.0.v1.json"),
+    getFromUrlAndSaveAs("https://api-test.digilean.tools/swagger/v2/swagger.json", "OpenApi3.0.v2.json"),
+]).then(() => console.log("done"))
     .catch(err => console.error(err))

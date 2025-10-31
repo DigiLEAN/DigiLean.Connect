@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress"
-import { sidebar } from "../services/openApi"
+import { sidebar as sidebarV1 } from "../services/openApi"
+import { sidebar as sidebarV2 } from "../services/openApiV2"
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 
 
@@ -17,7 +18,10 @@ export default defineConfig({
     logo: "/images/logo.svg",
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Docs', link: '/docs' },
+      { text: 'Docs', items: [
+        { text: 'Version 1', link: '/docs' },
+        { text: 'Version 2', link: '/docs/v2' },
+      ] },
       { text: 'Examples', link: '/examples' },
       { text: 'Enterprise', link: '/enterprise' }
     ],
@@ -25,7 +29,7 @@ export default defineConfig({
     //   provider: "local"
     // },
     sidebar: {
-      "/docs/": [
+      "/docs": [
         {
           text: 'Overview',
           items: [
@@ -41,7 +45,16 @@ export default defineConfig({
           ]
         },
         /// OpenAPI docs
-        ...sidebar.generateSidebarGroups()
+        ...sidebarV1.generateSidebarGroups()
+      ],
+       "/docs/v2": [
+        {
+          text: 'Overview',
+          items: [
+            { text: 'Get started', link: '/docs/v2/' },
+          ]
+        },
+        ...sidebarV2.generateSidebarGroups()
       ],
       "/examples/": [
         {

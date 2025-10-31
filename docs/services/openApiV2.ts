@@ -1,7 +1,7 @@
 import { useSidebar } from "vitepress-openapi"
 import { useOpenapi, generateCodeSample, OARequest } from "vitepress-openapi/client"
 
-import spec from "../openApi/OpenApi3.0.v1.json" with { type: "json" }
+import spec from "../openApi/OpenApi3.0.v2.json" with { type: "json" }
 
 export default useOpenapi({
     spec,
@@ -66,5 +66,5 @@ function generateBruRequest(request: OARequest) {
 export const sidebar = useSidebar({ 
   spec,
   // Optionally, you can specify a link prefix for all generated sidebar items.
-  linkPrefix: '/docs/operations/',
+  linkPrefix: '/docs/v2/operations/',
 })

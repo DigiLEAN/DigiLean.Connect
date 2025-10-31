@@ -1,26 +1,19 @@
-// https://vitepress.dev/guide/custom-theme
-import { h } from "vue"
 import type { Theme } from "vitepress"
 import DefaultTheme from "vitepress/theme"
 import "./style.css"
 
-import { theme } from "vitepress-openapi"
+import { theme } from "vitepress-openapi/client"
 import "vitepress-openapi/dist/style.css"
 import "./colors.css"
 import "./theme.css"
-import { getOpenApi } from "../../services/openApi"
-// import "../../components/digiLeanLogo"
-//import "../../components"
+import openAPI from "../../services/openApi"
+import openAPIV2 from "../../services/openApiV2"
 
 export default {
   extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-    })
-  },
-  enhanceApp({ app, router, siteData }) {
-    const opa = getOpenApi()
+  enhanceApp({ app }) {
+    const _ = openAPI
+    const __ = openAPIV2
     theme.enhanceApp({ app })
   },
   
