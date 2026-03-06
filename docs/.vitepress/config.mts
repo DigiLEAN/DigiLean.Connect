@@ -31,7 +31,7 @@ export default defineConfig({
     sidebar: {
       "/docs": [
         {
-          text: 'Overview',
+          text: 'API v1',
           items: [
             { text: 'Get started', link: '/docs/' },
             { text: 'Authentication', link: '/docs/authentication' },
@@ -41,7 +41,7 @@ export default defineConfig({
         {
           text: 'Querying',
           items: [
-            { text: 'Filter resource', link: '/docs/filtering' }
+            { text: 'Filter resource', link: '/docs/filtering' },
           ]
         },
         /// OpenAPI docs
@@ -49,9 +49,17 @@ export default defineConfig({
       ],
        "/docs/v2": [
         {
-          text: 'Overview',
+          text: 'API v2',
           items: [
             { text: 'Get started', link: '/docs/v2/' },
+            { text: 'Authentication', link: '/docs/v2/authentication' },
+            { text: 'Scopes', link: '/docs/v2/scopes' },
+          ]
+        },
+        {
+          text: 'OData Querying',
+          items: [
+            { text: 'Filter', link: '/docs/v2/filter' },
           ]
         },
         ...sidebarV2.generateSidebarGroups()

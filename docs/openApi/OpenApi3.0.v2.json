@@ -4914,6 +4914,10 @@
             "type": "string",
             "nullable": true
           },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
           "type": {
             "$ref": "#/components/schemas/UserType"
           },
@@ -4963,6 +4967,10 @@
           "businessUnitId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -5072,6 +5080,10 @@
           "businessUnitId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
             "nullable": true
           }
         },

@@ -47,7 +47,7 @@ Content-Type: application/x-www-form-urlencoded
 </p>
 
 ```http
-GET https://connect.digilean.tools/v1/datasources
+GET https://connect.digilean.tools/v2/datasources
 Authorization: Bearer eyJhbGciOiJFUzM4NCIsImtpZCI6Ijk2YzU0MTQ4Y2U4MTQzMWNh...
 
 ```

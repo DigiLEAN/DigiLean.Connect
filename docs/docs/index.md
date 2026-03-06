@@ -1,4 +1,4 @@
-# DigiLEAN Connect API
+# DigiLEAN Connect API V1
 
 ## General info
 

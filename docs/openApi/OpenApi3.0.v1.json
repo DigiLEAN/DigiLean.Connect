@@ -791,6 +791,53 @@
       }
     },
     "/v1/Datasources/{id}/values/{valueId}": {
+      "put": {
+        "tags": [
+          "Datasources"
+        ],
+        "summary": "Datasource Value Replace",
+        "description": "Replace a single value on Datasource",
+        "operationId": "Datasources_DatasourceValueReplace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Datasource Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "valueId",
+            "in": "path",
+            "description": "Value Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          }
+        ],
+        "requestBody": {
+          "description": "Replacement value data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataValueCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Datasources"
@@ -5854,6 +5901,10 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5906,6 +5957,10 @@
           "businessUnitId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
             "nullable": true
           }
         },
