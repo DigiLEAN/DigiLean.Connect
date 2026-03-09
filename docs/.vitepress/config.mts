@@ -20,7 +20,7 @@ export default defineConfig({
     nav: [
       { text: 'Docs', items: [
         { text: 'Version 1', link: '/docs' },
-        { text: 'Version 2', link: '/docs/v2' },
+        // { text: 'Version 2', link: '/docs/v2' }, uncomment when ready
       ] },
       { text: 'Examples', link: '/examples' },
       { text: 'Enterprise', link: '/enterprise' }
