@@ -111,7 +111,7 @@ Response if successful
 If you got an error message in this step
 
 Note that as a minimum the “Sites.FullControl.All” permission is required for the user to be able to grant permissions when using Graph Explorer.
-See below how to this
+See below how to do this
 :::
 
 ## Consent to permissions in Graph Explorer

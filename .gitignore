@@ -5,3 +5,5 @@ power.platform/publish
 nugetPackage
 
 .env
+
+*.lscache
