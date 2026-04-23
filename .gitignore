@@ -7,3 +7,5 @@ nugetPackage
 .env
 
 *.lscache
+
+node_modules
